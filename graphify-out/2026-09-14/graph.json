@@ -97,7 +97,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys_update",
-      "community": 41,
+      "community": 4,
       "norm_label": ".update()"
     },
     {
@@ -263,7 +263,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_resetall",
-      "community": 0,
+      "community": 4,
       "norm_label": ".resetall()"
     },
     {
@@ -1406,7 +1406,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner",
-      "community": 1,
+      "community": 41,
       "norm_label": "spawner"
     },
     {
@@ -1423,7 +1423,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_entry",
-      "community": 1,
+      "community": 41,
       "norm_label": "entry"
     },
     {
@@ -1433,7 +1433,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_cs_string",
-      "community": 1,
+      "community": 41,
       "norm_label": "string"
     },
     {
@@ -1443,7 +1443,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_cs_bool",
-      "community": 1,
+      "community": 41,
       "norm_label": "bool"
     },
     {
@@ -1453,7 +1453,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_cs_list",
-      "community": 1,
+      "community": 41,
       "norm_label": "list"
     },
     {
@@ -1469,7 +1469,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_ensurecatalog",
-      "community": 1,
+      "community": 41,
       "norm_label": ".ensurecatalog()"
     },
     {
@@ -1485,7 +1485,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_invalidate",
-      "community": 1,
+      "community": 41,
       "norm_label": ".invalidate()"
     },
     {
@@ -1501,7 +1501,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_matches",
-      "community": 1,
+      "community": 41,
       "norm_label": ".matches()"
     },
     {
@@ -1517,7 +1517,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_giveitem",
-      "community": 1,
+      "community": 41,
       "norm_label": ".giveitem()"
     },
     {
@@ -1533,7 +1533,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_dropitem",
-      "community": 1,
+      "community": 41,
       "norm_label": ".dropitem()"
     },
     {
@@ -1543,7 +1543,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_cs_gameobject",
-      "community": 1,
+      "community": 41,
       "norm_label": "gameobject"
     },
     {
@@ -1559,7 +1559,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_spawncreature",
-      "community": 1,
+      "community": 41,
       "norm_label": ".spawncreature()"
     },
     {
@@ -1575,7 +1575,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_killnearby",
-      "community": 1,
+      "community": 41,
       "norm_label": ".killnearby()"
     },
     {
@@ -2645,7 +2645,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_patches_gamepatches_mjolnirmenu_patches_gamepatches",
-      "community": 0,
+      "community": 4,
       "norm_label": "gamepatches"
     },
     {
@@ -2661,7 +2661,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_patches_gamepatches_mjolnirmenu_patches_gamepatches_logout_prefix",
-      "community": 0,
+      "community": 4,
       "norm_label": ".logout_prefix()"
     },
     {
@@ -2671,7 +2671,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_patches_gamepatches_cs_harmonyprefix",
-      "community": 0,
+      "community": 4,
       "norm_label": "harmonyprefix"
     },
     {
@@ -2681,7 +2681,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_patches_gamepatches_cs_harmonypatch",
-      "community": 0,
+      "community": 4,
       "norm_label": "harmonypatch"
     },
     {
@@ -2731,10 +2731,20 @@
       "norm_label": "type"
     },
     {
+      "label": "string",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "_origin": "ast",
+      "id": "src_mjolnirmenu_patches_itempatches_cs_string",
+      "community": 46,
+      "norm_label": "string"
+    },
+    {
       "label": ".TargetMethods()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L40",
+      "source_location": "L42",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2770,7 +2780,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L47",
+      "source_location": "L51",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2786,7 +2796,7 @@
       "label": ".Postfix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L48",
+      "source_location": "L52",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2802,7 +2812,7 @@
       "label": "InventoryRemovePatches",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L51",
+      "source_location": "L55",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2818,7 +2828,7 @@
       "label": ".Block()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L54",
+      "source_location": "L58",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2844,7 +2854,7 @@
       "label": ".RemoveOneItem_Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L61",
+      "source_location": "L65",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2880,7 +2890,7 @@
       "label": ".RemoveItem_Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L69",
+      "source_location": "L73",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2896,7 +2906,7 @@
       "label": ".RemoveItemAmount_Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L77",
+      "source_location": "L81",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2912,7 +2922,7 @@
       "label": ".RemoveItemByName_Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L85",
+      "source_location": "L89",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2928,7 +2938,7 @@
       "label": "Dupe",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L94",
+      "source_location": "L98",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2944,7 +2954,7 @@
       "label": ".On()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L96",
+      "source_location": "L100",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2970,7 +2980,7 @@
       "label": ".Give()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L99",
+      "source_location": "L103",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -2996,7 +3006,7 @@
       "label": "ItemDropInteractPatch",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L114",
+      "source_location": "L118",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3012,7 +3022,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L117",
+      "source_location": "L121",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3038,7 +3048,7 @@
       "label": "PickableInteractPatch",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L133",
+      "source_location": "L137",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3054,7 +3064,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L136",
+      "source_location": "L140",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3080,7 +3090,7 @@
       "label": "PickableItemInteractPatch",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L146",
+      "source_location": "L150",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3096,7 +3106,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L149",
+      "source_location": "L153",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3122,7 +3132,7 @@
       "label": "BeehiveInteractPatch",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L159",
+      "source_location": "L163",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3138,7 +3148,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L162",
+      "source_location": "L166",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3164,7 +3174,7 @@
       "label": "AutoPickupPatch",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L173",
+      "source_location": "L177",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3180,7 +3190,7 @@
       "label": ".Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L176",
+      "source_location": "L180",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
@@ -3602,7 +3612,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_plugin_mjolnirmenu_plugin",
-      "community": 0,
+      "community": 4,
       "norm_label": "plugin"
     },
     {
@@ -3612,7 +3622,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "baseunityplugin",
-      "community": 0,
+      "community": 4,
       "norm_label": "baseunityplugin"
     },
     {
@@ -3622,7 +3632,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "manuallogsource",
-      "community": 0,
+      "community": 4,
       "norm_label": "manuallogsource"
     },
     {
@@ -3632,7 +3642,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "harmony",
-      "community": 0,
+      "community": 4,
       "norm_label": "harmony"
     },
     {
@@ -3664,7 +3674,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_plugin_mjolnirmenu_plugin_update",
-      "community": 5,
+      "community": 4,
       "norm_label": ".update()"
     },
     {
@@ -3696,7 +3706,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_plugin_mjolnirmenu_plugin_ondestroy",
-      "community": 0,
+      "community": 4,
       "norm_label": ".ondestroy()"
     },
     {
@@ -3737,7 +3747,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
-      "community": 9,
+      "community": 41,
       "norm_label": "menuwindow"
     },
     {
@@ -3747,7 +3757,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_int",
-      "community": 9,
+      "community": 41,
       "norm_label": "int"
     },
     {
@@ -3757,7 +3767,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_string",
-      "community": 9,
+      "community": 41,
       "norm_label": "string"
     },
     {
@@ -3767,7 +3777,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "rect",
-      "community": 9,
+      "community": 41,
       "norm_label": "rect"
     },
     {
@@ -3777,7 +3787,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_bool",
-      "community": 9,
+      "community": 41,
       "norm_label": "bool"
     },
     {
@@ -3787,7 +3797,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_vector2",
-      "community": 9,
+      "community": 41,
       "norm_label": "vector2"
     },
     {
@@ -3797,7 +3807,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_float",
-      "community": 9,
+      "community": 41,
       "norm_label": "float"
     },
     {
@@ -3829,7 +3839,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
-      "community": 9,
+      "community": 41,
       "norm_label": ".drawwindow()"
     },
     {
@@ -3861,7 +3871,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcombat",
-      "community": 9,
+      "community": 41,
       "norm_label": ".drawcombat()"
     },
     {
@@ -3909,7 +3919,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
-      "community": 9,
+      "community": 41,
       "norm_label": ".drawworld()"
     },
     {
@@ -3925,7 +3935,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
-      "community": 1,
+      "community": 41,
       "norm_label": ".drawspawner()"
     },
     {
@@ -3957,7 +3967,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawesp",
-      "community": 9,
+      "community": 41,
       "norm_label": ".drawesp()"
     },
     {
@@ -3989,7 +3999,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcredits",
-      "community": 9,
+      "community": 41,
       "norm_label": ".drawcredits()"
     },
     {
@@ -4005,7 +4015,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
-      "community": 9,
+      "community": 41,
       "norm_label": ".toggle()"
     },
     {
@@ -4021,7 +4031,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parseint",
-      "community": 1,
+      "community": 41,
       "norm_label": ".parseint()"
     },
     {
@@ -4037,7 +4047,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parsefloat",
-      "community": 9,
+      "community": 41,
       "norm_label": ".parsefloat()"
     },
     {
@@ -4149,80 +4159,200 @@
       "norm_label": "readme.md"
     },
     {
-      "label": "MjolnirMenu",
+      "label": "\u2692\ufe0f MjolnirMenu",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L1",
+      "source_location": "L3",
       "_origin": "ast",
       "id": "readme_mjolnirmenu",
       "community": 13,
-      "norm_label": "mjolnirmenu"
+      "norm_label": "\u2692\ufe0f mjolnirmenu"
     },
     {
       "label": "Features",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L23",
       "_origin": "ast",
       "id": "readme_features",
       "community": 13,
       "norm_label": "features"
     },
     {
-      "label": "Hotkeys (change in `BepInEx/config/com.mjolnir.menu.cfg`)",
+      "label": "Player",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L21",
+      "source_location": "L25",
       "_origin": "ast",
-      "id": "readme_hotkeys_change_in_bepinex_config_com_mjolnir_menu_cfg",
+      "id": "readme_player",
       "community": 13,
-      "norm_label": "hotkeys (change in `bepinex/config/com.mjolnir.menu.cfg`)"
+      "norm_label": "player"
     },
     {
-      "label": "Build",
+      "label": "Combat",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L34",
+      "source_location": "L41",
       "_origin": "ast",
-      "id": "readme_build",
+      "id": "readme_combat",
       "community": 13,
-      "norm_label": "build"
+      "norm_label": "combat"
     },
     {
-      "label": "Install",
+      "label": "World",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L47",
+      "source_location": "L50",
       "_origin": "ast",
-      "id": "readme_install",
+      "id": "readme_world",
       "community": 13,
-      "norm_label": "install"
+      "norm_label": "world"
     },
     {
-      "label": "Layout",
+      "label": "Skills",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L61",
+      "source_location": "L53",
       "_origin": "ast",
-      "id": "readme_layout",
+      "id": "readme_skills",
       "community": 13,
-      "norm_label": "layout"
+      "norm_label": "skills"
     },
     {
-      "label": "Development tooling",
+      "label": "Effects",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L76",
+      "source_location": "L56",
       "_origin": "ast",
-      "id": "readme_development_tooling",
+      "id": "readme_effects",
       "community": 13,
-      "norm_label": "development tooling"
+      "norm_label": "effects"
+    },
+    {
+      "label": "Spawner",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "readme_spawner",
+      "community": 13,
+      "norm_label": "spawner"
+    },
+    {
+      "label": "Teleport",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L63",
+      "_origin": "ast",
+      "id": "readme_teleport",
+      "community": 13,
+      "norm_label": "teleport"
+    },
+    {
+      "label": "ESP",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "readme_esp",
+      "community": 13,
+      "norm_label": "esp"
+    },
+    {
+      "label": "Settings",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L69",
+      "_origin": "ast",
+      "id": "readme_settings",
+      "community": 13,
+      "norm_label": "settings"
+    },
+    {
+      "label": "Credits",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "readme_credits",
+      "community": 13,
+      "norm_label": "credits"
+    },
+    {
+      "label": "Installation",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L77",
+      "_origin": "ast",
+      "id": "readme_installation",
+      "community": 13,
+      "norm_label": "installation"
+    },
+    {
+      "label": "Usage",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L89",
+      "_origin": "ast",
+      "id": "readme_usage",
+      "community": 13,
+      "norm_label": "usage"
+    },
+    {
+      "label": "Configuration",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L100",
+      "_origin": "ast",
+      "id": "readme_configuration",
+      "community": 13,
+      "norm_label": "configuration"
+    },
+    {
+      "label": "Building from source",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L115",
+      "_origin": "ast",
+      "id": "readme_building_from_source",
+      "community": 13,
+      "norm_label": "building from source"
+    },
+    {
+      "label": "Architecture",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L131",
+      "_origin": "ast",
+      "id": "readme_architecture",
+      "community": 13,
+      "norm_label": "architecture"
+    },
+    {
+      "label": "FAQ",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "_origin": "ast",
+      "id": "readme_faq",
+      "community": 13,
+      "norm_label": "faq"
+    },
+    {
+      "label": "Development",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L183",
+      "_origin": "ast",
+      "id": "readme_development",
+      "community": 13,
+      "norm_label": "development"
     },
     {
       "label": "License",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L83",
+      "source_location": "L189",
       "_origin": "ast",
       "id": "readme_license",
       "community": 13,
@@ -4245,7 +4375,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "entry",
-      "community": 1,
+      "community": 41,
       "norm_label": "entry"
     },
     {
@@ -9166,7 +9296,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L173",
+      "source_location": "L177",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_autopickuppatch",
@@ -9176,7 +9306,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L159",
+      "source_location": "L163",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_beehiveinteractpatch",
@@ -9196,7 +9326,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L94",
+      "source_location": "L98",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe",
@@ -9206,7 +9336,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L51",
+      "source_location": "L55",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
@@ -9216,7 +9346,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L114",
+      "source_location": "L118",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_itemdropinteractpatch",
@@ -9226,7 +9356,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L133",
+      "source_location": "L137",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableinteractpatch",
@@ -9236,7 +9366,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L146",
+      "source_location": "L150",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableiteminteractpatch",
@@ -9257,10 +9387,24 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
+      "source_location": "L32",
+      "weight": 1.0,
+      "context": "field",
+      "metadata": {
+        "ref_token": "string"
+      },
+      "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches",
+      "target": "src_mjolnirmenu_patches_itempatches_cs_string",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L48",
+      "source_location": "L52",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches_postfix",
@@ -9270,7 +9414,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L47",
+      "source_location": "L51",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches_prefix",
@@ -9280,7 +9424,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_consumescopepatches_targetmethods",
@@ -9290,7 +9434,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L21",
+      "source_location": "L22",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -9306,7 +9450,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0,
       "context": "generic_arg",
       "metadata": {
@@ -9320,7 +9464,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L40",
+      "source_location": "L42",
       "weight": 1.0,
       "context": "return_type",
       "metadata": {
@@ -9334,7 +9478,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L54",
+      "source_location": "L58",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_block",
@@ -9344,7 +9488,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L69",
+      "source_location": "L73",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitem_prefix",
@@ -9354,7 +9498,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L77",
+      "source_location": "L81",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitemamount_prefix",
@@ -9364,7 +9508,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L85",
+      "source_location": "L89",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitembyname_prefix",
@@ -9374,7 +9518,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L61",
+      "source_location": "L65",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeoneitem_prefix",
@@ -9384,7 +9528,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L54",
+      "source_location": "L58",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9399,7 +9543,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L72",
+      "source_location": "L76",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitem_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_block",
@@ -9410,7 +9554,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L80",
+      "source_location": "L84",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitemamount_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_block",
@@ -9421,7 +9565,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L87",
+      "source_location": "L91",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeitembyname_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_block",
@@ -9432,7 +9576,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L64",
+      "source_location": "L68",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_removeoneitem_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_inventoryremovepatches_block",
@@ -9442,7 +9586,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L69",
+      "source_location": "L73",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9456,7 +9600,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L77",
+      "source_location": "L81",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9470,7 +9614,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L85",
+      "source_location": "L89",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9484,7 +9628,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L61",
+      "source_location": "L65",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9498,7 +9642,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L61",
+      "source_location": "L65",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9512,7 +9656,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L61",
+      "source_location": "L65",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9526,7 +9670,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L69",
+      "source_location": "L73",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9540,7 +9684,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L77",
+      "source_location": "L81",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9554,7 +9698,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L85",
+      "source_location": "L89",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9568,7 +9712,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L69",
+      "source_location": "L73",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9582,7 +9726,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L77",
+      "source_location": "L81",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9596,7 +9740,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L85",
+      "source_location": "L89",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -9610,7 +9754,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L99",
+      "source_location": "L103",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_give",
@@ -9620,7 +9764,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L96",
+      "source_location": "L100",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_on",
@@ -9632,7 +9776,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L164",
+      "source_location": "L168",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_beehiveinteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_on"
@@ -9641,7 +9785,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L96",
+      "source_location": "L100",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9657,7 +9801,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L119",
+      "source_location": "L123",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_itemdropinteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_on"
@@ -9668,7 +9812,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L138",
+      "source_location": "L142",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableinteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_on"
@@ -9679,7 +9823,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L151",
+      "source_location": "L155",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableiteminteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_on"
@@ -9688,7 +9832,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L162",
+      "source_location": "L166",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9702,7 +9846,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L99",
+      "source_location": "L103",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9716,7 +9860,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L117",
+      "source_location": "L121",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9730,7 +9874,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L136",
+      "source_location": "L140",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9744,7 +9888,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L149",
+      "source_location": "L153",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9760,7 +9904,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L167",
+      "source_location": "L171",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_beehiveinteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_give"
@@ -9769,7 +9913,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L99",
+      "source_location": "L103",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9785,7 +9929,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L140",
+      "source_location": "L144",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableinteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_give"
@@ -9796,7 +9940,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L153",
+      "source_location": "L157",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableiteminteractpatch_prefix",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_dupe_give"
@@ -9805,7 +9949,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L117",
+      "source_location": "L121",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_itemdropinteractpatch",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_itemdropinteractpatch_prefix",
@@ -9815,7 +9959,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L117",
+      "source_location": "L121",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9829,7 +9973,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L136",
+      "source_location": "L140",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableinteractpatch",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableinteractpatch_prefix",
@@ -9839,7 +9983,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L136",
+      "source_location": "L140",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9853,7 +9997,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L149",
+      "source_location": "L153",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableiteminteractpatch",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_pickableiteminteractpatch_prefix",
@@ -9863,7 +10007,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L149",
+      "source_location": "L153",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9877,7 +10021,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L162",
+      "source_location": "L166",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_beehiveinteractpatch",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_beehiveinteractpatch_prefix",
@@ -9887,7 +10031,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L162",
+      "source_location": "L166",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -9901,7 +10045,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L176",
+      "source_location": "L180",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_autopickuppatch",
       "target": "src_mjolnirmenu_patches_itempatches_mjolnirmenu_patches_autopickuppatch_prefix",
@@ -9911,7 +10055,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/ItemPatches.cs",
-      "source_location": "L176",
+      "source_location": "L180",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -11333,7 +11477,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L1",
+      "source_location": "L3",
       "weight": 1.0,
       "source": "readme",
       "target": "readme_mjolnirmenu",
@@ -11343,27 +11487,57 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L34",
+      "source_location": "L131",
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_build",
+      "target": "readme_architecture",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L76",
+      "source_location": "L115",
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_development_tooling",
+      "target": "readme_building_from_source",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": "L100",
+      "weight": 1.0,
+      "source": "readme_mjolnirmenu",
+      "target": "readme_configuration",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "readme_mjolnirmenu",
+      "target": "readme_development",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L169",
+      "weight": 1.0,
+      "source": "readme_mjolnirmenu",
+      "target": "readme_faq",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L23",
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
       "target": "readme_features",
@@ -11373,27 +11547,17 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L47",
+      "source_location": "L77",
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_install",
+      "target": "readme_installation",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L61",
-      "weight": 1.0,
-      "source": "readme_mjolnirmenu",
-      "target": "readme_layout",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L83",
+      "source_location": "L189",
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
       "target": "readme_license",
@@ -11403,13 +11567,113 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L21",
+      "source_location": "L89",
+      "weight": 1.0,
+      "source": "readme_mjolnirmenu",
+      "target": "readme_usage",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L41",
       "weight": 1.0,
       "source": "readme_features",
-      "target": "readme_hotkeys_change_in_bepinex_config_com_mjolnir_menu_cfg",
+      "target": "readme_combat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_credits",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_effects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_esp",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_player",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L69",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_settings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L53",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_skills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_spawner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_teleport",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "readme_features",
+      "target": "readme_world",
       "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9e755a24244bf198c6e5da254ab755bcdf2049b4"
+  "built_at_commit": "520c9521b3ce36c4fbfb40812dd0b1af905d7a43"
 }

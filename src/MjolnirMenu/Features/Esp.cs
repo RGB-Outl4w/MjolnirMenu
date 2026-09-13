@@ -71,11 +71,19 @@ namespace MjolnirMenu.Features
             var cam = Utils.GetMainCamera();
             if (p == null || cam == null) return;
 
+            // The game's skin label wraps by default; a wrapped label grows past the rect we
+            // measured and gets clipped. Force single-line, overflow instead of clip, no padding.
             _style ??= new GUIStyle(GUI.skin.label)
             {
                 fontSize = 12,
                 alignment = TextAnchor.MiddleCenter,
                 fontStyle = FontStyle.Bold,
+                wordWrap = false,
+                clipping = TextClipping.Overflow,
+                padding = new RectOffset(0, 0, 0, 0),
+                margin = new RectOffset(0, 0, 0, 0),
+                stretchWidth = false,
+                stretchHeight = false,
             };
 
             var origin = p.transform.position;
@@ -137,7 +145,9 @@ namespace MjolnirMenu.Features
             };
 
             var size = _style!.CalcSize(new GUIContent(text));
-            var rect = new Rect(x - size.x / 2f, y - size.y / 2f, size.x, size.y);
+            // Generous box: width + 8, height + 6, so descenders/★ never touch the edge.
+            float w = size.x + 8f, h = Mathf.Max(size.y, 16f) + 6f;
+            var rect = new Rect(x - w / 2f, y - h / 2f, w, h);
 
             // Shadow then colored text: readable on snow and in the dark.
             _style.normal.textColor = new Color(0f, 0f, 0f, 0.85f);
