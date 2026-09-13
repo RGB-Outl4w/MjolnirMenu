@@ -8,9 +8,9 @@ namespace MjolnirMenu.UI
     public static class MenuWindow
     {
         private const int WindowId = 0x4D4A4F4C; // "MJOL"
-        private static readonly string[] Tabs = { "Player", "Combat", "World", "Skills", "Spawner", "Teleport", "ESP", "Settings", "Credits" };
+        private static readonly string[] Tabs = { "Player", "Combat", "World", "Skills", "Effects", "Spawner", "Teleport", "ESP", "Settings", "Credits" };
 
-        private static Rect _rect = new Rect(60, 60, 700, 500);
+        private static Rect _rect = new Rect(60, 60, 760, 540);
         private static int _tab;
         private static bool _rectLoaded;
 
@@ -36,6 +36,14 @@ namespace MjolnirMenu.UI
         // Skills tab
         private static Vector2 _skillScroll;
         private static string _allSkillsText = "100";
+
+        // Effects tab
+        private static Vector2 _effectScroll;
+        private static Vector2 _activeScroll;
+        private static string _effectFilter = "";
+
+        // Settings tab
+        private static string _presetName = "";
 
         public static void Draw()
         {
@@ -87,10 +95,11 @@ namespace MjolnirMenu.UI
                 case 1: DrawCombat(); break;
                 case 2: DrawWorld(); break;
                 case 3: DrawSkills(); break;
-                case 4: DrawSpawner(); break;
-                case 5: DrawTeleport(); break;
-                case 6: DrawEsp(); break;
-                case 7: DrawSettings(); break;
+                case 4: DrawEffects(); break;
+                case 5: DrawSpawner(); break;
+                case 6: DrawTeleport(); break;
+                case 7: DrawEsp(); break;
+                case 8: DrawSettings(); break;
                 default: DrawCredits(); break;
             }
 
@@ -182,6 +191,8 @@ namespace MjolnirMenu.UI
             GUILayout.BeginVertical(GUILayout.Width(300));
             GUILayout.Label("Gear", Styles.Header);
             Toggle(ref State.InfiniteDurability, "Infinite durability  (weapons, armor, tools)");
+            Toggle(ref State.InfiniteItems, "Infinite items  (ammo, food, mead, fuel, ore, feed never consumed)");
+            Toggle(ref State.InfiniteInteract, "Infinite interaction  (pick-ups / bushes / hives stay; walk-over pickup off)");
             GUILayout.Space(8);
             GUILayout.Label("Attack speed", Styles.Header);
             Toggle(ref State.AttackSpeedHack, $"Attack speed hack  ×{State.AttackSpeedMultiplier:0.0}");
@@ -203,7 +214,97 @@ namespace MjolnirMenu.UI
             if (GUILayout.Button("×10", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 10f;
             if (GUILayout.Button("One-shot", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 50f;
             GUILayout.EndHorizontal();
+            GUILayout.Space(6);
+            GUILayout.Label("Harvesting & structures  (same master toggle)", Styles.Header);
+            GUILayout.Label($"Trees  ×{State.TreeMultiplier:0.0}", Styles.Small);
+            State.TreeMultiplier = GUILayout.HorizontalSlider(State.TreeMultiplier, 1f, 50f);
+            GUILayout.Label($"Stones / ores  ×{State.RockMultiplier:0.0}", Styles.Small);
+            State.RockMultiplier = GUILayout.HorizontalSlider(State.RockMultiplier, 1f, 50f);
+            GUILayout.Label($"Player structures  ×{State.PlayerStructureMultiplier:0.0}", Styles.Small);
+            State.PlayerStructureMultiplier = GUILayout.HorizontalSlider(State.PlayerStructureMultiplier, 1f, 50f);
+            GUILayout.Label($"World structures / destructibles  ×{State.WorldStructureMultiplier:0.0}", Styles.Small);
+            State.WorldStructureMultiplier = GUILayout.HorizontalSlider(State.WorldStructureMultiplier, 1f, 50f);
             GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+        }
+
+        // ---------------- Effects ----------------
+
+        private static void DrawEffects()
+        {
+            if (Player.m_localPlayer == null)
+            {
+                GUILayout.Label("Load into a world to manage effects.", Styles.Small);
+                return;
+            }
+
+            GUILayout.Label($"Forsaken power  (current: {(string.IsNullOrEmpty(Effects.CurrentPower()) ? "none" : Effects.CurrentPower())})", Styles.Header);
+            GUILayout.BeginHorizontal();
+            foreach (var gp in Effects.GuardianPowers())
+            {
+                bool cur = gp.name == Effects.CurrentPower();
+                if (GUILayout.Button(Effects.Label(gp), cur ? Styles.TabActive : Styles.Button)) Effects.SelectPower(gp.name);
+            }
+            if (GUILayout.Button("None", Styles.Button, GUILayout.Width(50))) Effects.SelectPower("");
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            Toggle(ref State.NoPowerCooldown, "No cooldown");
+            Toggle(ref State.InfinitePower, "Power lasts forever");
+            if (GUILayout.Button("Activate now", Styles.Button, GUILayout.Width(100))) Effects.ActivatePower();
+            GUILayout.EndHorizontal();
+
+            GUILayout.Space(8);
+            GUILayout.BeginHorizontal();
+
+            GUILayout.BeginVertical(GUILayout.Width(360));
+            GUILayout.Label("Active effects", Styles.Header);
+            _activeScroll = GUILayout.BeginScrollView(_activeScroll, GUILayout.Height(240));
+            var active = new List<StatusEffect>(Effects.Active());
+            if (active.Count == 0) GUILayout.Label("None.", Styles.Small);
+            foreach (var se in active)
+            {
+                if (se == null) continue;
+                bool frozen = Effects.Frozen.Contains(se.NameHash());
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(Effects.Label(se), Styles.ListRow, GUILayout.Width(130));
+                string t = se.m_ttl > 0f ? $"{se.GetRemaningTime():0}s" : "∞";
+                GUILayout.Label(frozen ? $"{t} ❄" : t, Styles.Small, GUILayout.Width(60));
+                if (GUILayout.Button("+60s", Styles.Button, GUILayout.Width(44))) Effects.Extend(se, 60f);
+                if (GUILayout.Button("+10m", Styles.Button, GUILayout.Width(44))) Effects.Extend(se, 600f);
+                if (GUILayout.Button(frozen ? "Unfreeze" : "Freeze", Styles.Button, GUILayout.Width(64)))
+                {
+                    if (frozen) Effects.Frozen.Remove(se.NameHash()); else Effects.Frozen.Add(se.NameHash());
+                }
+                if (GUILayout.Button("×", Styles.Button, GUILayout.Width(24))) Effects.Remove(se);
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical();
+            GUILayout.BeginHorizontal();
+            GUILayout.Label("All effects", Styles.Header, GUILayout.Width(80));
+            _effectFilter = GUILayout.TextField(_effectFilter, GUILayout.ExpandWidth(true));
+            if (GUILayout.Button("×", Styles.Button, GUILayout.Width(24))) _effectFilter = "";
+            GUILayout.EndHorizontal();
+            _effectScroll = GUILayout.BeginScrollView(_effectScroll, GUILayout.Height(240));
+            int shown = 0;
+            foreach (var se in Effects.Catalog())
+            {
+                string label = Effects.Label(se);
+                if (_effectFilter.Length > 0
+                    && label.IndexOf(_effectFilter, System.StringComparison.OrdinalIgnoreCase) < 0
+                    && se.name.IndexOf(_effectFilter, System.StringComparison.OrdinalIgnoreCase) < 0) continue;
+                if (++shown > 200) { GUILayout.Label("… refine your search", Styles.Small); break; }
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(label, Styles.ListRow, GUILayout.Width(150));
+                GUILayout.Label(se.name, Styles.Small, GUILayout.ExpandWidth(true));
+                if (GUILayout.Button("Apply", Styles.Button, GUILayout.Width(50))) Effects.Apply(se);
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
+            GUILayout.EndVertical();
+
             GUILayout.EndHorizontal();
         }
 
@@ -452,6 +553,25 @@ namespace MjolnirMenu.UI
             GUILayout.Space(8);
             bool wm = MenuConfig.ShowWatermark.Value;
             if (Toggle(ref wm, "Show watermark")) MenuConfig.ShowWatermark.Value = wm;
+            GUILayout.Space(8);
+            GUILayout.Label("Presets  (BepInEx/config/MjolnirMenu.presets)", Styles.Header);
+            GUILayout.BeginHorizontal();
+            _presetName = GUILayout.TextField(_presetName, GUILayout.Width(180));
+            if (GUILayout.Button("Save current", Styles.Button, GUILayout.Width(100))) { Presets.Save(_presetName); }
+            GUILayout.EndHorizontal();
+            string auto = MenuConfig.AutoLoadPreset.Value;
+            foreach (var name in Presets.List())
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(name, Styles.ListRow, GUILayout.Width(180));
+                if (GUILayout.Button("Load", Styles.Button, GUILayout.Width(50))) Presets.Load(name);
+                bool isAuto = name == auto;
+                if (GUILayout.Button(isAuto ? "Auto-load: ON" : "Auto-load", isAuto ? Styles.TabActive : Styles.Button, GUILayout.Width(100)))
+                    MenuConfig.AutoLoadPreset.Value = isAuto ? "" : name;
+                if (GUILayout.Button("×", Styles.Button, GUILayout.Width(24))) Presets.Delete(name);
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.Label("Auto-load applies the marked preset once when you enter a world.", Styles.Small);
             GUILayout.Space(8);
             GUILayout.Label("Cheat tags", Styles.Header);
             if (Toggle(ref State.HideCheatTags, "Never tag loot / crafts as 'obtained using cheats'")) MenuConfig.HideCheatTags.Value = State.HideCheatTags;

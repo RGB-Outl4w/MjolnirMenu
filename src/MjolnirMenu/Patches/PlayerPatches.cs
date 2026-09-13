@@ -78,7 +78,10 @@ namespace MjolnirMenu.Patches
         private static void OnDestroy_Prefix(Player __instance)
         {
             if (ReferenceEquals(__instance, Player.m_localPlayer))
+            {
                 Spawner.Invalidate();
+                Effects.Invalidate();
+            }
         }
     }
 

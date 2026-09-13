@@ -20,13 +20,13 @@
     "semantic_hash": "085d38b5d2a97a4cea4ccce2fd596cae"
   },
   "src/MjolnirMenu/Core/MenuConfig.cs": {
-    "mtime": 1789331498.5863142,
-    "ast_hash": "94996126cfb8d208df0a30a84db67f7a",
+    "mtime": 1789329348.195403,
+    "ast_hash": "972cb76833aabc97429613a6adfdcd55",
     "semantic_hash": ""
   },
   "src/MjolnirMenu/Core/State.cs": {
-    "mtime": 1789331498.5863142,
-    "ast_hash": "23293973ae5f6e9a1977838cc78b5361",
+    "mtime": 1789329348.195403,
+    "ast_hash": "50a3cec6f1b664db39423f89e5399ece",
     "semantic_hash": ""
   },
   "src/MjolnirMenu/Features/Esp.cs": {
@@ -55,8 +55,8 @@
     "semantic_hash": "df33aacfc531572c2be9b554158d787c"
   },
   "src/MjolnirMenu/MjolnirMenu.csproj": {
-    "mtime": 1789331572.2246182,
-    "ast_hash": "f044506d87f25d31b5a71f7a43fb282b",
+    "mtime": 1789329447.8489368,
+    "ast_hash": "58e0f958bb5e29b9ea8e17deeecdb74c",
     "semantic_hash": ""
   },
   "src/MjolnirMenu/Patches/CharacterPatches.cs": {
@@ -80,18 +80,18 @@
     "semantic_hash": "fb33a2dceaeea40846c235abada8e4fa"
   },
   "src/MjolnirMenu/Patches/PlayerPatches.cs": {
-    "mtime": 1789331498.5863142,
-    "ast_hash": "6fa6a19ff773839921c39fb486a64370",
+    "mtime": 1789329348.2079515,
+    "ast_hash": "22a52060493edb3afb8eba70853b4fbb",
     "semantic_hash": ""
   },
   "src/MjolnirMenu/Plugin.cs": {
-    "mtime": 1789331498.5863142,
-    "ast_hash": "e8146d865924b42a54c3ac84eaf8736c",
-    "semantic_hash": ""
+    "mtime": 1789321728.682881,
+    "ast_hash": "aeb0e221851304559b005227de1e3970",
+    "semantic_hash": "aeb0e221851304559b005227de1e3970"
   },
   "src/MjolnirMenu/UI/MenuWindow.cs": {
-    "mtime": 1789331498.5874722,
-    "ast_hash": "8ad80562f8f1a5041e1dc9a3eb7716d6",
+    "mtime": 1789329421.8454864,
+    "ast_hash": "28caee4cbb3b60fbaa85cbbfb8a28825",
     "semantic_hash": ""
   },
   "src/MjolnirMenu/UI/Styles.cs": {
@@ -107,26 +107,6 @@
   "src/MjolnirMenu/Features/SkillCheats.cs": {
     "mtime": 1789326083.0381167,
     "ast_hash": "4302fa9a33dccf76af82b5fefcc37924",
-    "semantic_hash": ""
-  },
-  "src/MjolnirMenu/Features/Effects.cs": {
-    "mtime": 1789331347.0711622,
-    "ast_hash": "dddd693e5b16f6d2aa8480f5cd701f17",
-    "semantic_hash": ""
-  },
-  "src/MjolnirMenu/Features/Presets.cs": {
-    "mtime": 1789331366.6919215,
-    "ast_hash": "68d5f65fe04b10343934966a4015ce5c",
-    "semantic_hash": ""
-  },
-  "src/MjolnirMenu/Patches/DestructiblePatches.cs": {
-    "mtime": 1789331378.1926858,
-    "ast_hash": "36a53bfc109f7c990083da510dd331d4",
-    "semantic_hash": ""
-  },
-  "src/MjolnirMenu/Patches/ItemPatches.cs": {
-    "mtime": 1789331403.6322372,
-    "ast_hash": "1039fd0ffa3933d52bf1571fed3f1ba7",
     "semantic_hash": ""
   }
 }

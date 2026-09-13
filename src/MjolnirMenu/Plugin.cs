@@ -35,6 +35,8 @@ namespace MjolnirMenu
             Hotkeys.Update();
             PlayerCheats.Tick();
             WorldCheats.Tick();
+            Effects.Tick();
+            Presets.Tick();
             Esp.Tick();
         }
 

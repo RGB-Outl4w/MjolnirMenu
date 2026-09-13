@@ -40,10 +40,5 @@
   "38": "Teleport Tab (map click, temple/bed, saved positions, player teleport)",
   "39": "Valheim",
   "40": "World Tab (free build, free/instant crafting, lock time, force weather)",
-  "41": "Styles",
-  "42": "Effects",
-  "43": "Humanoid",
-  "44": "DestructiblePatches.cs",
-  "45": "InventoryRemovePatches",
-  "46": "ConsumeScopePatches"
+  "41": "Styles"
 }

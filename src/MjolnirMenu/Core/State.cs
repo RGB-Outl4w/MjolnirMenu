@@ -44,6 +44,16 @@ namespace MjolnirMenu.Core
         public static float RangedMultiplier = 2f;
         public static bool AttackSpeedHack;
         public static float AttackSpeedMultiplier = 2f;
+        public static float TreeMultiplier = 1f;
+        public static float RockMultiplier = 1f;
+        public static float PlayerStructureMultiplier = 1f;
+        public static float WorldStructureMultiplier = 1f;
+        public static bool InfiniteItems;
+        public static bool InfiniteInteract;
+
+        // Effects
+        public static bool NoPowerCooldown;
+        public static bool InfinitePower;
 
         // World / build
         public static bool FreeBuild;
@@ -86,6 +96,9 @@ namespace MjolnirMenu.Core
             CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;
             FastTeleport = false;
             InfiniteDurability = DamageHack = AttackSpeedHack = false;
+            InfiniteItems = InfiniteInteract = false;
+            NoPowerCooldown = InfinitePower = false;
+            Features.Effects.Frozen.Clear();
             FreeBuild = NoPlaceDelay = InstantCraft = FreeCraft = false;
             LockTimeOfDay = false;
             ForcedWeather = "";
