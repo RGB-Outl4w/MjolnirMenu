@@ -18,30 +18,34 @@ namespace MjolnirMenu.Patches
         private static int _depth;
         internal static bool Active => _depth > 0;
 
-        private static readonly (System.Type type, string name)[] Consumers =
+        // Parallel arrays on purpose: System.ValueTuple is not available in the game's Mono profile.
+        private static readonly System.Type[] ConsumerTypes =
         {
-            (typeof(Attack), "UseAmmo"),
-            (typeof(Attack), "ConsumeItem"),
-            (typeof(Player), "ConsumeItem"),
-            (typeof(Fireplace), "UseItem"),
-            (typeof(Fireplace), "Interact"),
-            (typeof(Smelter), "OnAddOre"),
-            (typeof(Smelter), "OnAddFuel"),
-            (typeof(CookingStation), "CookItem"),
-            (typeof(CookingStation), "OnAddFuelSwitch"),
-            (typeof(Fermenter), "AddItem"),
-            (typeof(Tameable), "UseItem"),
-            (typeof(Turret), "UseItem"),
-            (typeof(ShieldGenerator), "OnAddFuel"),
-            (typeof(Catapult), "OnLoadPointUse"),
-            (typeof(Door), "UseItem"),
+            typeof(Attack), typeof(Attack), typeof(Player),
+            typeof(Fireplace), typeof(Fireplace),
+            typeof(Smelter), typeof(Smelter),
+            typeof(CookingStation), typeof(CookingStation),
+            typeof(Fermenter), typeof(Tameable), typeof(Turret),
+            typeof(ShieldGenerator), typeof(Catapult), typeof(Door),
+        };
+
+        private static readonly string[] ConsumerMethods =
+        {
+            "UseAmmo", "ConsumeItem", "ConsumeItem",
+            "UseItem", "Interact",
+            "OnAddOre", "OnAddFuel",
+            "CookItem", "OnAddFuelSwitch",
+            "AddItem", "UseItem", "UseItem",
+            "OnAddFuel", "OnLoadPointUse", "UseItem",
         };
 
         private static IEnumerable<MethodBase> TargetMethods()
         {
-            foreach (var (type, name) in Consumers)
-                foreach (var m in AccessTools.GetDeclaredMethods(type))
-                    if (m.Name == name && !m.IsAbstract) yield return m;
+            for (int i = 0; i < ConsumerTypes.Length; i++)
+            {
+                foreach (var m in AccessTools.GetDeclaredMethods(ConsumerTypes[i]))
+                    if (m.Name == ConsumerMethods[i] && !m.IsAbstract) yield return m;
+            }
         }
 
         private static void Prefix() => _depth++;

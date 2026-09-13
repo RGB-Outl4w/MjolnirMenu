@@ -84,7 +84,7 @@ Who made it and what it runs on.
    ```
 2. Launch Valheim once so BepInEx creates its folders, then quit.
 3. Drop `MjolnirMenu.dll` into `<Valheim>\BepInEx\plugins\MjolnirMenu\` — from a [release](https://github.com/RGB-Outl4w/MjolnirMenu/releases) or by [building from source](#building-from-source).
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.4.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.4.1]`.
 
 ## Usage
 
