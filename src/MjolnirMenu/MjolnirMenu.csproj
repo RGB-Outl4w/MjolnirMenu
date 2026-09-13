@@ -4,7 +4,7 @@
     <TargetFramework>net462</TargetFramework>
     <AssemblyName>MjolnirMenu</AssemblyName>
     <RootNamespace>MjolnirMenu</RootNamespace>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <BepInExPluginGuid>com.mjolnir.menu</BepInExPluginGuid>
     <BepInExPluginName>MjolnirMenu</BepInExPluginName>
     <NoWarn>$(NoWarn);CS0436;MSB3277</NoWarn>
@@ -51,6 +51,10 @@
     </Reference>
     <Reference Include="UnityEngine.InputLegacyModule">
       <HintPath>$(ValheimManaged)\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AnimationModule">
+      <HintPath>$(ValheimManaged)\UnityEngine.AnimationModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityEngine.PhysicsModule">

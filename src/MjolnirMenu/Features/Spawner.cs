@@ -94,7 +94,7 @@ namespace MjolnirMenu.Features
             while (remaining > 0)
             {
                 int n = Mathf.Min(remaining, maxStack);
-                var item = p.GetInventory().AddItem(prefabName, n, quality, 0, p.GetPlayerID(), p.GetPlayerName(), true, false);
+                var item = p.GetInventory().AddItem(prefabName, n, quality, 0, p.GetPlayerID(), p.GetPlayerName(), false, false);
                 if (item == null)
                 {
                     DropItem(prefab, remaining, quality);

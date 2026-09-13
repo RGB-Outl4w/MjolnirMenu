@@ -4,14 +4,21 @@ using UnityEngine;
 namespace MjolnirMenu.Features
 {
     /// <summary>
-    /// Player-side cheats. Game fields we touch (god flag, fly flag, jump force) are
-    /// reconciled every frame against <see cref="State"/> so a respawn or a new Player
-    /// instance never drifts out of sync, and turning a toggle off restores the original.
+    /// Player-side cheats. Game fields we touch (god flag, fly flag, jump force, swim speed,
+    /// camera water clamp) are reconciled every frame against <see cref="State"/> so a respawn
+    /// or a new Player instance never drifts out of sync, and turning a toggle off restores the original.
     /// </summary>
     public static class PlayerCheats
     {
         private static Player? _trackedPlayer;
         private static float _origJumpForce;
+        private static float _origSwimSpeed;
+
+        private static GameCamera? _trackedCamera;
+        private static float _origMinWaterDistance;
+
+        /// <summary>Camera clamp value that effectively lets the camera go under the surface.</summary>
+        private const float UnderwaterClamp = -5000f;
 
         public static void Tick()
         {
@@ -19,26 +26,34 @@ namespace MjolnirMenu.Features
             if (p == null)
             {
                 _trackedPlayer = null;
-                return;
             }
-
-            if (!ReferenceEquals(p, _trackedPlayer))
+            else
             {
-                // Fresh Player object (login / respawn): snapshot vanilla values before we scale them.
-                _trackedPlayer = p;
-                _origJumpForce = p.m_jumpForce;
+                if (!ReferenceEquals(p, _trackedPlayer))
+                {
+                    // Fresh Player object (login / respawn): snapshot vanilla values before we scale them.
+                    _trackedPlayer = p;
+                    _origJumpForce = p.m_jumpForce;
+                    _origSwimSpeed = p.m_swimSpeed;
+                }
+
+                ApplyGodMode();
+                ApplyGhostMode();
+                ApplyFly();
+                ApplyJump();
+                ApplySwimSpeed();
+
+                if (State.InfiniteStamina && p.m_stamina < p.GetMaxStamina())
+                    p.m_stamina = p.GetMaxStamina();
+
+                if (State.InfiniteEitr && p.GetMaxEitr() > 0f && p.m_eitr < p.GetMaxEitr())
+                    p.m_eitr = p.GetMaxEitr();
+
+                if (State.InfiniteDurability)
+                    RefillDurability(p);
             }
 
-            ApplyGodMode();
-            ApplyGhostMode();
-            ApplyFly();
-            ApplyJump();
-
-            if (State.InfiniteStamina && p.m_stamina < p.GetMaxStamina())
-                p.m_stamina = p.GetMaxStamina();
-
-            if (State.InfiniteEitr && p.GetMaxEitr() > 0f && p.m_eitr < p.GetMaxEitr())
-                p.m_eitr = p.GetMaxEitr();
+            ApplyCamera();
         }
 
         public static void ApplyAll()
@@ -47,6 +62,8 @@ namespace MjolnirMenu.Features
             ApplyGhostMode();
             ApplyFly();
             ApplyJump();
+            ApplySwimSpeed();
+            ApplyCamera();
         }
 
         public static void ApplyGodMode()
@@ -77,6 +94,47 @@ namespace MjolnirMenu.Features
             float target = State.JumpHack ? _origJumpForce * State.JumpMultiplier : _origJumpForce;
             if (!Mathf.Approximately(p.m_jumpForce, target))
                 p.m_jumpForce = target;
+        }
+
+        public static void ApplySwimSpeed()
+        {
+            var p = Player.m_localPlayer;
+            if (p == null || !ReferenceEquals(p, _trackedPlayer)) return;
+            float target = State.SwimSpeedHack ? _origSwimSpeed * State.SwimSpeedMultiplier : _origSwimSpeed;
+            if (!Mathf.Approximately(p.m_swimSpeed, target))
+                p.m_swimSpeed = target;
+        }
+
+        /// <summary>GameCamera keeps itself m_minWaterDistance above the water line; push that far below to allow diving shots.</summary>
+        public static void ApplyCamera()
+        {
+            var cam = GameCamera.instance;
+            if (cam == null)
+            {
+                _trackedCamera = null;
+                return;
+            }
+            if (!ReferenceEquals(cam, _trackedCamera))
+            {
+                _trackedCamera = cam;
+                _origMinWaterDistance = cam.m_minWaterDistance;
+            }
+            float target = State.UnderwaterCamera ? UnderwaterClamp : _origMinWaterDistance;
+            if (!Mathf.Approximately(cam.m_minWaterDistance, target))
+                cam.m_minWaterDistance = target;
+        }
+
+        /// <summary>Tops up every durability-using item in the inventory (weapons, armor, tools).</summary>
+        private static void RefillDurability(Player p)
+        {
+            var inv = p.GetInventory();
+            if (inv == null) return;
+            foreach (var item in inv.GetAllItems())
+            {
+                if (item?.m_shared == null || !item.m_shared.m_useDurability) continue;
+                float max = item.GetMaxDurability();
+                if (item.m_durability < max) item.m_durability = max;
+            }
         }
 
         public static void HealFull()

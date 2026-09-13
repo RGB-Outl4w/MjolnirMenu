@@ -24,6 +24,22 @@ namespace MjolnirMenu.Core
         public static float SpeedMultiplier = 2f;
         public static float JumpMultiplier = 2f;
 
+        // Water
+        public static bool SwimSpeedHack;
+        public static float SwimSpeedMultiplier = 3f;
+        public static bool WaterJump;
+        public static bool WalkOnWater;
+        public static bool SeabedWalk;
+        public static bool UnderwaterCamera;
+
+        // Combat
+        public static bool InfiniteDurability;
+        public static bool DamageHack;
+        public static float MeleeMultiplier = 2f;
+        public static float RangedMultiplier = 2f;
+        public static bool AttackSpeedHack;
+        public static float AttackSpeedMultiplier = 2f;
+
         // World / build
         public static bool FreeBuild;
         public static bool NoPlaceDelay;
@@ -54,6 +70,8 @@ namespace MjolnirMenu.Core
         {
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
             Fly = SpeedHack = JumpHack = InfiniteCarryWeight = false;
+            SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = false;
+            InfiniteDurability = DamageHack = AttackSpeedHack = false;
             FreeBuild = NoPlaceDelay = InstantCraft = FreeCraft = false;
             LockTimeOfDay = false;
             ForcedWeather = "";

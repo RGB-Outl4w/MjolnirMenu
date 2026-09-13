@@ -10,7 +10,7 @@ namespace MjolnirMenu.UI
         private const int WindowId = 0x4D4A4F4C; // "MJOL"
         private static readonly string[] Tabs = { "Player", "World", "Spawner", "Warp", "ESP", "MenuConfig" };
 
-        private static Rect _rect = new Rect(60, 60, 560, 460);
+        private static Rect _rect = new Rect(60, 60, 640, 480);
         private static int _tab;
         private static bool _rectLoaded;
 
@@ -32,6 +32,10 @@ namespace MjolnirMenu.UI
 
         // World tab
         private static Vector2 _weatherScroll;
+
+        // Skills tab
+        private static Vector2 _skillScroll;
+        private static string _allSkillsText = "100";
 
         public static void Draw()
         {
@@ -80,10 +84,12 @@ namespace MjolnirMenu.UI
             switch (_tab)
             {
                 case 0: DrawPlayer(); break;
-                case 1: DrawWorld(); break;
-                case 2: DrawSpawner(); break;
-                case 3: DrawTeleport(); break;
-                case 4: DrawEsp(); break;
+                case 1: DrawCombat(); break;
+                case 2: DrawWorld(); break;
+                case 3: DrawSkills(); break;
+                case 4: DrawSpawner(); break;
+                case 5: DrawTeleport(); break;
+                case 6: DrawEsp(); break;
                 default: DrawSettings(); break;
             }
 
@@ -137,11 +143,98 @@ namespace MjolnirMenu.UI
             GUILayout.EndHorizontal();
 
             GUILayout.Space(8);
+            GUILayout.Label("Water", Styles.Header);
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical(GUILayout.Width(300));
+            if (Toggle(ref State.SwimSpeedHack, $"Swim speed hack  ×{State.SwimSpeedMultiplier:0.0}")) PlayerCheats.ApplySwimSpeed();
+            float sw = GUILayout.HorizontalSlider(State.SwimSpeedMultiplier, 1f, 10f);
+            if (sw != State.SwimSpeedMultiplier) { State.SwimSpeedMultiplier = sw; PlayerCheats.ApplySwimSpeed(); }
+            Toggle(ref State.WaterJump, "Jump while swimming");
+            if (Toggle(ref State.UnderwaterCamera, "Underwater camera  (follows you below the surface)")) PlayerCheats.ApplyCamera();
+            GUILayout.EndVertical();
+            GUILayout.BeginVertical();
+            if (Toggle(ref State.WalkOnWater, "Walk on water  (surface acts as ground)") && State.WalkOnWater) State.SeabedWalk = false;
+            if (Toggle(ref State.SeabedWalk, "Walk on seabed  (sink and walk underwater)") && State.SeabedWalk) State.WalkOnWater = false;
+            GUILayout.Label("Water modes pause while Fly is on.", Styles.Small);
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+
+            GUILayout.Space(8);
             GUILayout.BeginHorizontal();
             GUI.enabled = inGame;
             if (GUILayout.Button("Heal + refill", Styles.Button, GUILayout.Width(110))) PlayerCheats.HealFull();
             GUI.enabled = true;
             GUILayout.EndHorizontal();
+        }
+
+        // ---------------- Combat ----------------
+
+        private static void DrawCombat()
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical(GUILayout.Width(300));
+            GUILayout.Label("Gear", Styles.Header);
+            Toggle(ref State.InfiniteDurability, "Infinite durability  (weapons, armor, tools)");
+            GUILayout.Space(8);
+            GUILayout.Label("Attack speed", Styles.Header);
+            Toggle(ref State.AttackSpeedHack, $"Attack speed hack  ×{State.AttackSpeedMultiplier:0.0}");
+            State.AttackSpeedMultiplier = GUILayout.HorizontalSlider(State.AttackSpeedMultiplier, 1f, 5f);
+            GUILayout.Label("Scales the attack animation: swings, draws and combos finish faster.", Styles.Small);
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical();
+            GUILayout.Label("Damage", Styles.Header);
+            Toggle(ref State.DamageHack, "Damage multiplier");
+            GUILayout.Label($"Melee  ×{State.MeleeMultiplier:0.0}", Styles.Small);
+            State.MeleeMultiplier = GUILayout.HorizontalSlider(State.MeleeMultiplier, 1f, 50f);
+            GUILayout.Label($"Ranged  ×{State.RangedMultiplier:0.0}", Styles.Small);
+            State.RangedMultiplier = GUILayout.HorizontalSlider(State.RangedMultiplier, 1f, 50f);
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("×1", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 1f;
+            if (GUILayout.Button("×2", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 2f;
+            if (GUILayout.Button("×5", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 5f;
+            if (GUILayout.Button("×10", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 10f;
+            if (GUILayout.Button("One-shot", Styles.Button)) State.MeleeMultiplier = State.RangedMultiplier = 50f;
+            GUILayout.EndHorizontal();
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+        }
+
+        // ---------------- Skills ----------------
+
+        private static void DrawSkills()
+        {
+            var skills = SkillCheats.GetSkills();
+            if (skills.Count == 0)
+            {
+                GUILayout.Label("Load into a world to edit skills.", Styles.Small);
+                return;
+            }
+
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Max all (100)", Styles.Button, GUILayout.Width(110))) SkillCheats.MaxAll();
+            if (GUILayout.Button("Reset all (0)", Styles.Button, GUILayout.Width(110))) SkillCheats.ResetAll();
+            GUILayout.Space(16);
+            GUILayout.Label("Set all to", Styles.Small, GUILayout.Width(60));
+            _allSkillsText = GUILayout.TextField(_allSkillsText, GUILayout.Width(50));
+            if (GUILayout.Button("Apply", Styles.Button, GUILayout.Width(60))) SkillCheats.SetAll(ParseFloat(_allSkillsText, 0f));
+            GUILayout.EndHorizontal();
+            GUILayout.Space(6);
+
+            _skillScroll = GUILayout.BeginScrollView(_skillScroll, GUILayout.Height(330));
+            foreach (var s in skills)
+            {
+                GUILayout.BeginHorizontal();
+                GUILayout.Label(SkillCheats.Name(s), Styles.ListRow, GUILayout.Width(150));
+                GUILayout.Label($"{s.m_level:0}", Styles.Small, GUILayout.Width(36));
+                float nv = GUILayout.HorizontalSlider(s.m_level, 0f, SkillCheats.MaxLevel, GUILayout.Width(220));
+                if (Mathf.Abs(nv - s.m_level) > 0.01f) SkillCheats.SetLevel(s, nv);
+                if (GUILayout.Button("0", Styles.Button, GUILayout.Width(32))) SkillCheats.SetLevel(s, 0f);
+                if (GUILayout.Button("50", Styles.Button, GUILayout.Width(36))) SkillCheats.SetLevel(s, 50f);
+                if (GUILayout.Button("100", Styles.Button, GUILayout.Width(40))) SkillCheats.SetLevel(s, 100f);
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
         }
 
         // ---------------- World ----------------
@@ -373,5 +466,8 @@ namespace MjolnirMenu.UI
 
         private static int ParseInt(string s, int fallback)
             => int.TryParse(s, out var v) ? v : fallback;
+
+        private static float ParseFloat(string s, float fallback)
+            => float.TryParse(s, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var v) ? v : fallback;
     }
 }

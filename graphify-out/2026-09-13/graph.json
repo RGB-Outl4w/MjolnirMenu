@@ -1,7 +1,56 @@
 {
   "directed": false,
   "multigraph": false,
-  "graph": {},
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "readme_menu_tabs",
+        "label": "Menu tabs of the MjolnirMenu IMGUI window",
+        "nodes": [
+          "readme_player_tab",
+          "readme_world_tab",
+          "readme_spawner_tab",
+          "readme_teleport_tab",
+          "readme_esp_tab",
+          "readme_settings_tab"
+        ],
+        "relation": "form",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "README.md"
+      },
+      {
+        "id": "readme_state_reconciliation_flow",
+        "label": "State-driven cheat flow: State read by patches, reconciled by features every frame",
+        "nodes": [
+          "src_mjolnirmenu_core_state_mjolnirmenu_core_state",
+          "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
+          "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats",
+          "src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches",
+          "readme_state_single_source_of_truth"
+        ],
+        "relation": "participate_in",
+        "confidence": "INFERRED",
+        "confidence_score": 0.85,
+        "source_file": "README.md"
+      },
+      {
+        "id": "readme_build_install_pipeline",
+        "label": "Build and install pipeline (BepInEx install, dotnet build, deploy)",
+        "nodes": [
+          "readme_build_process",
+          "readme_install_process",
+          "readme_install_bepinex_script",
+          "readme_deploy_script",
+          "readme_krafs_publicizer"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "README.md"
+      }
+    ]
+  },
   "nodes": [
     {
       "label": "MjolnirMenu.sln",
@@ -81,7 +130,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys",
-      "community": 1,
+      "community": 0,
       "norm_label": "hotkeys"
     },
     {
@@ -196,7 +245,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Core",
         "scope_chain": [
-          "s31"
+          "s29"
         ]
       },
       "_origin": "ast",
@@ -238,11 +287,11 @@
       "label": ".LoadFromSettings()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L62",
+      "source_location": "L46",
       "metadata": {
         "namespace": "MjolnirMenu.Core",
         "scope_chain": [
-          "s31"
+          "s29"
         ]
       },
       "_origin": "ast",
@@ -254,11 +303,11 @@
       "label": ".ResetAll()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L69",
+      "source_location": "L53",
       "metadata": {
         "namespace": "MjolnirMenu.Core",
         "scope_chain": [
-          "s31"
+          "s29"
         ]
       },
       "_origin": "ast",
@@ -568,20 +617,10 @@
       "norm_label": "float"
     },
     {
-      "label": "GameCamera",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "gamecamera",
-      "community": 4,
-      "norm_label": "gamecamera"
-    },
-    {
       "label": ".Tick()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L23",
+      "source_location": "L16",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -597,7 +636,7 @@
       "label": ".ApplyAll()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L59",
+      "source_location": "L44",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -613,7 +652,7 @@
       "label": ".ApplyGodMode()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L69",
+      "source_location": "L52",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -629,7 +668,7 @@
       "label": ".ApplyGhostMode()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L76",
+      "source_location": "L59",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -645,7 +684,7 @@
       "label": ".ApplyFly()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L83",
+      "source_location": "L66",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -661,7 +700,7 @@
       "label": ".ApplyJump()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L90",
+      "source_location": "L73",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -674,58 +713,10 @@
       "norm_label": ".applyjump()"
     },
     {
-      "label": ".ApplySwimSpeed()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L99",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s44"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyswimspeed",
-      "community": 4,
-      "norm_label": ".applyswimspeed()"
-    },
-    {
-      "label": ".ApplyCamera()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L109",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s44"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applycamera",
-      "community": 4,
-      "norm_label": ".applycamera()"
-    },
-    {
-      "label": ".RefillDurability()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L128",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s44"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_refilldurability",
-      "community": 4,
-      "norm_label": ".refilldurability()"
-    },
-    {
       "label": ".HealFull()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L140",
+      "source_location": "L82",
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
@@ -736,158 +727,6 @@
       "id": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_healfull",
       "community": 4,
       "norm_label": ".healfull()"
-    },
-    {
-      "label": "SkillCheats.cs",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats",
-      "community": 3,
-      "norm_label": "skillcheats.cs"
-    },
-    {
-      "label": "SkillCheats",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L8",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "community": 9,
-      "norm_label": "skillcheats"
-    },
-    {
-      "label": "float",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_cs_float",
-      "community": 9,
-      "norm_label": "float"
-    },
-    {
-      "label": ".GetSkills()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L12",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills",
-      "community": 9,
-      "norm_label": ".getskills()"
-    },
-    {
-      "label": "List",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_cs_list",
-      "community": 9,
-      "norm_label": "list"
-    },
-    {
-      "label": "Skill",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "skill",
-      "community": 9,
-      "norm_label": "skill"
-    },
-    {
-      "label": ".Name()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L20",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_name",
-      "community": 9,
-      "norm_label": ".name()"
-    },
-    {
-      "label": ".SetLevel()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L27",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setlevel",
-      "community": 9,
-      "norm_label": ".setlevel()"
-    },
-    {
-      "label": ".SetAll()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L33",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "community": 9,
-      "norm_label": ".setall()"
-    },
-    {
-      "label": ".MaxAll()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L39",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_maxall",
-      "community": 9,
-      "norm_label": ".maxall()"
-    },
-    {
-      "label": ".ResetAll()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L40",
-      "metadata": {
-        "namespace": "MjolnirMenu.Features",
-        "scope_chain": [
-          "s78"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_resetall",
-      "community": 9,
-      "norm_label": ".resetall()"
     },
     {
       "label": "Spawner.cs",
@@ -907,7 +746,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -924,7 +763,7 @@
         "is_nested_type": true,
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -970,7 +809,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -986,7 +825,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1002,7 +841,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1018,7 +857,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1034,7 +873,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1060,7 +899,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1076,7 +915,7 @@
       "metadata": {
         "namespace": "MjolnirMenu.Features",
         "scope_chain": [
-          "s97"
+          "s92"
         ]
       },
       "_origin": "ast",
@@ -1545,7 +1384,7 @@
       "label": "MjolnirMenu.Patches",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L5",
+      "source_location": "L4",
       "type": "namespace",
       "metadata": {
         "kind": "csharp_namespace",
@@ -1560,11 +1399,11 @@
       "label": "CharacterPatches",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L7",
+      "source_location": "L6",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
-          "s62"
+          "s43"
         ]
       },
       "_origin": "ast",
@@ -1576,11 +1415,11 @@
       "label": ".Damage_Prefix()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "metadata": {
         "namespace": "MjolnirMenu.Patches",
         "scope_chain": [
-          "s62"
+          "s43"
         ]
       },
       "_origin": "ast",
@@ -1627,190 +1466,6 @@
       "id": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
       "community": 10,
       "norm_label": "harmonypatch"
-    },
-    {
-      "label": ".Jump_Prefix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L38",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_jump_prefix",
-      "community": 10,
-      "norm_label": ".jump_prefix()"
-    },
-    {
-      "label": ".IsSwimming_Prefix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L46",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_isswimming_prefix",
-      "community": 10,
-      "norm_label": ".isswimming_prefix()"
-    },
-    {
-      "label": "HumanoidPatches",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L56",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches",
-      "community": 10,
-      "norm_label": "humanoidpatches"
-    },
-    {
-      "label": ".DrainEquipedItemDurability_Prefix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L60",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_drainequipeditemdurability_prefix",
-      "community": 10,
-      "norm_label": ".drainequipeditemdurability_prefix()"
-    },
-    {
-      "label": "Humanoid",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "humanoid",
-      "community": 10,
-      "norm_label": "humanoid"
-    },
-    {
-      "label": ".CustomFixedUpdate_Postfix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L69",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_customfixedupdate_postfix",
-      "community": 10,
-      "norm_label": ".customfixedupdate_postfix()"
-    },
-    {
-      "label": "HarmonyPostfix",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_cs_harmonypostfix",
-      "community": 10,
-      "norm_label": "harmonypostfix"
-    },
-    {
-      "label": "CharacterAnimEventPatches",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L103",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "community": 10,
-      "norm_label": "characteranimeventpatches"
-    },
-    {
-      "label": "float",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_cs_float",
-      "community": 10,
-      "norm_label": "float"
-    },
-    {
-      "label": ".IsLocalAttacking()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L110",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_islocalattacking",
-      "community": 10,
-      "norm_label": ".islocalattacking()"
-    },
-    {
-      "label": "CharacterAnimEvent",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "_origin": "ast",
-      "id": "characteranimevent",
-      "community": 10,
-      "norm_label": "characteranimevent"
-    },
-    {
-      "label": ".Speed_Postfix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L116",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "community": 10,
-      "norm_label": ".speed_postfix()"
-    },
-    {
-      "label": ".CustomFixedUpdate_Postfix()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L125",
-      "metadata": {
-        "namespace": "MjolnirMenu.Patches",
-        "scope_chain": [
-          "s62"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "community": 10,
-      "norm_label": ".customfixedupdate_postfix()"
     },
     {
       "label": "EnvManPatches.cs",
@@ -2386,12 +2041,12 @@
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
-      "community": 9,
+      "community": 1,
       "norm_label": "menuwindow"
     },
     {
@@ -2401,7 +2056,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "int",
-      "community": 9,
+      "community": 1,
       "norm_label": "int"
     },
     {
@@ -2411,7 +2066,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_string",
-      "community": 9,
+      "community": 1,
       "norm_label": "string"
     },
     {
@@ -2421,7 +2076,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "rect",
-      "community": 9,
+      "community": 1,
       "norm_label": "rect"
     },
     {
@@ -2431,7 +2086,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_bool",
-      "community": 9,
+      "community": 1,
       "norm_label": "bool"
     },
     {
@@ -2441,7 +2096,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_vector2",
-      "community": 9,
+      "community": 1,
       "norm_label": "vector2"
     },
     {
@@ -2451,50 +2106,50 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_cs_float",
-      "community": 9,
+      "community": 1,
       "norm_label": "float"
     },
     {
       "label": ".Draw()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L40",
+      "source_location": "L36",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_draw",
-      "community": 5,
+      "community": 9,
       "norm_label": ".draw()"
     },
     {
       "label": ".DrawWindow()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L73",
+      "source_location": "L69",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
-      "community": 9,
+      "community": 1,
       "norm_label": ".drawwindow()"
     },
     {
       "label": ".DrawPlayer()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L118",
+      "source_location": "L112",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
@@ -2503,62 +2158,30 @@
       "norm_label": ".drawplayer()"
     },
     {
-      "label": ".DrawCombat()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L172",
-      "metadata": {
-        "namespace": "MjolnirMenu.UI",
-        "scope_chain": [
-          "s111"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcombat",
-      "community": 9,
-      "norm_label": ".drawcombat()"
-    },
-    {
-      "label": ".DrawSkills()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L205",
-      "metadata": {
-        "namespace": "MjolnirMenu.UI",
-        "scope_chain": [
-          "s111"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "community": 9,
-      "norm_label": ".drawskills()"
-    },
-    {
       "label": ".DrawWorld()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L242",
+      "source_location": "L149",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
-      "community": 9,
+      "community": 1,
       "norm_label": ".drawworld()"
     },
     {
       "label": ".DrawSpawner()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L283",
+      "source_location": "L190",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
@@ -2570,11 +2193,11 @@
       "label": ".DrawTeleport()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L352",
+      "source_location": "L259",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
@@ -2586,59 +2209,59 @@
       "label": ".DrawEsp()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L415",
+      "source_location": "L322",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawesp",
-      "community": 9,
+      "community": 1,
       "norm_label": ".drawesp()"
     },
     {
       "label": ".DrawSettings()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L434",
+      "source_location": "L341",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawsettings",
-      "community": 9,
+      "community": 1,
       "norm_label": ".drawsettings()"
     },
     {
       "label": ".Toggle()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L459",
+      "source_location": "L366",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
-      "community": 9,
+      "community": 1,
       "norm_label": ".toggle()"
     },
     {
       "label": ".ParseInt()",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L467",
+      "source_location": "L374",
       "metadata": {
         "namespace": "MjolnirMenu.UI",
         "scope_chain": [
-          "s111"
+          "s106"
         ]
       },
       "_origin": "ast",
@@ -2647,29 +2270,13 @@
       "norm_label": ".parseint()"
     },
     {
-      "label": ".ParseFloat()",
-      "file_type": "code",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L470",
-      "metadata": {
-        "namespace": "MjolnirMenu.UI",
-        "scope_chain": [
-          "s111"
-        ]
-      },
-      "_origin": "ast",
-      "id": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parsefloat",
-      "community": 9,
-      "norm_label": ".parsefloat()"
-    },
-    {
       "label": "Styles.cs",
       "file_type": "code",
       "source_file": "src/MjolnirMenu/UI/Styles.cs",
       "source_location": "L1",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles",
-      "community": 5,
+      "community": 9,
       "norm_label": "styles.cs"
     },
     {
@@ -2685,7 +2292,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_mjolnirmenu_ui_styles",
-      "community": 5,
+      "community": 9,
       "norm_label": "styles"
     },
     {
@@ -2695,7 +2302,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_cs_color",
-      "community": 5,
+      "community": 9,
       "norm_label": "color"
     },
     {
@@ -2705,7 +2312,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_cs_guistyle",
-      "community": 5,
+      "community": 9,
       "norm_label": "guistyle"
     },
     {
@@ -2715,7 +2322,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_cs_bool",
-      "community": 5,
+      "community": 9,
       "norm_label": "bool"
     },
     {
@@ -2731,7 +2338,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_mjolnirmenu_ui_styles_ensurebuilt",
-      "community": 5,
+      "community": 9,
       "norm_label": ".ensurebuilt()"
     },
     {
@@ -2747,7 +2354,7 @@
       },
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_mjolnirmenu_ui_styles_solid",
-      "community": 5,
+      "community": 9,
       "norm_label": ".solid()"
     },
     {
@@ -2757,98 +2364,8 @@
       "source_location": "",
       "_origin": "ast",
       "id": "src_mjolnirmenu_ui_styles_cs_texture2d",
-      "community": 5,
+      "community": 9,
       "norm_label": "texture2d"
-    },
-    {
-      "label": "README.md",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "readme",
-      "community": 13,
-      "norm_label": "readme.md"
-    },
-    {
-      "label": "MjolnirMenu",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L1",
-      "_origin": "ast",
-      "id": "readme_mjolnirmenu",
-      "community": 13,
-      "norm_label": "mjolnirmenu"
-    },
-    {
-      "label": "Features",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L7",
-      "_origin": "ast",
-      "id": "readme_features",
-      "community": 13,
-      "norm_label": "features"
-    },
-    {
-      "label": "Hotkeys (change in `BepInEx/config/com.mjolnir.menu.cfg`)",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L20",
-      "_origin": "ast",
-      "id": "readme_hotkeys_change_in_bepinex_config_com_mjolnir_menu_cfg",
-      "community": 13,
-      "norm_label": "hotkeys (change in `bepinex/config/com.mjolnir.menu.cfg`)"
-    },
-    {
-      "label": "Build",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L31",
-      "_origin": "ast",
-      "id": "readme_build",
-      "community": 13,
-      "norm_label": "build"
-    },
-    {
-      "label": "Install",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L44",
-      "_origin": "ast",
-      "id": "readme_install",
-      "community": 13,
-      "norm_label": "install"
-    },
-    {
-      "label": "Layout",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L58",
-      "_origin": "ast",
-      "id": "readme_layout",
-      "community": 13,
-      "norm_label": "layout"
-    },
-    {
-      "label": "Development tooling",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L73",
-      "_origin": "ast",
-      "id": "readme_development_tooling",
-      "community": 13,
-      "norm_label": "development tooling"
-    },
-    {
-      "label": "License",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L80",
-      "_origin": "ast",
-      "id": "readme_license",
-      "community": 13,
-      "norm_label": "license"
     },
     {
       "label": "Kind",
@@ -2881,6 +2398,19 @@
       "norm_label": "savedpos"
     },
     {
+      "label": "MjolnirMenu",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_mjolnirmenu",
+      "community": 6,
+      "norm_label": "mjolnirmenu"
+    },
+    {
       "label": "Valheim",
       "file_type": "concept",
       "source_file": "README.md",
@@ -2889,9 +2419,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 39,
-      "norm_label": "valheim",
-      "id": "readme_valheim"
+      "id": "readme_valheim",
+      "community": 6,
+      "norm_label": "valheim"
     },
     {
       "label": "BepInEx 5",
@@ -2902,9 +2432,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 15,
-      "norm_label": "bepinex 5",
-      "id": "readme_bepinex"
+      "id": "readme_bepinex",
+      "community": 0,
+      "norm_label": "bepinex 5"
     },
     {
       "label": "HarmonyX",
@@ -2915,9 +2445,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 25,
-      "norm_label": "harmonyx",
-      "id": "readme_harmonyx"
+      "id": "readme_harmonyx",
+      "community": 0,
+      "norm_label": "harmonyx"
     },
     {
       "label": "Tabbed IMGUI Menu Window",
@@ -2928,9 +2458,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 27,
-      "norm_label": "tabbed imgui menu window",
-      "id": "readme_imgui_menu_window"
+      "id": "readme_imgui_menu_window",
+      "community": 6,
+      "norm_label": "tabbed imgui menu window"
     },
     {
       "label": "Player Tab (God mode, ghost, infinite stamina/eitr, fly, speed/jump hack)",
@@ -2941,9 +2471,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 33,
-      "norm_label": "player tab (god mode, ghost, infinite stamina/eitr, fly, speed/jump hack)",
-      "id": "readme_player_tab"
+      "id": "readme_player_tab",
+      "community": 4,
+      "norm_label": "player tab (god mode, ghost, infinite stamina/eitr, fly, speed/jump hack)"
     },
     {
       "label": "God Mode",
@@ -2954,9 +2484,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 22,
-      "norm_label": "god mode",
-      "id": "readme_god_mode"
+      "id": "readme_god_mode",
+      "community": 4,
+      "norm_label": "god mode"
     },
     {
       "label": "Fly",
@@ -2967,9 +2497,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 21,
-      "norm_label": "fly",
-      "id": "readme_fly"
+      "id": "readme_fly",
+      "community": 4,
+      "norm_label": "fly"
     },
     {
       "label": "World Tab (free build, free/instant crafting, lock time, force weather)",
@@ -2980,9 +2510,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 40,
-      "norm_label": "world tab (free build, free/instant crafting, lock time, force weather)",
-      "id": "readme_world_tab"
+      "id": "readme_world_tab",
+      "community": 6,
+      "norm_label": "world tab (free build, free/instant crafting, lock time, force weather)"
     },
     {
       "label": "Spawner Tab (ObjectDB items, ZNetScene creatures, kill radius)",
@@ -2993,9 +2523,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 36,
-      "norm_label": "spawner tab (objectdb items, znetscene creatures, kill radius)",
-      "id": "readme_spawner_tab"
+      "id": "readme_spawner_tab",
+      "community": 6,
+      "norm_label": "spawner tab (objectdb items, znetscene creatures, kill radius)"
     },
     {
       "label": "Teleport Tab (map click, temple/bed, saved positions, player teleport)",
@@ -3006,9 +2536,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 38,
-      "norm_label": "teleport tab (map click, temple/bed, saved positions, player teleport)",
-      "id": "readme_teleport_tab"
+      "id": "readme_teleport_tab",
+      "community": 2,
+      "norm_label": "teleport tab (map click, temple/bed, saved positions, player teleport)"
     },
     {
       "label": "MjolnirMenu.positions.txt (persisted named positions)",
@@ -3019,9 +2549,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 34,
-      "norm_label": "mjolnirmenu.positions.txt (persisted named positions)",
-      "id": "readme_saved_positions_file"
+      "id": "readme_saved_positions_file",
+      "community": 2,
+      "norm_label": "mjolnirmenu.positions.txt (persisted named positions)"
     },
     {
       "label": "ESP Tab (player/creature/resource labels, tracers, range/cap)",
@@ -3032,9 +2562,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 19,
-      "norm_label": "esp tab (player/creature/resource labels, tracers, range/cap)",
-      "id": "readme_esp_tab"
+      "id": "readme_esp_tab",
+      "community": 6,
+      "norm_label": "esp tab (player/creature/resource labels, tracers, range/cap)"
     },
     {
       "label": "Settings Tab (hotkey overview, watermark, save defaults)",
@@ -3045,9 +2575,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 35,
-      "norm_label": "settings tab (hotkey overview, watermark, save defaults)",
-      "id": "readme_settings_tab"
+      "id": "readme_settings_tab",
+      "community": 0,
+      "norm_label": "settings tab (hotkey overview, watermark, save defaults)"
     },
     {
       "label": "Hotkeys (Insert, F6, F7, End) in com.mjolnir.menu.cfg",
@@ -3058,9 +2588,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 26,
-      "norm_label": "hotkeys (insert, f6, f7, end) in com.mjolnir.menu.cfg",
-      "id": "readme_hotkeys"
+      "id": "readme_hotkeys",
+      "community": 0,
+      "norm_label": "hotkeys (insert, f6, f7, end) in com.mjolnir.menu.cfg"
     },
     {
       "label": "Panic Key (End: turn every cheat off)",
@@ -3071,9 +2601,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 31,
-      "norm_label": "panic key (end: turn every cheat off)",
-      "id": "readme_panic_key"
+      "id": "readme_panic_key",
+      "community": 0,
+      "norm_label": "panic key (end: turn every cheat off)"
     },
     {
       "label": "Auto-disable cheats on logout",
@@ -3085,9 +2615,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Every cheat is switched off automatically on logout so nothing leaks into the next world.",
-      "community": 14,
-      "norm_label": "auto-disable cheats on logout",
-      "id": "readme_auto_disable_on_logout"
+      "id": "readme_auto_disable_on_logout",
+      "community": 0,
+      "norm_label": "auto-disable cheats on logout"
     },
     {
       "label": "Design rule: State is the only source of truth",
@@ -3099,9 +2629,9 @@
       "author": null,
       "contributor": null,
       "rationale": "State holds all toggles. Patches only read it; Features/* reconcile game fields against it every frame and restore originals when a toggle goes off. Keeps cheats reversible and avoids divergent toggle state across patches and features.",
-      "community": 37,
-      "norm_label": "design rule: state is the only source of truth",
-      "id": "readme_state_single_source_of_truth"
+      "id": "readme_state_single_source_of_truth",
+      "community": 0,
+      "norm_label": "design rule: state is the only source of truth"
     },
     {
       "label": "Per-frame reconciliation of game fields against State",
@@ -3113,9 +2643,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Features re-apply cheat values to game fields every frame and restore originals when a toggle goes off, so game code that resets fields does not silently undo a cheat, and disabling is always clean.",
-      "community": 32,
-      "norm_label": "per-frame reconciliation of game fields against state",
-      "id": "readme_per_frame_reconciliation"
+      "id": "readme_per_frame_reconciliation",
+      "community": 0,
+      "norm_label": "per-frame reconciliation of game fields against state"
     },
     {
       "label": "Build (dotnet build, VALHEIM_DIR, Managed assemblies, BepInEx NuGet feed)",
@@ -3127,9 +2657,9 @@
       "author": null,
       "contributor": null,
       "rationale": "BepInEx and Harmony come from the BepInEx NuGet feed (nuget.config) so the project compiles even before BepInEx is installed; game assemblies are referenced straight from valheim_Data/Managed.",
-      "community": 16,
-      "norm_label": "build (dotnet build, valheim_dir, managed assemblies, bepinex nuget feed)",
-      "id": "readme_build_process"
+      "id": "readme_build_process",
+      "community": 0,
+      "norm_label": "build (dotnet build, valheim_dir, managed assemblies, bepinex nuget feed)"
     },
     {
       "label": "Krafs.Publicizer",
@@ -3141,9 +2671,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Exposes the private m_ fields of game classes that the Harmony patches and features need to read and write.",
-      "community": 30,
-      "norm_label": "krafs.publicizer",
-      "id": "readme_krafs_publicizer"
+      "id": "readme_krafs_publicizer",
+      "community": 0,
+      "norm_label": "krafs.publicizer"
     },
     {
       "label": "Install (BepInExPack_Valheim, install-bepinex.ps1, deploy.ps1)",
@@ -3154,9 +2684,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 29,
-      "norm_label": "install (bepinexpack_valheim, install-bepinex.ps1, deploy.ps1)",
-      "id": "readme_install_process"
+      "id": "readme_install_process",
+      "community": 0,
+      "norm_label": "install (bepinexpack_valheim, install-bepinex.ps1, deploy.ps1)"
     },
     {
       "label": "scripts/install-bepinex.ps1",
@@ -3167,9 +2697,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 28,
-      "norm_label": "scripts/install-bepinex.ps1",
-      "id": "readme_install_bepinex_script"
+      "id": "readme_install_bepinex_script",
+      "community": 0,
+      "norm_label": "scripts/install-bepinex.ps1"
     },
     {
       "label": "scripts/deploy.ps1",
@@ -3180,9 +2710,22 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 18,
-      "norm_label": "scripts/deploy.ps1",
-      "id": "readme_deploy_script"
+      "id": "readme_deploy_script",
+      "community": 0,
+      "norm_label": "scripts/deploy.ps1"
+    },
+    {
+      "label": "Source Layout (Plugin, Core, Features, Patches, UI)",
+      "file_type": "concept",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_layout",
+      "community": 0,
+      "norm_label": "source layout (plugin, core, features, patches, ui)"
     },
     {
       "label": "Harmony patches on Player, Character, Minimap, EnvMan, Game",
@@ -3193,9 +2736,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 24,
-      "norm_label": "harmony patches on player, character, minimap, envman, game",
-      "id": "readme_harmony_patches"
+      "id": "readme_harmony_patches",
+      "community": 0,
+      "norm_label": "harmony patches on player, character, minimap, envman, game"
     },
     {
       "label": "caveman (Claude Code helper)",
@@ -3206,9 +2749,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 17,
-      "norm_label": "caveman (claude code helper)",
-      "id": "readme_caveman"
+      "id": "readme_caveman",
+      "community": 6,
+      "norm_label": "caveman (claude code helper)"
     },
     {
       "label": "graphify (knowledge graph tooling)",
@@ -3219,9 +2762,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "community": 23,
-      "norm_label": "graphify (knowledge graph tooling)",
-      "id": "readme_graphify"
+      "id": "readme_graphify",
+      "community": 6,
+      "norm_label": "graphify (knowledge graph tooling)"
     },
     {
       "label": "Ethical use notice (own/permitted servers only, no anti-detection)",
@@ -3233,9 +2776,9 @@
       "author": null,
       "contributor": null,
       "rationale": "Intended for single-player and servers the user owns or has permission to mod; deliberately contains no anti-detection or server-bypass logic.",
-      "community": 20,
-      "norm_label": "ethical use notice (own/permitted servers only, no anti-detection)",
-      "id": "readme_ethical_use_notice"
+      "id": "readme_ethical_use_notice",
+      "community": 6,
+      "norm_label": "ethical use notice (own/permitted servers only, no anti-detection)"
     }
   ],
   "links": [
@@ -3403,22 +2946,6 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L2",
-      "weight": 1.0,
-      "metadata": {
-        "using_kind": "namespace",
-        "target_fqn": "MjolnirMenu.Core",
-        "scope_kind": "file"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats",
-      "target": "csharp_namespace:67f090cc357b299f",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "imports",
-      "context": "import",
-      "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/Spawner.cs",
       "source_location": "L3",
       "weight": 1.0,
@@ -3576,6 +3103,26 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_hotkeys",
+      "target": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys"
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/Hotkeys.cs",
@@ -3655,17 +3202,6 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L36",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "target": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys_notify"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Features/Spawner.cs",
       "source_location": "L87",
       "weight": 1.0,
@@ -3711,7 +3247,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L448",
+      "source_location": "L355",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawsettings",
       "target": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys_notify"
@@ -3722,7 +3258,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L103",
+      "source_location": "L97",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_core_hotkeys_mjolnirmenu_core_hotkeys_notify"
@@ -3736,6 +3272,36 @@
       "source": "src_mjolnirmenu_core_menuconfig",
       "target": "src_mjolnirmenu_core_menuconfig_mjolnirmenu_core_menuconfig",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_hotkeys",
+      "target": "src_mjolnirmenu_core_menuconfig_mjolnirmenu_core_menuconfig"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "src_mjolnirmenu_core_menuconfig_mjolnirmenu_core_menuconfig"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_settings_tab",
+      "target": "src_mjolnirmenu_core_menuconfig_mjolnirmenu_core_menuconfig"
     },
     {
       "relation": "references",
@@ -3814,9 +3380,59 @@
     },
     {
       "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_auto_disable_on_logout",
+      "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_harmony_patches",
+      "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_panic_key",
+      "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_state_single_source_of_truth",
+      "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state"
+    },
+    {
+      "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L60",
+      "source_location": "L44",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -3830,7 +3446,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L49",
+      "source_location": "L33",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -3844,7 +3460,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L50",
+      "source_location": "L34",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -3858,7 +3474,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L62",
+      "source_location": "L46",
       "weight": 1.0,
       "source": "src_mjolnirmenu_core_state_mjolnirmenu_core_state",
       "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_loadfromsettings",
@@ -3868,7 +3484,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L69",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "src_mjolnirmenu_core_state_mjolnirmenu_core_state",
       "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_resetall",
@@ -3891,7 +3507,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L81",
+      "source_location": "L63",
       "weight": 1.0,
       "source": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_resetall",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall"
@@ -3902,7 +3518,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/Core/State.cs",
-      "source_location": "L82",
+      "source_location": "L64",
       "weight": 1.0,
       "source": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_resetall",
       "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats_applyall"
@@ -3935,7 +3551,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L102",
+      "source_location": "L96",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_core_state_mjolnirmenu_core_state_resetall"
@@ -3987,16 +3603,6 @@
       "source_location": "L4",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats",
-      "target": "csharp_namespace:df0573113206df01",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L5",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats",
       "target": "csharp_namespace:df0573113206df01",
       "confidence_score": 1.0
     },
@@ -4093,6 +3699,16 @@
       "source": "src_mjolnirmenu_ui_menuwindow",
       "target": "csharp_namespace:df0573113206df01",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_esp_tab",
+      "target": "src_mjolnirmenu_features_esp_mjolnirmenu_features_esp"
     },
     {
       "relation": "references",
@@ -4393,23 +4009,49 @@
     },
     {
       "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L17",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
       "weight": 1.0,
-      "context": "field",
-      "metadata": {
-        "ref_token": "GameCamera"
-      },
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
-      "target": "gamecamera",
-      "confidence_score": 1.0
+      "source": "readme_fly",
+      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_god_mode",
+      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_per_frame_reconciliation",
+      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_player_tab",
+      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L21",
+      "source_location": "L14",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -4437,7 +4079,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L59",
+      "source_location": "L44",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
@@ -4447,17 +4089,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L109",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applycamera",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L83",
+      "source_location": "L66",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyfly",
@@ -4467,7 +4099,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L76",
+      "source_location": "L59",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyghostmode",
@@ -4477,7 +4109,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L69",
+      "source_location": "L52",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applygodmode",
@@ -4487,7 +4119,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L90",
+      "source_location": "L73",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyjump",
@@ -4497,17 +4129,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L99",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyswimspeed",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L140",
+      "source_location": "L82",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_healfull",
@@ -4517,53 +4139,18 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L128",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_refilldurability",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L23",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L128",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Player"
-      },
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_refilldurability",
-      "target": "src_mjolnirmenu_features_playercheats_cs_player",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L56",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applycamera",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L42",
+      "source_location": "L34",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyfly",
@@ -4574,7 +4161,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L41",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyghostmode",
@@ -4585,7 +4172,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L40",
+      "source_location": "L32",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applygodmode",
@@ -4596,32 +4183,10 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L43",
+      "source_location": "L35",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyjump",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L44",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyswimspeed",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L53",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_tick",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_refilldurability",
       "confidence_score": 1.0
     },
     {
@@ -4640,18 +4205,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L66",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applycamera",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L63",
+      "source_location": "L48",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyfly",
@@ -4662,7 +4216,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L62",
+      "source_location": "L47",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyghostmode",
@@ -4673,7 +4227,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L61",
+      "source_location": "L46",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applygodmode",
@@ -4684,7 +4238,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L64",
+      "source_location": "L49",
       "weight": 1.0,
       "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyjump",
@@ -4694,20 +4248,9 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/PlayerCheats.cs",
-      "source_location": "L65",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyall",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyswimspeed",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L126",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applygodmode"
@@ -4718,7 +4261,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L127",
+      "source_location": "L121",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyghostmode"
@@ -4729,7 +4272,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L136",
+      "source_location": "L130",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyfly"
@@ -4740,7 +4283,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L139",
+      "source_location": "L133",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyjump"
@@ -4751,288 +4294,10 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L149",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applyswimspeed"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L153",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
-      "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_applycamera"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L165",
+      "source_location": "L142",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats_healfull"
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L8",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L10",
-      "weight": 1.0,
-      "context": "field",
-      "metadata": {
-        "ref_token": "float"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_cs_float",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L12",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_maxall",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L20",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_name",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L40",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_resetall",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L33",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L27",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setlevel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L12",
-      "weight": 1.0,
-      "context": "generic_arg",
-      "metadata": {
-        "ref_token": "Skill",
-        "qualified": true,
-        "ref_qualifier": "Skills"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills",
-      "target": "skill",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L12",
-      "weight": 1.0,
-      "context": "return_type",
-      "metadata": {
-        "ref_token": "List"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills",
-      "target": "src_mjolnirmenu_features_skillcheats_cs_list",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L35",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L207",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_getskills"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L20",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Skill",
-        "qualified": true,
-        "ref_qualifier": "Skills"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_name",
-      "target": "skill",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L27",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Skill",
-        "qualified": true,
-        "ref_qualifier": "Skills"
-      },
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setlevel",
-      "target": "skill",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L228",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_name"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L35",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setlevel",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L231",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setlevel"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L39",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_maxall",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Features/SkillCheats.cs",
-      "source_location": "L40",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_resetall",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L220",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_setall"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L215",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_maxall"
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L216",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_features_skillcheats_mjolnirmenu_features_skillcheats_resetall"
     },
     {
       "relation": "contains",
@@ -5053,6 +4318,16 @@
       "source": "src_mjolnirmenu_features_spawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_spawner_tab",
+      "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner"
     },
     {
       "relation": "references",
@@ -5186,7 +4461,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L285",
+      "source_location": "L192",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_ensurecatalog"
@@ -5222,7 +4497,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L325",
+      "source_location": "L232",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_matches"
@@ -5244,7 +4519,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L335",
+      "source_location": "L242",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_giveitem"
@@ -5269,7 +4544,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L333",
+      "source_location": "L240",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_spawncreature"
@@ -5280,7 +4555,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L346",
+      "source_location": "L253",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_features_spawner_mjolnirmenu_features_spawner_killnearby"
@@ -5304,6 +4579,26 @@
       "source": "src_mjolnirmenu_features_warp",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_saved_positions_file",
+      "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_teleport_tab",
+      "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp"
     },
     {
       "relation": "references",
@@ -5532,7 +4827,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L386",
+      "source_location": "L293",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_to"
@@ -5565,7 +4860,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L363",
+      "source_location": "L270",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_tostart"
@@ -5576,7 +4871,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L364",
+      "source_location": "L271",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_tospawnpoint"
@@ -5603,7 +4898,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L397",
+      "source_location": "L304",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_otherplayers"
@@ -5614,7 +4909,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L354",
+      "source_location": "L261",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_ensureloaded"
@@ -5636,7 +4931,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L375",
+      "source_location": "L282",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_savecurrent"
@@ -5672,7 +4967,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L391",
+      "source_location": "L298",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_features_warp_mjolnirmenu_features_warp_remove"
@@ -5686,6 +4981,26 @@
       "source": "src_mjolnirmenu_features_worldcheats",
       "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_per_frame_reconciliation",
+      "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_world_tab",
+      "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats"
     },
     {
       "relation": "references",
@@ -5825,7 +5140,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L269",
+      "source_location": "L176",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
       "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats_getweathernames"
@@ -5836,7 +5151,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L254",
+      "source_location": "L161",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
       "target": "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats_currenttimelabel"
@@ -5845,7 +5160,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L5",
+      "source_location": "L4",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_characterpatches",
       "target": "csharp_namespace:249bb26229239789",
@@ -5855,30 +5170,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L103",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L7",
+      "source_location": "L6",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_characterpatches",
       "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L56",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches",
       "confidence_score": 1.0
     },
     {
@@ -5925,37 +5220,17 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "weight": 1.0,
       "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches",
       "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_damage_prefix",
       "confidence_score": 1.0
     },
     {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L46",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_isswimming_prefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L38",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_jump_prefix",
-      "confidence_score": 1.0
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -5969,7 +5244,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "weight": 1.0,
       "context": "parameter_type",
       "metadata": {
@@ -5983,7 +5258,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -5997,7 +5272,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L15",
+      "source_location": "L10",
       "weight": 1.0,
       "context": "attribute",
       "metadata": {
@@ -6005,358 +5280,6 @@
       },
       "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_damage_prefix",
       "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonyprefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L46",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Character"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_isswimming_prefix",
-      "target": "character",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L38",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Character"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_jump_prefix",
-      "target": "character",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L46",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPrefix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_isswimming_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonyprefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L38",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPrefix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_jump_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonyprefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L60",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPrefix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_drainequipeditemdurability_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonyprefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L125",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L116",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L46",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_isswimming_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L38",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characterpatches_jump_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L69",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_customfixedupdate_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L60",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPatch"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_drainequipeditemdurability_prefix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypatch",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L69",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_customfixedupdate_postfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L60",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_drainequipeditemdurability_prefix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L60",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Humanoid"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_drainequipeditemdurability_prefix",
-      "target": "humanoid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L69",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "Humanoid"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_customfixedupdate_postfix",
-      "target": "humanoid",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L69",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPostfix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_humanoidpatches_customfixedupdate_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypostfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L125",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPostfix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypostfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L116",
-      "weight": 1.0,
-      "context": "attribute",
-      "metadata": {
-        "ref_token": "HarmonyPostfix"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_harmonypostfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L108",
-      "weight": 1.0,
-      "context": "field",
-      "metadata": {
-        "ref_token": "float"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_cs_float",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L125",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L110",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_islocalattacking",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L116",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L129",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_islocalattacking",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L110",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "CharacterAnimEvent"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_islocalattacking",
-      "target": "characteranimevent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L121",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "target": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_islocalattacking",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L125",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "CharacterAnimEvent"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_customfixedupdate_postfix",
-      "target": "characteranimevent",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/Patches/CharacterPatches.cs",
-      "source_location": "L116",
-      "weight": 1.0,
-      "context": "parameter_type",
-      "metadata": {
-        "ref_token": "CharacterAnimEvent"
-      },
-      "source": "src_mjolnirmenu_patches_characterpatches_mjolnirmenu_patches_characteranimeventpatches_speed_postfix",
-      "target": "characteranimevent",
       "confidence_score": 1.0
     },
     {
@@ -6526,6 +5449,26 @@
       "source": "src_mjolnirmenu_patches_playerpatches",
       "target": "src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_harmony_patches",
+      "target": "src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_player_tab",
+      "target": "src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches"
     },
     {
       "relation": "method",
@@ -7018,6 +5961,16 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "src_mjolnirmenu_plugin_mjolnirmenu_plugin"
+    },
+    {
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/Plugin.cs",
@@ -7057,6 +6010,16 @@
       "source": "src_mjolnirmenu_plugin_mjolnirmenu_plugin",
       "target": "manuallogsource",
       "confidence_score": 1.0
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "src_mjolnirmenu_plugin_mjolnirmenu_plugin",
+      "target": "readme_bepinex"
     },
     {
       "relation": "method",
@@ -7141,6 +6104,26 @@
     },
     {
       "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow"
+    },
+    {
+      "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
       "source_location": "L14",
@@ -7199,7 +6182,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L38",
+      "source_location": "L30",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -7213,7 +6196,7 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L37",
+      "source_location": "L34",
       "weight": 1.0,
       "context": "field",
       "metadata": {
@@ -7227,7 +6210,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L40",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_draw",
@@ -7237,17 +6220,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L172",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcombat",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L415",
+      "source_location": "L322",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawesp",
@@ -7257,7 +6230,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L118",
+      "source_location": "L112",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
@@ -7267,7 +6240,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L434",
+      "source_location": "L341",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawsettings",
@@ -7277,17 +6250,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L205",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L283",
+      "source_location": "L190",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
@@ -7297,7 +6260,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L352",
+      "source_location": "L259",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
@@ -7307,7 +6270,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L73",
+      "source_location": "L69",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
@@ -7317,7 +6280,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L242",
+      "source_location": "L149",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
@@ -7327,17 +6290,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L470",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parsefloat",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "method",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L467",
+      "source_location": "L374",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parseint",
@@ -7347,7 +6300,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L459",
+      "source_location": "L366",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7359,7 +6312,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L42",
+      "source_location": "L38",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_draw",
       "target": "src_mjolnirmenu_ui_styles_mjolnirmenu_ui_styles_ensurebuilt"
@@ -7369,18 +6322,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L87",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcombat",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L92",
+      "source_location": "L86",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawesp",
@@ -7391,7 +6333,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L86",
+      "source_location": "L82",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
@@ -7402,7 +6344,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L93",
+      "source_location": "L87",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawsettings",
@@ -7413,18 +6355,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L89",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L90",
+      "source_location": "L84",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
@@ -7435,7 +6366,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L91",
+      "source_location": "L85",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
@@ -7446,7 +6377,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L88",
+      "source_location": "L83",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawwindow",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
@@ -7457,7 +6388,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L126",
+      "source_location": "L120",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawplayer",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7468,29 +6399,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L177",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawcombat",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L220",
-      "weight": 1.0,
-      "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawskills",
-      "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parsefloat",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "context": "call",
-      "confidence": "EXTRACTED",
-      "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L247",
+      "source_location": "L154",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawworld",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7501,7 +6410,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L333",
+      "source_location": "L240",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawspawner",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_parseint",
@@ -7512,7 +6421,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L358",
+      "source_location": "L265",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawteleport",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7523,7 +6432,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L418",
+      "source_location": "L325",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawesp",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7534,7 +6443,7 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/MjolnirMenu/UI/MenuWindow.cs",
-      "source_location": "L440",
+      "source_location": "L347",
       "weight": 1.0,
       "source": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_drawsettings",
       "target": "src_mjolnirmenu_ui_menuwindow_mjolnirmenu_ui_menuwindow_toggle",
@@ -7652,86 +6561,363 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L1",
-      "weight": 1.0,
-      "source": "readme",
-      "target": "readme_mjolnirmenu",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L31",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_build",
-      "confidence_score": 1.0
+      "target": "readme_bepinex"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L73",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_development_tooling",
-      "confidence_score": 1.0
+      "target": "readme_caveman"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L7",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_features",
-      "confidence_score": 1.0
+      "target": "readme_ethical_use_notice"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L44",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_install",
-      "confidence_score": 1.0
+      "target": "readme_graphify"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L58",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_layout",
-      "confidence_score": 1.0
+      "target": "readme_harmonyx"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L80",
+      "source_location": null,
       "weight": 1.0,
       "source": "readme_mjolnirmenu",
-      "target": "readme_license",
-      "confidence_score": 1.0
+      "target": "readme_imgui_menu_window"
     },
     {
-      "relation": "contains",
+      "relation": "references",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "L20",
+      "source_location": null,
       "weight": 1.0,
-      "source": "readme_features",
-      "target": "readme_hotkeys_change_in_bepinex_config_com_mjolnir_menu_cfg",
-      "confidence_score": 1.0
+      "source": "readme_mjolnirmenu",
+      "target": "readme_valheim"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_build_process",
+      "target": "readme_bepinex"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_install_process",
+      "target": "readme_bepinex"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_harmony_patches",
+      "target": "readme_harmonyx"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_esp_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_player_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_settings_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_spawner_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_teleport_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_imgui_menu_window",
+      "target": "readme_world_tab"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_player_tab",
+      "target": "readme_fly"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_player_tab",
+      "target": "readme_god_mode"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_teleport_tab",
+      "target": "readme_saved_positions_file"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_settings_tab",
+      "target": "readme_hotkeys"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_hotkeys",
+      "target": "readme_panic_key"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_panic_key",
+      "target": "readme_auto_disable_on_logout"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_auto_disable_on_logout",
+      "target": "readme_harmony_patches"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "readme_state_single_source_of_truth"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_state_single_source_of_truth",
+      "target": "readme_per_frame_reconciliation"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_build_process",
+      "target": "readme_krafs_publicizer"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_deploy_script",
+      "target": "readme_build_process"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_krafs_publicizer",
+      "target": "readme_harmony_patches"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_install_process",
+      "target": "readme_deploy_script"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_install_process",
+      "target": "readme_install_bepinex_script"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "source": "readme_layout",
+      "target": "readme_harmony_patches"
     }
   ],
-  "hyperedges": [],
-  "built_at_commit": "1ca58f21ed1418d770361e7a21835628789c348a"
+  "hyperedges": [
+    {
+      "id": "readme_menu_tabs",
+      "label": "Menu tabs of the MjolnirMenu IMGUI window",
+      "nodes": [
+        "readme_player_tab",
+        "readme_world_tab",
+        "readme_spawner_tab",
+        "readme_teleport_tab",
+        "readme_esp_tab",
+        "readme_settings_tab"
+      ],
+      "relation": "form",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    },
+    {
+      "id": "readme_state_reconciliation_flow",
+      "label": "State-driven cheat flow: State read by patches, reconciled by features every frame",
+      "nodes": [
+        "src_mjolnirmenu_core_state_mjolnirmenu_core_state",
+        "src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats",
+        "src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats",
+        "src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches",
+        "readme_state_single_source_of_truth"
+      ],
+      "relation": "participate_in",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "README.md"
+    },
+    {
+      "id": "readme_build_install_pipeline",
+      "label": "Build and install pipeline (BepInEx install, dotnet build, deploy)",
+      "nodes": [
+        "readme_build_process",
+        "readme_install_process",
+        "readme_install_bepinex_script",
+        "readme_deploy_script",
+        "readme_krafs_publicizer"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md"
+    }
+  ],
+  "built_at_commit": "7d85e901dab8652b94ac33713c3d933ad360132d"
 }

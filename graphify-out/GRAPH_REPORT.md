@@ -1,12 +1,18 @@
-# Graph Report - .  (2026-09-13)
+# Graph Report - MjolnirMenu  (2026-09-13)
 
 ## Corpus Check
-- Corpus is ~6,187 words - fits in a single context window. You may not need a graph.
+- 22 files · ~7,505 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 209 nodes · 354 edges · 13 communities
-- Extraction: 92% EXTRACTED · 8% INFERRED · 0% AMBIGUOUS · INFERRED: 28 edges (avg confidence: 0.91)
-- Token cost: 60,000 input · 5,500 output
+- 247 nodes · 380 edges · 41 communities (14 shown, 27 thin omitted)
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `1ca58f21`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - [[_COMMUNITY_BepInEx Plugin Bootstrap & Install|BepInEx Plugin Bootstrap & Install]]
@@ -20,68 +26,82 @@
 - [[_COMMUNITY_Build Configuration|Build Configuration]]
 - [[_COMMUNITY_IMGUI Skin Styles|IMGUI Skin Styles]]
 - [[_COMMUNITY_Character Damage Patch|Character Damage Patch]]
+- [[_COMMUNITY_MjolnirMenu|MjolnirMenu]]
+- [[_COMMUNITY_Auto-disable cheats on logout|Auto-disable cheats on logout]]
+- [[_COMMUNITY_BepInEx 5|BepInEx 5]]
+- [[_COMMUNITY_Build (dotnet build, VALHEIM_DIR, Managed assemblies, BepInEx NuGet feed)|Build (dotnet build, VALHEIM_DIR, Managed assemblies, BepInEx NuGet feed)]]
+- [[_COMMUNITY_caveman (Claude Code helper)|caveman (Claude Code helper)]]
+- [[_COMMUNITY_scriptsdeploy.ps1|scripts/deploy.ps1]]
+- [[_COMMUNITY_ESP Tab (playercreatureresource labels, tracers, rangecap)|ESP Tab (player/creature/resource labels, tracers, range/cap)]]
+- [[_COMMUNITY_Ethical use notice (ownpermitted servers only, no anti-detection)|Ethical use notice (own/permitted servers only, no anti-detection)]]
+- [[_COMMUNITY_Fly|Fly]]
+- [[_COMMUNITY_God Mode|God Mode]]
+- [[_COMMUNITY_graphify (knowledge graph tooling)|graphify (knowledge graph tooling)]]
+- [[_COMMUNITY_Harmony patches on Player, Character, Minimap, EnvMan, Game|Harmony patches on Player, Character, Minimap, EnvMan, Game]]
+- [[_COMMUNITY_HarmonyX|HarmonyX]]
+- [[_COMMUNITY_Hotkeys (Insert, F6, F7, End) in com.mjolnir.menu.cfg|Hotkeys (Insert, F6, F7, End) in com.mjolnir.menu.cfg]]
+- [[_COMMUNITY_Tabbed IMGUI Menu Window|Tabbed IMGUI Menu Window]]
+- [[_COMMUNITY_scriptsinstall-bepinex.ps1|scripts/install-bepinex.ps1]]
+- [[_COMMUNITY_Install (BepInExPack_Valheim, install-bepinex.ps1, deploy.ps1)|Install (BepInExPack_Valheim, install-bepinex.ps1, deploy.ps1)]]
+- [[_COMMUNITY_Krafs.Publicizer|Krafs.Publicizer]]
+- [[_COMMUNITY_Panic Key (End turn every cheat off)|Panic Key (End: turn every cheat off)]]
+- [[_COMMUNITY_Per-frame reconciliation of game fields against State|Per-frame reconciliation of game fields against State]]
+- [[_COMMUNITY_Player Tab (God mode, ghost, infinite staminaeitr, fly, speedjump hack)|Player Tab (God mode, ghost, infinite stamina/eitr, fly, speed/jump hack)]]
+- [[_COMMUNITY_MjolnirMenu.positions.txt (persisted named positions)|MjolnirMenu.positions.txt (persisted named positions)]]
+- [[_COMMUNITY_Settings Tab (hotkey overview, watermark, save defaults)|Settings Tab (hotkey overview, watermark, save defaults)]]
+- [[_COMMUNITY_Spawner Tab (ObjectDB items, ZNetScene creatures, kill radius)|Spawner Tab (ObjectDB items, ZNetScene creatures, kill radius)]]
+- [[_COMMUNITY_Design rule State is the only source of truth|Design rule: State is the only source of truth]]
+- [[_COMMUNITY_Teleport Tab (map click, templebed, saved positions, player teleport)|Teleport Tab (map click, temple/bed, saved positions, player teleport)]]
+- [[_COMMUNITY_Valheim|Valheim]]
+- [[_COMMUNITY_World Tab (free build, freeinstant crafting, lock time, force weather)|World Tab (free build, free/instant crafting, lock time, force weather)]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `MenuWindow` - 19 edges
-2. `MjolnirMenu.Core` - 15 edges
+1. `MenuWindow` - 20 edges
+2. `MjolnirMenu.Core` - 16 edges
 3. `PlayerCheats` - 14 edges
-4. `Warp` - 14 edges
-5. `PlayerPatches` - 12 edges
-6. `State` - 11 edges
-7. `MjolnirMenu.Features` - 11 edges
-8. `Esp` - 11 edges
-9. `Spawner` - 11 edges
-10. `WorldCheats` - 11 edges
+4. `MjolnirMenu.Features` - 12 edges
+5. `Warp` - 12 edges
+6. `Esp` - 10 edges
+7. `Spawner` - 10 edges
+8. `PlayerPatches` - 10 edges
+9. `WorldCheats` - 9 edges
+10. `SkillCheats` - 8 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `ESP Tab (player/creature/resource labels, tracers, range/cap)` --references--> `Esp`  [INFERRED]
-  README.md → src/MjolnirMenu/Features/Esp.cs
-- `Spawner Tab (ObjectDB items, ZNetScene creatures, kill radius)` --references--> `Spawner`  [INFERRED]
-  README.md → src/MjolnirMenu/Features/Spawner.cs
-- `Fly` --references--> `PlayerCheats`  [INFERRED]
-  README.md → src/MjolnirMenu/Features/PlayerCheats.cs
-- `God Mode` --references--> `PlayerCheats`  [INFERRED]
-  README.md → src/MjolnirMenu/Features/PlayerCheats.cs
-- `Per-frame reconciliation of game fields against State` --rationale_for--> `PlayerCheats`  [INFERRED]
-  README.md → src/MjolnirMenu/Features/PlayerCheats.cs
+- None detected - all connections are within the same source files.
 
 ## Import Cycles
 - None detected.
 
-## Hyperedges (group relationships)
-- **Menu tabs of the MjolnirMenu IMGUI window** — readme_player_tab, readme_world_tab, readme_spawner_tab, readme_teleport_tab, readme_esp_tab, readme_settings_tab [EXTRACTED 1.00]
-- **State-driven cheat flow: State read by patches, reconciled by features every frame** — src_mjolnirmenu_core_state_mjolnirmenu_core_state, src_mjolnirmenu_features_playercheats_mjolnirmenu_features_playercheats, src_mjolnirmenu_features_worldcheats_mjolnirmenu_features_worldcheats, src_mjolnirmenu_patches_playerpatches_mjolnirmenu_patches_playerpatches, readme_state_single_source_of_truth [INFERRED 0.85]
-- **Build and install pipeline (BepInEx install, dotnet build, deploy)** — readme_build_process, readme_install_process, readme_install_bepinex_script, readme_deploy_script, readme_krafs_publicizer [EXTRACTED 1.00]
-
-## Communities (13 total, 0 thin omitted)
+## Communities (41 total, 27 thin omitted)
 
 ### Community 0 - "BepInEx Plugin Bootstrap & Install"
-Cohesion: 0.08
-Nodes (27): BaseUnityPlugin, ConfigEntry, ConfigFile, Harmony, ManualLogSource, Auto-disable cheats on logout, BepInEx 5, Build (dotnet build, VALHEIM_DIR, Managed assemblies, BepInEx NuGet feed) (+19 more)
+Cohesion: 0.12
+Nodes (11): BaseUnityPlugin, ConfigEntry, ConfigFile, Harmony, ManualLogSource, MenuConfig, bool, float (+3 more)
 
 ### Community 1 - "Item & Creature Spawner"
-Cohesion: 0.11
-Nodes (14): Entry, GameObject, int, Rect, bool, List, string, Entry (+6 more)
+Cohesion: 0.16
+Nodes (8): Entry, GameObject, Hotkeys, bool, List, string, Entry, Spawner
 
 ### Community 2 - "Teleport & Saved Positions"
-Cohesion: 0.13
-Nodes (14): Minimap, PlayerInfo, MjolnirMenu.positions.txt (persisted named positions), Teleport Tab (map click, temple/bed, saved positions, player teleport), SavedPos, bool, List, string (+6 more)
+Cohesion: 0.14
+Nodes (12): Minimap, PlayerInfo, SavedPos, bool, List, string, Vector3, SavedPos (+4 more)
 
 ### Community 3 - "Namespace & File Layout"
-Cohesion: 0.14
+Cohesion: 0.13
 Nodes (9): MjolnirMenu.UI, MjolnirMenu.Patches, MjolnirMenu, MjolnirMenu.Core, MjolnirMenu.Features, Kind, HarmonyPatch, HarmonyPostfix (+1 more)
 
 ### Community 4 - "Player Cheats & State Reset"
-Cohesion: 0.18
-Nodes (9): Fly, God Mode, Player Tab (God mode, ghost, infinite stamina/eitr, fly, speed/jump hack), float, Player, PlayerCheats, HarmonyPatch, HarmonyPrefix (+1 more)
+Cohesion: 0.19
+Nodes (7): GameCamera, float, Player, PlayerCheats, HarmonyPatch, HarmonyPrefix, GamePatches
 
 ### Community 5 - "ESP Overlay Rendering"
-Cohesion: 0.13
-Nodes (13): Camera, Kind, Color, float, GUIStyle, List, string, Texture2D (+5 more)
+Cohesion: 0.09
+Nodes (18): Camera, Kind, Color, float, GUIStyle, List, string, Texture2D (+10 more)
 
 ### Community 6 - "Menu Tabs & Project Concepts"
-Cohesion: 0.11
-Nodes (15): InventoryGui, caveman (Claude Code helper), ESP Tab (player/creature/resource labels, tracers, range/cap), Ethical use notice (own/permitted servers only, no anti-detection), graphify (knowledge graph tooling), Tabbed IMGUI Menu Window, MjolnirMenu, Spawner Tab (ObjectDB items, ZNetScene creatures, kill radius) (+7 more)
+Cohesion: 0.22
+Nodes (6): InventoryGui, float, List, Player, string, WorldCheats
 
 ### Community 7 - "Player Harmony Patches"
 Cohesion: 0.38
@@ -92,31 +112,36 @@ Cohesion: 0.22
 Nodes (7): net462, BepInEx.Core (5.4.21), BepInEx.PluginInfoProps (2.1.0), HarmonyX (2.10.2), Krafs.Publicizer (2.2.1), Microsoft.NETFramework.ReferenceAssemblies (1.0.3), Microsoft.NET.Sdk
 
 ### Community 9 - "IMGUI Skin Styles"
-Cohesion: 0.28
-Nodes (5): bool, Color, GUIStyle, Texture2D, Styles
+Cohesion: 0.15
+Nodes (11): int, Rect, Skill, float, List, SkillCheats, bool, float (+3 more)
 
 ### Community 10 - "Character Damage Patch"
-Cohesion: 0.33
-Nodes (5): Character, HitData, HarmonyPatch, HarmonyPrefix, CharacterPatches
+Cohesion: 0.20
+Nodes (11): Character, CharacterAnimEvent, HitData, Humanoid, float, HarmonyPatch, HarmonyPostfix, HarmonyPrefix (+3 more)
+
+### Community 13 - "MjolnirMenu"
+Cohesion: 0.22
+Nodes (8): Build, Development tooling, Features, Hotkeys (change in `BepInEx/config/com.mjolnir.menu.cfg`), Install, Layout, License, MjolnirMenu
 
 ## Knowledge Gaps
-- **13 isolated node(s):** `Kind`, `net462`, `BepInEx.Core (5.4.21)`, `BepInEx.PluginInfoProps (2.1.0)`, `HarmonyX (2.10.2)` (+8 more)
+- **38 isolated node(s):** `Kind`, `net462`, `BepInEx.Core (5.4.21)`, `BepInEx.PluginInfoProps (2.1.0)`, `HarmonyX (2.10.2)` (+33 more)
   These have ≤1 connection - possible missing edges or undocumented components.
+- **27 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `MjolnirMenu.Core` connect `Namespace & File Layout` to `BepInEx Plugin Bootstrap & Install`?**
-  _High betweenness centrality (0.219) - this node is a cross-community bridge._
-- **Why does `MenuWindow` connect `Item & Creature Spawner` to `BepInEx Plugin Bootstrap & Install`, `Teleport & Saved Positions`, `Namespace & File Layout`, `Player Cheats & State Reset`, `Menu Tabs & Project Concepts`, `IMGUI Skin Styles`?**
-  _High betweenness centrality (0.200) - this node is a cross-community bridge._
-- **Why does `Tabbed IMGUI Menu Window` connect `Menu Tabs & Project Concepts` to `BepInEx Plugin Bootstrap & Install`, `Item & Creature Spawner`, `Teleport & Saved Positions`, `Player Cheats & State Reset`?**
-  _High betweenness centrality (0.129) - this node is a cross-community bridge._
-- **Are the 2 inferred relationships involving `MenuWindow` (e.g. with `Tabbed IMGUI Menu Window` and `Source Layout (Plugin, Core, Features, Patches, UI)`) actually correct?**
-  _`MenuWindow` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 4 inferred relationships involving `PlayerCheats` (e.g. with `Fly` and `God Mode`) actually correct?**
-  _`PlayerCheats` has 4 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `Warp` (e.g. with `MjolnirMenu.positions.txt (persisted named positions)` and `Teleport Tab (map click, temple/bed, saved positions, player teleport)`) actually correct?**
-  _`Warp` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `PlayerPatches` (e.g. with `Harmony patches on Player, Character, Minimap, EnvMan, Game` and `Player Tab (God mode, ghost, infinite stamina/eitr, fly, speed/jump hack)`) actually correct?**
-  _`PlayerPatches` has 2 INFERRED edges - model-reasoned connections that need verification._
+  _High betweenness centrality (0.264) - this node is a cross-community bridge._
+- **Why does `MenuWindow` connect `IMGUI Skin Styles` to `Item & Creature Spawner`, `Teleport & Saved Positions`, `Namespace & File Layout`, `Player Cheats & State Reset`, `ESP Overlay Rendering`?**
+  _High betweenness centrality (0.126) - this node is a cross-community bridge._
+- **What connects `Kind`, `net462`, `BepInEx.Core (5.4.21)` to the rest of the system?**
+  _42 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `BepInEx Plugin Bootstrap & Install` be split into smaller, more focused modules?**
+  _Cohesion score 0.125 - nodes in this community are weakly interconnected._
+- **Should `Teleport & Saved Positions` be split into smaller, more focused modules?**
+  _Cohesion score 0.1422924901185771 - nodes in this community are weakly interconnected._
+- **Should `Namespace & File Layout` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
+- **Should `ESP Overlay Rendering` be split into smaller, more focused modules?**
+  _Cohesion score 0.0873015873015873 - nodes in this community are weakly interconnected._

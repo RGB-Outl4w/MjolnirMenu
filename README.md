@@ -8,7 +8,9 @@ In-game trainer / mod menu for **Valheim**, built on BepInEx 5 + HarmonyX. Press
 
 | Tab | What you get |
 |-----|--------------|
-| **Player** | God mode, ghost mode (enemies ignore you), infinite stamina / eitr, no fall damage, infinite carry weight, fly, speed hack (×1–10), jump hack (×1–10), heal + refill |
+| **Player** | God mode, ghost mode (enemies ignore you), infinite stamina / eitr, no fall damage, infinite carry weight, fly, speed hack (×1–10), jump hack (×1–10), heal + refill. Water: swim speed hack, jump while swimming, walk on water, walk on the seabed, underwater camera |
+| **Combat** | Infinite durability (weapons, armor, tools), melee / ranged damage multipliers (×1–50), attack speed hack (×1–5) |
+| **Skills** | Every skill as a slider; max all / reset all / set all to a custom level; per-skill 0 / 50 / 100 buttons |
 | **World** | Free build (no piece cost), no placement delay, free crafting (no materials), instant crafting, lock time of day (slider + dawn/noon/dusk/night), force weather (every `EnvSetup` the game knows) |
 | **Spawner** | Searchable catalog of every item (`ObjectDB`) and creature (`ZNetScene`); give items with stack + quality, spawn creatures with level, count, tamed; kill everything within a radius |
 | **Teleport** | Ctrl + left-click on the big map to teleport, jump to start temple / bed, save & recall named positions (persisted to `BepInEx/config/MjolnirMenu.positions.txt`), teleport to other players who share their position |
@@ -51,7 +53,7 @@ Game assemblies are referenced straight from `valheim_Data\Managed`; BepInEx and
    .\scripts\deploy.ps1
    ```
    (plain `dotnet build` also copies the DLL into `BepInEx\plugins\MjolnirMenu` when that folder exists.)
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.1.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.2.0]`.
 
 ## Layout
 
@@ -59,8 +61,8 @@ Game assemblies are referenced straight from `valheim_Data\Managed`; BepInEx and
 src/MjolnirMenu/
   Plugin.cs            BepInEx entry point; Harmony PatchAll; Update/OnGUI dispatch
   Core/                MenuConfig (config entries), State (all toggles), Hotkeys
-  Features/            PlayerCheats, WorldCheats, Spawner, Warp (teleport), Esp
-  Patches/             Harmony patches on Player, Character, Minimap, EnvMan, Game
+  Features/            PlayerCheats, WorldCheats, SkillCheats, Spawner, Warp (teleport), Esp
+  Patches/             Harmony patches on Player, Character, Humanoid, CharacterAnimEvent, Minimap, EnvMan, Game
   UI/                  MenuWindow (tabs) and Styles (skin)
 scripts/               install-bepinex.ps1, deploy.ps1
 graphify-out/          knowledge graph of the codebase (graphify)
