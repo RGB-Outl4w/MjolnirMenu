@@ -106,6 +106,7 @@ namespace MjolnirMenu.Patches
         // Attack animations drive their own pacing through Speed() animation events; we scale
         // whatever the clip asked for. Base is reset when the attack ends (CustomFixedUpdate sets speed=1).
         private static float _baseSpeed = 1f;
+        private static float _emoteGraceUntil;
 
         private static bool IsLocalAttacking(CharacterAnimEvent ev)
         {
@@ -131,10 +132,23 @@ namespace MjolnirMenu.Patches
                 float target = Mathf.Max(0.05f, _baseSpeed) * State.AttackSpeedMultiplier;
                 if (!Mathf.Approximately(__instance.m_animator.speed, target))
                     __instance.m_animator.speed = target;
+                return;
             }
-            else
+
+            _baseSpeed = 1f;
+
+            // Sit / stand: emote state while sitting, then a short grace so the stand-up transition
+            // (no longer tagged emote) is sped up too before the game resets speed to 1.
+            if (State.EmoteSpeedHack)
             {
-                _baseSpeed = 1f;
+                var c = __instance.m_character;
+                bool inEmote = c.InEmote() || c.IsSitting();
+                if (inEmote) _emoteGraceUntil = Time.time + 1.5f;
+                if (inEmote || Time.time < _emoteGraceUntil)
+                {
+                    if (!Mathf.Approximately(__instance.m_animator.speed, State.EmoteSpeedMultiplier))
+                        __instance.m_animator.speed = State.EmoteSpeedMultiplier;
+                }
             }
         }
     }

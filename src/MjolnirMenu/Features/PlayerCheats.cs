@@ -13,6 +13,7 @@ namespace MjolnirMenu.Features
         private static Player? _trackedPlayer;
         private static float _origJumpForce;
         private static float _origSwimSpeed;
+        private static float _origCrouchSpeed;
 
         private static GameCamera? _trackedCamera;
         private static float _origMinWaterDistance;
@@ -35,6 +36,7 @@ namespace MjolnirMenu.Features
                     _trackedPlayer = p;
                     _origJumpForce = p.m_jumpForce;
                     _origSwimSpeed = p.m_swimSpeed;
+                    _origCrouchSpeed = p.m_crouchSpeed;
                 }
 
                 ApplyGodMode();
@@ -42,6 +44,7 @@ namespace MjolnirMenu.Features
                 ApplyFly();
                 ApplyJump();
                 ApplySwimSpeed();
+                ApplyCrouchSpeed();
 
                 if (State.InfiniteStamina && p.m_stamina < p.GetMaxStamina())
                     p.m_stamina = p.GetMaxStamina();
@@ -63,6 +66,7 @@ namespace MjolnirMenu.Features
             ApplyFly();
             ApplyJump();
             ApplySwimSpeed();
+            ApplyCrouchSpeed();
             ApplyCamera();
         }
 
@@ -103,6 +107,32 @@ namespace MjolnirMenu.Features
             float target = State.SwimSpeedHack ? _origSwimSpeed * State.SwimSpeedMultiplier : _origSwimSpeed;
             if (!Mathf.Approximately(p.m_swimSpeed, target))
                 p.m_swimSpeed = target;
+        }
+
+        public static void ApplyCrouchSpeed()
+        {
+            var p = Player.m_localPlayer;
+            if (p == null || !ReferenceEquals(p, _trackedPlayer)) return;
+            float target = State.CrouchSpeedHack ? _origCrouchSpeed * State.CrouchSpeedMultiplier : _origCrouchSpeed;
+            if (!Mathf.Approximately(p.m_crouchSpeed, target))
+                p.m_crouchSpeed = target;
+        }
+
+        /// <summary>Strip the 'obtained using cheats' flag from everything currently carried.</summary>
+        public static int ClearCheatTags()
+        {
+            var p = Player.m_localPlayer;
+            if (p == null) return 0;
+            int n = 0;
+            foreach (var item in p.GetInventory().GetAllItems())
+            {
+                if (item == null || !item.m_cheated) continue;
+                item.m_cheated = false;
+                n++;
+            }
+            p.GetInventory().Changed();
+            Hotkeys.Notify($"Cleared cheat tag on {n} item(s)");
+            return n;
         }
 
         /// <summary>GameCamera keeps itself m_minWaterDistance above the water line; push that far below to allow diving shots.</summary>

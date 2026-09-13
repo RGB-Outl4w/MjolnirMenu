@@ -14,6 +14,8 @@ namespace MjolnirMenu.Features
             public string DisplayName = "";
             public bool IsCreature;
             public bool IsBoss;
+            /// <summary>Has an icon and a real item type: safe to hold in a player inventory.</summary>
+            public bool InventorySafe;
         }
 
         public static readonly List<Entry> Items = new List<Entry>();
@@ -36,10 +38,13 @@ namespace MjolnirMenu.Features
                 if (go == null) continue;
                 var drop = go.GetComponent<ItemDrop>();
                 if (drop == null || drop.m_itemData?.m_shared == null) continue;
+                var shared = drop.m_itemData.m_shared;
+                bool hasIcon = shared.m_icons != null && shared.m_icons.Length > 0 && shared.m_icons[0] != null;
                 Items.Add(new Entry
                 {
                     PrefabName = go.name,
-                    DisplayName = Localization.instance.Localize(drop.m_itemData.m_shared.m_name),
+                    DisplayName = Localization.instance.Localize(shared.m_name),
+                    InventorySafe = hasIcon && shared.m_itemType != ItemDrop.ItemData.ItemType.None && shared.m_maxStackSize >= 1,
                 });
             }
 

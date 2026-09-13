@@ -1,16 +1,16 @@
 # Graph Report - MjolnirMenu  (2026-09-13)
 
 ## Corpus Check
-- 22 files · ~7,505 words
+- 22 files · ~8,310 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 247 nodes · 380 edges · 41 communities (14 shown, 27 thin omitted)
+- 255 nodes · 402 edges · 42 communities (15 shown, 27 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `1ca58f21`
+- Built from commit: `ba137bc6`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -54,16 +54,17 @@
 - [[_COMMUNITY_Teleport Tab (map click, templebed, saved positions, player teleport)|Teleport Tab (map click, temple/bed, saved positions, player teleport)]]
 - [[_COMMUNITY_Valheim|Valheim]]
 - [[_COMMUNITY_World Tab (free build, freeinstant crafting, lock time, force weather)|World Tab (free build, free/instant crafting, lock time, force weather)]]
+- [[_COMMUNITY_Styles|Styles]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `MenuWindow` - 20 edges
+1. `MenuWindow` - 21 edges
 2. `MjolnirMenu.Core` - 16 edges
-3. `PlayerCheats` - 14 edges
+3. `PlayerCheats` - 16 edges
 4. `MjolnirMenu.Features` - 12 edges
 5. `Warp` - 12 edges
-6. `Esp` - 10 edges
-7. `Spawner` - 10 edges
-8. `PlayerPatches` - 10 edges
+6. `PlayerPatches` - 11 edges
+7. `Esp` - 10 edges
+8. `Spawner` - 10 edges
 9. `WorldCheats` - 9 edges
 10. `SkillCheats` - 8 edges
 
@@ -73,47 +74,47 @@
 ## Import Cycles
 - None detected.
 
-## Communities (41 total, 27 thin omitted)
+## Communities (42 total, 27 thin omitted)
 
 ### Community 0 - "BepInEx Plugin Bootstrap & Install"
-Cohesion: 0.12
-Nodes (11): BaseUnityPlugin, ConfigEntry, ConfigFile, Harmony, ManualLogSource, MenuConfig, bool, float (+3 more)
+Cohesion: 0.18
+Nodes (7): ConfigEntry, ConfigFile, MenuConfig, bool, float, string, State
 
 ### Community 1 - "Item & Creature Spawner"
-Cohesion: 0.16
-Nodes (8): Entry, GameObject, Hotkeys, bool, List, string, Entry, Spawner
+Cohesion: 0.10
+Nodes (15): Entry, GameObject, int, Rect, Hotkeys, bool, List, string (+7 more)
 
 ### Community 2 - "Teleport & Saved Positions"
 Cohesion: 0.14
 Nodes (12): Minimap, PlayerInfo, SavedPos, bool, List, string, Vector3, SavedPos (+4 more)
 
 ### Community 3 - "Namespace & File Layout"
-Cohesion: 0.13
-Nodes (9): MjolnirMenu.UI, MjolnirMenu.Patches, MjolnirMenu, MjolnirMenu.Core, MjolnirMenu.Features, Kind, HarmonyPatch, HarmonyPostfix (+1 more)
+Cohesion: 0.11
+Nodes (13): MjolnirMenu.UI, MjolnirMenu.Patches, MjolnirMenu, MjolnirMenu.Core, MjolnirMenu.Features, Kind, HarmonyPatch, HarmonyPostfix (+5 more)
 
 ### Community 4 - "Player Cheats & State Reset"
-Cohesion: 0.19
-Nodes (7): GameCamera, float, Player, PlayerCheats, HarmonyPatch, HarmonyPrefix, GamePatches
+Cohesion: 0.26
+Nodes (4): GameCamera, float, Player, PlayerCheats
 
 ### Community 5 - "ESP Overlay Rendering"
-Cohesion: 0.09
-Nodes (18): Camera, Kind, Color, float, GUIStyle, List, string, Texture2D (+10 more)
+Cohesion: 0.10
+Nodes (17): BaseUnityPlugin, Camera, Harmony, Kind, ManualLogSource, Color, float, GUIStyle (+9 more)
 
 ### Community 6 - "Menu Tabs & Project Concepts"
 Cohesion: 0.22
 Nodes (6): InventoryGui, float, List, Player, string, WorldCheats
 
 ### Community 7 - "Player Harmony Patches"
-Cohesion: 0.38
-Nodes (5): HarmonyPatch, HarmonyPostfix, HarmonyPrefix, Player, PlayerPatches
+Cohesion: 0.29
+Nodes (6): HarmonyPatch, HarmonyPostfix, HarmonyPrefix, Player, PlayerPatches, PlayerProfilePatches
 
 ### Community 8 - "Build Configuration"
 Cohesion: 0.22
 Nodes (7): net462, BepInEx.Core (5.4.21), BepInEx.PluginInfoProps (2.1.0), HarmonyX (2.10.2), Krafs.Publicizer (2.2.1), Microsoft.NETFramework.ReferenceAssemblies (1.0.3), Microsoft.NET.Sdk
 
 ### Community 9 - "IMGUI Skin Styles"
-Cohesion: 0.15
-Nodes (11): int, Rect, Skill, float, List, SkillCheats, bool, float (+3 more)
+Cohesion: 0.38
+Nodes (4): Skill, float, List, SkillCheats
 
 ### Community 10 - "Character Damage Patch"
 Cohesion: 0.20
@@ -123,6 +124,10 @@ Nodes (11): Character, CharacterAnimEvent, HitData, Humanoid, float, HarmonyPatc
 Cohesion: 0.22
 Nodes (8): Build, Development tooling, Features, Hotkeys (change in `BepInEx/config/com.mjolnir.menu.cfg`), Install, Layout, License, MjolnirMenu
 
+### Community 41 - "Styles"
+Cohesion: 0.28
+Nodes (5): bool, Color, GUIStyle, Texture2D, Styles
+
 ## Knowledge Gaps
 - **38 isolated node(s):** `Kind`, `net462`, `BepInEx.Core (5.4.21)`, `BepInEx.PluginInfoProps (2.1.0)`, `HarmonyX (2.10.2)` (+33 more)
   These have ≤1 connection - possible missing edges or undocumented components.
@@ -131,17 +136,17 @@ Nodes (8): Build, Development tooling, Features, Hotkeys (change in `BepInEx/con
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MjolnirMenu.Core` connect `Namespace & File Layout` to `BepInEx Plugin Bootstrap & Install`?**
-  _High betweenness centrality (0.264) - this node is a cross-community bridge._
-- **Why does `MenuWindow` connect `IMGUI Skin Styles` to `Item & Creature Spawner`, `Teleport & Saved Positions`, `Namespace & File Layout`, `Player Cheats & State Reset`, `ESP Overlay Rendering`?**
+- **Why does `MjolnirMenu.Core` connect `Namespace & File Layout` to `BepInEx Plugin Bootstrap & Install`, `Item & Creature Spawner`?**
+  _High betweenness centrality (0.265) - this node is a cross-community bridge._
+- **Why does `MenuWindow` connect `Item & Creature Spawner` to `Teleport & Saved Positions`, `Namespace & File Layout`, `Player Cheats & State Reset`, `Styles`, `IMGUI Skin Styles`?**
   _High betweenness centrality (0.126) - this node is a cross-community bridge._
+- **Why does `MjolnirMenu.Features` connect `Namespace & File Layout` to `Item & Creature Spawner`?**
+  _High betweenness centrality (0.101) - this node is a cross-community bridge._
 - **What connects `Kind`, `net462`, `BepInEx.Core (5.4.21)` to the rest of the system?**
   _42 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `BepInEx Plugin Bootstrap & Install` be split into smaller, more focused modules?**
-  _Cohesion score 0.125 - nodes in this community are weakly interconnected._
+- **Should `Item & Creature Spawner` be split into smaller, more focused modules?**
+  _Cohesion score 0.0957983193277311 - nodes in this community are weakly interconnected._
 - **Should `Teleport & Saved Positions` be split into smaller, more focused modules?**
   _Cohesion score 0.1422924901185771 - nodes in this community are weakly interconnected._
 - **Should `Namespace & File Layout` be split into smaller, more focused modules?**
-  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._
-- **Should `ESP Overlay Rendering` be split into smaller, more focused modules?**
-  _Cohesion score 0.0873015873015873 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.10591133004926108 - nodes in this community are weakly interconnected._

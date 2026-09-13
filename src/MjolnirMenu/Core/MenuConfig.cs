@@ -12,6 +12,7 @@ namespace MjolnirMenu.Core
         public static ConfigEntry<KeyboardShortcut> PanicKey = null!;
 
         public static ConfigEntry<bool> ShowWatermark = null!;
+        public static ConfigEntry<bool> HideCheatTags = null!;
         public static ConfigEntry<float> WindowX = null!;
         public static ConfigEntry<float> WindowY = null!;
 
@@ -33,6 +34,7 @@ namespace MjolnirMenu.Core
             PanicKey = cfg.Bind("Hotkeys", "PanicReset", new KeyboardShortcut(KeyCode.End), "Turn every cheat off at once.");
 
             ShowWatermark = cfg.Bind("UI", "ShowWatermark", true, "Small MjolnirMenu tag in the top-left corner.");
+            HideCheatTags = cfg.Bind("General", "HideCheatTags", true, "Report bypasscheatchecks to the game so loot/crafts are never tagged 'obtained using cheats'.");
             WindowX = cfg.Bind("UI", "WindowX", 60f, "Saved window X position.");
             WindowY = cfg.Bind("UI", "WindowY", 60f, "Saved window Y position.");
 

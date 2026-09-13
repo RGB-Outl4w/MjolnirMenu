@@ -25,9 +25,9 @@
     "semantic_hash": "a0a44465515db383333a5b608a2c6db3"
   },
   "src/MjolnirMenu/Core/State.cs": {
-    "mtime": 1789321728.6763585,
-    "ast_hash": "609140c4132f76fbb1737bae32a08356",
-    "semantic_hash": "609140c4132f76fbb1737bae32a08356"
+    "mtime": 1789326065.8307557,
+    "ast_hash": "4e60b1e5a1772bab413b04774ea81667",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/Features/Esp.cs": {
     "mtime": 1789321728.7026467,
@@ -35,14 +35,14 @@
     "semantic_hash": "a81c964d8d00c5e190d45da8fa166b2d"
   },
   "src/MjolnirMenu/Features/PlayerCheats.cs": {
-    "mtime": 1789321492.3420005,
-    "ast_hash": "8bca03960c244f5729b9debcf0a5343a",
-    "semantic_hash": "8bca03960c244f5729b9debcf0a5343a"
+    "mtime": 1789326099.9905972,
+    "ast_hash": "2b76792fc459dcf7f793ad7c167bca81",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/Features/Spawner.cs": {
-    "mtime": 1789321526.845771,
-    "ast_hash": "e231b4e25780a2cd40de41c8f161da28",
-    "semantic_hash": "e231b4e25780a2cd40de41c8f161da28"
+    "mtime": 1789326065.8307557,
+    "ast_hash": "439a99ce1a02b53537f30bbc5ee54538",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/Features/Warp.cs": {
     "mtime": 1789321728.6262598,
@@ -55,14 +55,14 @@
     "semantic_hash": "df33aacfc531572c2be9b554158d787c"
   },
   "src/MjolnirMenu/MjolnirMenu.csproj": {
-    "mtime": 1789321709.7620275,
-    "ast_hash": "a7f1f56a049925c2af7577bdc84ddd37",
-    "semantic_hash": "a7f1f56a049925c2af7577bdc84ddd37"
+    "mtime": 1789326239.5168517,
+    "ast_hash": "baec23eb4a4e6cd4517c228c46e2a7b6",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/Patches/CharacterPatches.cs": {
-    "mtime": 1789321585.1290438,
-    "ast_hash": "7317f49e391d70f54d813d88d3506c89",
-    "semantic_hash": "7317f49e391d70f54d813d88d3506c89"
+    "mtime": 1789326213.2073135,
+    "ast_hash": "f42b137846c1aafaa5fb513f6711fd1e",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/Patches/EnvManPatches.cs": {
     "mtime": 1789321595.2702827,
@@ -90,9 +90,9 @@
     "semantic_hash": "aeb0e221851304559b005227de1e3970"
   },
   "src/MjolnirMenu/UI/MenuWindow.cs": {
-    "mtime": 1789321728.6459527,
-    "ast_hash": "14fe8f576ea8c107003c2b6e9a36c89e",
-    "semantic_hash": "14fe8f576ea8c107003c2b6e9a36c89e"
+    "mtime": 1789326204.2044227,
+    "ast_hash": "4345ec24635f6a34fb63cdb9b9ad2ab2",
+    "semantic_hash": ""
   },
   "src/MjolnirMenu/UI/Styles.cs": {
     "mtime": 1789321613.796244,
@@ -100,8 +100,13 @@
     "semantic_hash": "d477033acfabe8205948f71a152c2636"
   },
   "README.md": {
-    "mtime": 1789321785.1074672,
-    "ast_hash": "4d6e8ce3dee480d2164240bfa0f2c5de",
-    "semantic_hash": "4d6e8ce3dee480d2164240bfa0f2c5de"
+    "mtime": 1789326239.5168517,
+    "ast_hash": "377df53c7ee5f93de0176d9b548c699b",
+    "semantic_hash": ""
+  },
+  "src/MjolnirMenu/Features/SkillCheats.cs": {
+    "mtime": 1789326083.0381167,
+    "ast_hash": "4302fa9a33dccf76af82b5fefcc37924",
+    "semantic_hash": ""
   }
 }

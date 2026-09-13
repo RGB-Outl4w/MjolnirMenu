@@ -23,6 +23,11 @@ namespace MjolnirMenu.Core
         public static bool InfiniteCarryWeight;
         public static float SpeedMultiplier = 2f;
         public static float JumpMultiplier = 2f;
+        public static bool CrouchSpeedHack;
+        public static float CrouchSpeedMultiplier = 3f;
+        public static bool CrouchInfiniteStamina;
+        public static bool EmoteSpeedHack;
+        public static float EmoteSpeedMultiplier = 3f;
 
         // Water
         public static bool SwimSpeedHack;
@@ -51,6 +56,12 @@ namespace MjolnirMenu.Core
 
         // Teleport
         public static bool MapClickTeleport;
+        public static bool FastTeleport;
+        public static float TeleportSpeed = 10f;
+
+        // Misc
+        public static bool HideCheatTags = true;
+        public static bool SpawnerShowAll;
 
         // ESP
         public static bool EspPlayers;
@@ -63,6 +74,7 @@ namespace MjolnirMenu.Core
         {
             SpeedMultiplier = MenuConfig.SpeedMultiplier.Value;
             JumpMultiplier = MenuConfig.JumpMultiplier.Value;
+            HideCheatTags = MenuConfig.HideCheatTags.Value;
         }
 
         /// <summary>Turn everything off and restore any game fields we touched.</summary>
@@ -71,6 +83,8 @@ namespace MjolnirMenu.Core
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
             Fly = SpeedHack = JumpHack = InfiniteCarryWeight = false;
             SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = false;
+            CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;
+            FastTeleport = false;
             InfiniteDurability = DamageHack = AttackSpeedHack = false;
             FreeBuild = NoPlaceDelay = InstantCraft = FreeCraft = false;
             LockTimeOfDay = false;

@@ -10,7 +10,23 @@ namespace MjolnirMenu.Patches
     {
         [HarmonyPrefix, HarmonyPatch(nameof(Player.UseStamina))]
         private static bool UseStamina_Prefix(Player __instance)
-            => !(State.InfiniteStamina && ReferenceEquals(__instance, Player.m_localPlayer));
+        {
+            if (!ReferenceEquals(__instance, Player.m_localPlayer)) return true;
+            if (State.InfiniteStamina) return false;
+            if (State.CrouchInfiniteStamina && __instance.IsCrouching()) return false;
+            return true;
+        }
+
+        /// <summary>
+        /// Teleport (portal or ours) waits on m_teleportTimer: &gt;2s before the move, &gt;8s for portals
+        /// before landing. Feeding a scaled dt shortens the whole vortex sequence.
+        /// </summary>
+        [HarmonyPrefix, HarmonyPatch("UpdateTeleport")]
+        private static void UpdateTeleport_Prefix(Player __instance, ref float dt)
+        {
+            if (State.FastTeleport && __instance.m_teleporting && ReferenceEquals(__instance, Player.m_localPlayer))
+                dt *= State.TeleportSpeed;
+        }
 
         [HarmonyPrefix, HarmonyPatch(nameof(Player.UseEitr))]
         private static bool UseEitr_Prefix(Player __instance)
@@ -63,6 +79,32 @@ namespace MjolnirMenu.Patches
         {
             if (ReferenceEquals(__instance, Player.m_localPlayer))
                 Spawner.Invalidate();
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerController))]
+    internal static class PlayerControllerPatches
+    {
+        /// <summary>Second input gate: movement and mouse-look come through here.</summary>
+        [HarmonyPostfix, HarmonyPatch("TakeInput")]
+        private static void TakeInput_Postfix(ref bool __result)
+        {
+            if (State.MenuOpen) __result = false;
+        }
+    }
+
+    [HarmonyPatch(typeof(PlayerProfile))]
+    internal static class PlayerProfilePatches
+    {
+        /// <summary>
+        /// The game tags loot/crafts as cheated whenever the player dealt damage in god/ghost/fly mode
+        /// (Character.ApplyDamage sets the player ZDO's 'cheated' flag). bypasscheatchecks is its own
+        /// off switch; we report it as set.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch("s_bypassCheatChecks", MethodType.Getter)]
+        private static void BypassCheatChecks_Postfix(ref bool __result)
+        {
+            if (State.HideCheatTags) __result = true;
         }
     }
 }

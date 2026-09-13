@@ -8,9 +8,9 @@ namespace MjolnirMenu.UI
     public static class MenuWindow
     {
         private const int WindowId = 0x4D4A4F4C; // "MJOL"
-        private static readonly string[] Tabs = { "Player", "World", "Spawner", "Warp", "ESP", "MenuConfig" };
+        private static readonly string[] Tabs = { "Player", "Combat", "World", "Skills", "Spawner", "Teleport", "ESP", "Settings", "Credits" };
 
-        private static Rect _rect = new Rect(60, 60, 640, 480);
+        private static Rect _rect = new Rect(60, 60, 700, 500);
         private static int _tab;
         private static bool _rectLoaded;
 
@@ -90,7 +90,8 @@ namespace MjolnirMenu.UI
                 case 4: DrawSpawner(); break;
                 case 5: DrawTeleport(); break;
                 case 6: DrawEsp(); break;
-                default: DrawSettings(); break;
+                case 7: DrawSettings(); break;
+                default: DrawCredits(); break;
             }
 
             GUILayout.FlexibleSpace();
@@ -139,6 +140,12 @@ namespace MjolnirMenu.UI
             if (Toggle(ref State.JumpHack, $"Jump hack  ×{State.JumpMultiplier:0.0}")) PlayerCheats.ApplyJump();
             float j = GUILayout.HorizontalSlider(State.JumpMultiplier, 1f, 10f);
             if (j != State.JumpMultiplier) { State.JumpMultiplier = j; PlayerCheats.ApplyJump(); }
+            if (Toggle(ref State.CrouchSpeedHack, $"Crouch speed hack  ×{State.CrouchSpeedMultiplier:0.0}")) PlayerCheats.ApplyCrouchSpeed();
+            float cs = GUILayout.HorizontalSlider(State.CrouchSpeedMultiplier, 1f, 10f);
+            if (cs != State.CrouchSpeedMultiplier) { State.CrouchSpeedMultiplier = cs; PlayerCheats.ApplyCrouchSpeed(); }
+            Toggle(ref State.CrouchInfiniteStamina, "Infinite stamina while crouched");
+            Toggle(ref State.EmoteSpeedHack, $"Sit / stand animation speed  ×{State.EmoteSpeedMultiplier:0.0}");
+            State.EmoteSpeedMultiplier = GUILayout.HorizontalSlider(State.EmoteSpeedMultiplier, 1f, 5f);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
 
@@ -292,6 +299,8 @@ namespace MjolnirMenu.UI
             if (GUILayout.Button("Items", !_showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = false;
             if (GUILayout.Button("Creatures", _showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = true;
             GUILayout.Space(10);
+            if (!_showCreatures)
+                Toggle(ref State.SpawnerShowAll, "Show all");
             GUILayout.Label("Search:", Styles.Small, GUILayout.Width(50));
             GUI.SetNextControlName("mjolnir_search");
             _filter = GUILayout.TextField(_filter, GUILayout.ExpandWidth(true));
@@ -322,10 +331,13 @@ namespace MjolnirMenu.UI
             int shown = 0;
             foreach (var e in source)
             {
+                if (!_showCreatures && !State.SpawnerShowAll && !e.InventorySafe) continue;
                 if (!Spawner.Matches(e, _filter)) continue;
                 if (++shown > 300) { GUILayout.Label("… refine your search", Styles.Small); break; }
                 GUILayout.BeginHorizontal();
-                GUILayout.Label(e.IsBoss ? $"★ {e.DisplayName}" : e.DisplayName, Styles.ListRow, GUILayout.Width(220));
+                string rowName = e.IsBoss ? $"★ {e.DisplayName}" : e.DisplayName;
+                if (!e.IsCreature && !e.InventorySafe) rowName += "  (not an inventory item)";
+                GUILayout.Label(rowName, Styles.ListRow, GUILayout.Width(220));
                 GUILayout.Label(e.PrefabName, Styles.Small, GUILayout.ExpandWidth(true));
                 if (GUILayout.Button(_showCreatures ? "Spawn" : "Give", Styles.Button, GUILayout.Width(60)))
                 {
@@ -356,6 +368,8 @@ namespace MjolnirMenu.UI
 
             GUILayout.Label("Map", Styles.Header);
             Toggle(ref State.MapClickTeleport, "Ctrl + left-click on the big map (M) to teleport");
+            Toggle(ref State.FastTeleport, $"Fast teleport / portals  ×{State.TeleportSpeed:0}  (shortens the vortex wait)");
+            State.TeleportSpeed = Mathf.Round(GUILayout.HorizontalSlider(State.TeleportSpeed, 1f, 40f, GUILayout.Width(300)));
 
             GUILayout.Space(6);
             GUILayout.BeginHorizontal();
@@ -439,6 +453,13 @@ namespace MjolnirMenu.UI
             bool wm = MenuConfig.ShowWatermark.Value;
             if (Toggle(ref wm, "Show watermark")) MenuConfig.ShowWatermark.Value = wm;
             GUILayout.Space(8);
+            GUILayout.Label("Cheat tags", Styles.Header);
+            if (Toggle(ref State.HideCheatTags, "Never tag loot / crafts as 'obtained using cheats'")) MenuConfig.HideCheatTags.Value = State.HideCheatTags;
+            GUILayout.Label("The game flags you as a cheater when you deal damage in god / ghost / fly mode; this reports the game's own bypass key instead.", Styles.Small);
+            GUI.enabled = Player.m_localPlayer != null;
+            if (GUILayout.Button("Clear tags on items in inventory", Styles.Button, GUILayout.Width(230))) PlayerCheats.ClearCheatTags();
+            GUI.enabled = true;
+            GUILayout.Space(8);
             GUILayout.Label("Defaults", Styles.Header);
             GUILayout.BeginHorizontal();
             if (GUILayout.Button("Save speed/jump as default", Styles.Button, GUILayout.Width(200)))
@@ -451,6 +472,29 @@ namespace MjolnirMenu.UI
             GUILayout.Space(12);
             GUILayout.Label("MjolnirMenu is meant for single-player and servers you own. Respect other people's servers.", Styles.Small);
             GUILayout.Label($"v{MyPluginInfo.PLUGIN_VERSION}", Styles.Small);
+        }
+
+        // ---------------- Credits ----------------
+
+        private static void DrawCredits()
+        {
+            GUILayout.Label("MjolnirMenu", Styles.Title);
+            GUILayout.Label($"v{MyPluginInfo.PLUGIN_VERSION}  •  Valheim trainer / mod menu", Styles.Small);
+            GUILayout.Space(10);
+            GUILayout.Label("Made by", Styles.Header);
+            GUILayout.Label("RGB-Outl4w  —  github.com/RGB-Outl4w/MjolnirMenu", Styles.ListRow);
+            GUILayout.Space(10);
+            GUILayout.Label("Built with", Styles.Header);
+            GUILayout.Label("Claude Code (Anthropic)  —  pair-programmed the whole thing", Styles.ListRow);
+            GUILayout.Label("caveman  —  JuliusBrussee/caveman, terse assistant output", Styles.ListRow);
+            GUILayout.Label("graphify  —  safishamsi/graphify, codebase knowledge graph", Styles.ListRow);
+            GUILayout.Space(10);
+            GUILayout.Label("Runs on", Styles.Header);
+            GUILayout.Label("BepInEx 5  —  plugin loader (denikson's BepInExPack_Valheim)", Styles.ListRow);
+            GUILayout.Label("HarmonyX  —  runtime method patching", Styles.ListRow);
+            GUILayout.Label("Krafs.Publicizer  —  access to the game's private fields", Styles.ListRow);
+            GUILayout.Space(10);
+            GUILayout.Label("Valheim is © Iron Gate Studio. Single-player and your own servers only.", Styles.Small);
         }
 
         // ---------------- helpers ----------------
