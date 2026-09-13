@@ -1,0 +1,107 @@
+{
+  "MjolnirMenu.sln": {
+    "mtime": 1789321265.3869586,
+    "ast_hash": "7a5357d9826283767629d415b73210cb",
+    "semantic_hash": "7a5357d9826283767629d415b73210cb"
+  },
+  "scripts/deploy.ps1": {
+    "mtime": 1789321765.083618,
+    "ast_hash": "848a175674d36630a219de5d76e4aba8",
+    "semantic_hash": "848a175674d36630a219de5d76e4aba8"
+  },
+  "scripts/install-bepinex.ps1": {
+    "mtime": 1789321759.5192642,
+    "ast_hash": "f77c92250b37491e2197d19ad263b851",
+    "semantic_hash": "f77c92250b37491e2197d19ad263b851"
+  },
+  "src/MjolnirMenu/Core/Hotkeys.cs": {
+    "mtime": 1789321728.5727007,
+    "ast_hash": "085d38b5d2a97a4cea4ccce2fd596cae",
+    "semantic_hash": "085d38b5d2a97a4cea4ccce2fd596cae"
+  },
+  "src/MjolnirMenu/Core/MenuConfig.cs": {
+    "mtime": 1789321728.555012,
+    "ast_hash": "a0a44465515db383333a5b608a2c6db3",
+    "semantic_hash": "a0a44465515db383333a5b608a2c6db3"
+  },
+  "src/MjolnirMenu/Core/State.cs": {
+    "mtime": 1789321728.6763585,
+    "ast_hash": "609140c4132f76fbb1737bae32a08356",
+    "semantic_hash": "609140c4132f76fbb1737bae32a08356"
+  },
+  "src/MjolnirMenu/Features/Esp.cs": {
+    "mtime": 1789321728.7026467,
+    "ast_hash": "a81c964d8d00c5e190d45da8fa166b2d",
+    "semantic_hash": "a81c964d8d00c5e190d45da8fa166b2d"
+  },
+  "src/MjolnirMenu/Features/PlayerCheats.cs": {
+    "mtime": 1789321492.3420005,
+    "ast_hash": "8bca03960c244f5729b9debcf0a5343a",
+    "semantic_hash": "8bca03960c244f5729b9debcf0a5343a"
+  },
+  "src/MjolnirMenu/Features/Spawner.cs": {
+    "mtime": 1789321526.845771,
+    "ast_hash": "e231b4e25780a2cd40de41c8f161da28",
+    "semantic_hash": "e231b4e25780a2cd40de41c8f161da28"
+  },
+  "src/MjolnirMenu/Features/Warp.cs": {
+    "mtime": 1789321728.6262598,
+    "ast_hash": "66d4b15e81a30d2a2938820e40452ed1",
+    "semantic_hash": "66d4b15e81a30d2a2938820e40452ed1"
+  },
+  "src/MjolnirMenu/Features/WorldCheats.cs": {
+    "mtime": 1789321503.7789466,
+    "ast_hash": "df33aacfc531572c2be9b554158d787c",
+    "semantic_hash": "df33aacfc531572c2be9b554158d787c"
+  },
+  "src/MjolnirMenu/MjolnirMenu.csproj": {
+    "mtime": 1789321709.7620275,
+    "ast_hash": "a7f1f56a049925c2af7577bdc84ddd37",
+    "semantic_hash": "a7f1f56a049925c2af7577bdc84ddd37"
+  },
+  "src/MjolnirMenu/Patches/CharacterPatches.cs": {
+    "mtime": 1789321585.1290438,
+    "ast_hash": "7317f49e391d70f54d813d88d3506c89",
+    "semantic_hash": "7317f49e391d70f54d813d88d3506c89"
+  },
+  "src/MjolnirMenu/Patches/EnvManPatches.cs": {
+    "mtime": 1789321595.2702827,
+    "ast_hash": "61c1c5d3693292cf57f8ce2fbb297220",
+    "semantic_hash": "61c1c5d3693292cf57f8ce2fbb297220"
+  },
+  "src/MjolnirMenu/Patches/GamePatches.cs": {
+    "mtime": 1789321591.5850606,
+    "ast_hash": "10baa71871a45c1892b3bf83a73eff68",
+    "semantic_hash": "10baa71871a45c1892b3bf83a73eff68"
+  },
+  "src/MjolnirMenu/Patches/MinimapPatches.cs": {
+    "mtime": 1789321728.6379268,
+    "ast_hash": "fb33a2dceaeea40846c235abada8e4fa",
+    "semantic_hash": "fb33a2dceaeea40846c235abada8e4fa"
+  },
+  "src/MjolnirMenu/Patches/PlayerPatches.cs": {
+    "mtime": 1789321581.8829794,
+    "ast_hash": "7d3979ff30066cb480e501ea6fc3db6e",
+    "semantic_hash": "7d3979ff30066cb480e501ea6fc3db6e"
+  },
+  "src/MjolnirMenu/Plugin.cs": {
+    "mtime": 1789321728.682881,
+    "ast_hash": "aeb0e221851304559b005227de1e3970",
+    "semantic_hash": "aeb0e221851304559b005227de1e3970"
+  },
+  "src/MjolnirMenu/UI/MenuWindow.cs": {
+    "mtime": 1789321728.6459527,
+    "ast_hash": "14fe8f576ea8c107003c2b6e9a36c89e",
+    "semantic_hash": "14fe8f576ea8c107003c2b6e9a36c89e"
+  },
+  "src/MjolnirMenu/UI/Styles.cs": {
+    "mtime": 1789321613.796244,
+    "ast_hash": "d477033acfabe8205948f71a152c2636",
+    "semantic_hash": "d477033acfabe8205948f71a152c2636"
+  },
+  "README.md": {
+    "mtime": 1789321785.1074672,
+    "ast_hash": "4d6e8ce3dee480d2164240bfa0f2c5de",
+    "semantic_hash": "4d6e8ce3dee480d2164240bfa0f2c5de"
+  }
+}
