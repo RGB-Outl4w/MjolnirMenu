@@ -96,7 +96,9 @@ Who made it and what it runs on.
 | <kbd>F7</kbd> | Toggle fly |
 | <kbd>End</kbd> | Panic: switch every cheat off |
 
-While the menu is open the game's input gates (`Player.TakeInput`, `PlayerController.TakeInput`) report *false*: keys and clicks reach the menu, not your character. Every cheat is switched off automatically on logout so nothing leaks into the next world.
+While the menu is open the game's input gates (`Player.TakeInput`, `PlayerController.TakeInput`) report *false* and `GameCamera.UpdateMouseCapture` is skipped: keys and clicks reach the menu, not your character, and the cursor stays free. Every cheat is switched off automatically on logout so nothing leaks into the next world.
+
+The in-game window uses the same design as the [website](https://rgb-outl4w.github.io/MjolnirMenu/) — every texture is generated at runtime, so the plugin stays a single DLL.
 
 ## Configuration
 

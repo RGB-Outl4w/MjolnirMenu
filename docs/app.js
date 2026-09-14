@@ -110,7 +110,7 @@
     },
     {
       name: "Teleport",
-      intro: "Instant travel. Fast teleport shortens the portal vortex for both portals and menu teleports.",
+      intro: "Menu teleports are instant — no fade, no vortex. Real portals get a separate speed multiplier.",
       groups: [
         { title: "Map", items: [
           ["Ctrl + left-click on the big map to teleport", "", true],
