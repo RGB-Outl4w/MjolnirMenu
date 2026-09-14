@@ -71,7 +71,8 @@
           ["Free build", "No piece cost", true],
           ["No placement delay", ""],
           ["Free crafting", "No materials"],
-          ["Instant crafting", ""]
+          ["Instant crafting", ""],
+          ["Big stations", "×1–50 capacity for smelters, kilns, fires, beehives, sap collectors", true, 40]
         ]},
         { title: "Time of day", items: [
           ["Lock time", "Slider plus Dawn / Noon / Dusk / Night", true, 50]
@@ -115,6 +116,7 @@
         { title: "Map", items: [
           ["Ctrl + left-click on the big map to teleport", "", true],
           ["Instant menu teleports", "No fade, no vortex wait", true],
+          ["Portals accept any item", "Ore, eggs and other non-teleportable items go through", true],
           ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
         ], chips: ["Start temple", "Bed / spawn point"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },

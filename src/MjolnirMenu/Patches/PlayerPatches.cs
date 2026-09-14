@@ -85,6 +85,16 @@ namespace MjolnirMenu.Patches
         }
     }
 
+    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.IsTeleportable))]
+    internal static class TeleportablePatch
+    {
+        /// <summary>Portals refuse players carrying non-teleportable items (ore, eggs...). Report clean.</summary>
+        private static void Postfix(Humanoid __instance, ref bool __result)
+        {
+            if (State.PortalAnyItem && ReferenceEquals(__instance, Player.m_localPlayer)) __result = true;
+        }
+    }
+
     [HarmonyPatch(typeof(PlayerController))]
     internal static class PlayerControllerPatches
     {

@@ -15,6 +15,11 @@ namespace MjolnirMenu.Features
 
         private static string _appliedWeather = "";
 
+        // Station capacity: originals per instance so toggling off restores vanilla values.
+        private static readonly Dictionary<Component, float> _origCapacity = new Dictionary<Component, float>();
+        private static float _nextStationScan;
+        private static float _appliedStationMul = -1f;
+
         public static void Tick()
         {
             var p = Player.m_localPlayer;
@@ -55,6 +60,8 @@ namespace MjolnirMenu.Features
                 _trackedGui = null;
             }
 
+            UpdateStations();
+
             var env = EnvMan.instance;
             if (env != null)
             {
@@ -77,6 +84,55 @@ namespace MjolnirMenu.Features
         }
 
         public static void ApplyAll() => Tick();
+
+        /// <summary>
+        /// Smelters / kilns / windmills / spinning wheels (Smelter), fires, beehives, sap collectors and
+        /// cooking-station fuel: multiply the per-instance capacity field. Rescans every 2s so newly
+        /// loaded stations get it too; restores originals when the toggle goes off.
+        /// </summary>
+        private static void UpdateStations()
+        {
+            float mul = State.BigStations ? Mathf.Max(1f, State.StationMultiplier) : 1f;
+            bool changed = !Mathf.Approximately(mul, _appliedStationMul);
+            if (!State.BigStations && !changed) return;
+            if (!changed && Time.unscaledTime < _nextStationScan) return;
+            _nextStationScan = Time.unscaledTime + 2f;
+            _appliedStationMul = mul;
+
+            foreach (var s in Object.FindObjectsByType<Smelter>(FindObjectsSortMode.None))
+            {
+                Apply(s, ref s.m_maxOre, mul, "ore");
+                Apply(s, ref s.m_maxFuel, mul, "fuel");
+            }
+            foreach (var f in Object.FindObjectsByType<Fireplace>(FindObjectsSortMode.None))
+                ApplyF(f, ref f.m_maxFuel, mul);
+            foreach (var b in Object.FindObjectsByType<Beehive>(FindObjectsSortMode.None))
+                Apply(b, ref b.m_maxHoney, mul, "honey");
+            foreach (var sc in Object.FindObjectsByType<SapCollector>(FindObjectsSortMode.None))
+                Apply(sc, ref sc.m_maxLevel, mul, "sap");
+            foreach (var c in Object.FindObjectsByType<CookingStation>(FindObjectsSortMode.None))
+                Apply(c, ref c.m_maxFuel, mul, "fuel");
+
+            if (mul <= 1f) _origCapacity.Clear();
+        }
+
+        private static readonly Dictionary<string, Dictionary<Component, int>> _origInt = new Dictionary<string, Dictionary<Component, int>>();
+
+        private static void Apply(Component c, ref int field, float mul, string key)
+        {
+            if (!_origInt.TryGetValue(key, out var map)) _origInt[key] = map = new Dictionary<Component, int>();
+            if (!map.TryGetValue(c, out int orig)) map[c] = orig = field;
+            int target = Mathf.Max(1, Mathf.RoundToInt(orig * mul));
+            if (field != target) field = target;
+            if (mul <= 1f) map.Remove(c);
+        }
+
+        private static void ApplyF(Component c, ref float field, float mul)
+        {
+            if (!_origCapacity.TryGetValue(c, out float orig)) _origCapacity[c] = orig = field;
+            float target = Mathf.Max(1f, orig * mul);
+            if (!Mathf.Approximately(field, target)) field = target;
+        }
 
         /// <summary>Names of every environment the game knows (Clear, Rain, ThunderStorm, ...).</summary>
         public static List<string> GetWeatherNames()

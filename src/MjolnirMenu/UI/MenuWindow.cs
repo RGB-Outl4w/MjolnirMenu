@@ -395,6 +395,8 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.NoPlaceDelay, "No placement delay");
             Ui.Toggle(ref State.FreeCraft, "Free crafting", "No materials");
             Ui.Toggle(ref State.InstantCraft, "Instant crafting");
+            Ui.Toggle(ref State.BigStations, "Big stations", $"×{State.StationMultiplier:0} capacity for smelters, kilns, fires, beehives, sap collectors");
+            Ui.Slider(ref State.StationMultiplier, 1f, 50f, SliderW);
 
             Ui.Space();
             Ui.Header("Time of day");
@@ -527,6 +529,7 @@ namespace MjolnirMenu.UI
             Ui.Header("Map");
             Ui.Toggle(ref State.MapClickTeleport, "Ctrl + left-click on the big map to teleport");
             Ui.Toggle(ref State.InstantTeleport, "Instant menu teleports", "Map click / saved positions / players: no fade, no vortex wait");
+            Ui.Toggle(ref State.PortalAnyItem, "Portals accept any item", "Take ore, eggs and other non-teleportable items through portals");
             Ui.Toggle(ref State.FastTeleport, "Fast portals", $"×{State.TeleportSpeed:0} on the vortex timer for real portals");
             float ts = State.TeleportSpeed;
             if (Ui.Slider(ref ts, 1f, 40f, SliderW)) State.TeleportSpeed = Mathf.Round(ts);

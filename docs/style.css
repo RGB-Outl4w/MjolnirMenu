@@ -153,7 +153,8 @@ p { margin: 0 0 1em; }
 .pane .row .chip { margin: 0; }
 .pane ul.list { list-style: none; padding: 0; margin: 0; }
 .pane ul.list li { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px dashed #24272e; color: #d6d6d6; }
-.pane ul.list li span:last-child { color: var(--muted); font-family: var(--mono); font-size: .8rem; }
+.pane ul.list li span:last-child { color: var(--muted); font-family: var(--mono); font-size: .8rem; text-align: right; overflow-wrap: anywhere; }
+.pane ul.list li span:first-child { overflow-wrap: anywhere; }
 .pane ul.list li.dim { color: var(--muted); }
 
 /* ---------- install ---------- */
@@ -178,7 +179,8 @@ p { margin: 0 0 1em; }
 
 /* ---------- config ---------- */
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-.cfg { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.cfg { width: 100%; border-collapse: collapse; font-size: .92rem; min-width: 480px; }
 .cfg th, .cfg td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
 .cfg th { color: var(--gold); font-weight: 600; }
 .cfg td:first-child { font-family: var(--mono); font-size: .85rem; white-space: nowrap; }
@@ -195,11 +197,70 @@ p { margin: 0 0 1em; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 760px) {
-  .nav { display: none; position: absolute; top: 58px; left: 0; right: 0; background: var(--bg-2); flex-direction: column; padding: 14px 24px; gap: 14px; border-bottom: 1px solid var(--line); }
+  body { font-size: 15px; }
+  .top { padding: 10px 16px; }
+  .nav { display: none; position: absolute; top: 54px; left: 0; right: 0; background: var(--bg-2); flex-direction: column; align-items: stretch; padding: 12px 16px 16px; gap: 4px; border-bottom: 1px solid var(--line); box-shadow: 0 20px 40px rgba(0,0,0,.5); }
   .nav.open { display: flex; }
+  .nav a { padding: 10px 6px; font-size: 1.05rem; }
+  .nav-gh { text-align: center; margin-top: 6px; }
   .nav-toggle { display: block; }
-  .hero { padding-top: 64px; }
-  .menu-body { min-height: 0; }
+
+  .hero { padding: 48px 16px 40px; }
+  .hero h1 { font-size: clamp(2rem, 9vw, 2.6rem); max-width: none; }
+  .lede { font-size: 1rem; }
+  .cta { flex-direction: column; }
+  .cta .btn { width: 100%; align-items: center; }
+  .btn-primary { align-items: center; }
+  .stats { gap: 18px 28px; }
+  .stats b { font-size: 1.35rem; }
+
+  .notice { padding: 0 16px; }
+  .section { padding: 44px 16px; }
+  .section.alt > * { padding-left: 0; padding-right: 0; }
+  h2 { font-size: 1.6rem; }
+  .section-head { margin-bottom: 18px; }
+
+  .menu { font-size: .9rem; border-radius: 6px; }
+  .menu-titlebar { padding: 8px 12px; }
+  .menu-tabs { padding: 8px 8px 0; gap: 4px; }
+  .menu-tabs button { padding: 6px 10px; font-size: .8rem; }
+  .menu-body { padding: 12px 12px 8px; min-height: 0; }
+  .pane { grid-template-columns: 1fr; gap: 14px; }
+  .slider { max-width: none; margin-right: 6px; }
+  .menu-foot { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .menu-foot .chip { margin: 0 6px 0 0; }
+
+  .steps { grid-template-columns: 1fr; gap: 20px; }
+  .build pre { font-size: .8rem; }
+
+  .keys { grid-template-columns: 1fr; }
+  .key { flex-wrap: wrap; }
+
+  .cols { gap: 22px; }
+  pre { padding: 12px; }
+
+  /* Config table becomes stacked cards. */
+  .cfg { min-width: 0; display: block; }
+  .cfg tr { display: block; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .cfg tr:first-child { display: none; }
+  .cfg td { display: block; padding: 2px 0; border: 0; white-space: normal; }
+  .cfg td:first-child { color: var(--text); font-weight: 600; overflow-wrap: anywhere; }
+  .cfg td:nth-child(2)::before { content: "Default: "; color: var(--gold); }
+  .cfg td:nth-child(3) { color: var(--muted); }
+
+  .faq details { padding: 2px 14px; }
+  .foot { flex-direction: column; gap: 12px; padding: 28px 16px 40px; }
+}
+
+@media (max-width: 400px) {
+  .menu-tabs button { padding: 5px 8px; font-size: .75rem; }
+  .stats { gap: 14px 20px; }
+}
+
+/* Touch targets: no hover-only affordances on coarse pointers. */
+@media (hover: none) {
+  .btn:hover { transform: none; }
+  .menu-tabs button, .chip { min-height: 32px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
