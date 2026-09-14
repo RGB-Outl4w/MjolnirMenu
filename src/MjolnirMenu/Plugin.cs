@@ -37,6 +37,7 @@ namespace MjolnirMenu
             WorldCheats.Tick();
             Effects.Tick();
             Presets.Tick();
+            Warp.Tick();
             Esp.Tick();
         }
 

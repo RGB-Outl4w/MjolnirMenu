@@ -42,15 +42,56 @@ namespace MjolnirMenu.Patches
                 __instance.m_hitWorldTime = 0f;
         }
 
-        /// <summary>Walk-on-water / seabed: pretend we are never swimming so ground movement logic runs.</summary>
+        /// <summary>
+        /// Walk-on-water / seabed: pretend we are never swimming so ground movement logic runs.
+        /// Use-items-while-swimming: same lie, but only inside the equipment/hotbar gates (see SwimItemScope).
+        /// </summary>
         [HarmonyPrefix, HarmonyPatch(nameof(Character.IsSwimming))]
         private static bool IsSwimming_Prefix(Character __instance, ref bool __result)
         {
-            if (!(State.WalkOnWater || State.SeabedWalk) || State.Fly) return true;
             if (!ReferenceEquals(__instance, Player.m_localPlayer)) return true;
+            bool waterMode = (State.WalkOnWater || State.SeabedWalk) && !State.Fly;
+            bool itemScope = State.SwimUseItems && SwimItemScope.Active;
+            if (!waterMode && !itemScope) return true;
             __result = false;
             return false;
         }
+
+        /// <summary>
+        /// speed -= speed² × depth × 0.05: with a speed hack fully submerged this goes negative and
+        /// pins you in place. Water modes skip it; otherwise clamp so it can never reverse you.
+        /// </summary>
+        [HarmonyPrefix, HarmonyPatch("ApplyLiquidResistance")]
+        private static bool ApplyLiquidResistance_Prefix(Character __instance)
+            => !((State.WalkOnWater || State.SeabedWalk) && ReferenceEquals(__instance, Player.m_localPlayer));
+
+        [HarmonyPostfix, HarmonyPatch("ApplyLiquidResistance")]
+        private static void ApplyLiquidResistance_Postfix(Character __instance, ref float speed)
+        {
+            if (speed < 0f && ReferenceEquals(__instance, Player.m_localPlayer)) speed = 0.5f;
+        }
+    }
+
+    /// <summary>
+    /// The four places that hide/deny hand items in water all test IsSwimming() && !IsOnGround().
+    /// While one of them is on the stack and the toggle is on, IsSwimming reports false.
+    /// </summary>
+    [HarmonyPatch]
+    internal static class SwimItemScope
+    {
+        private static int _depth;
+        internal static bool Active => _depth > 0;
+
+        private static System.Collections.Generic.IEnumerable<System.Reflection.MethodBase> TargetMethods()
+        {
+            yield return AccessTools.Method(typeof(Humanoid), "UpdateEquipment");
+            yield return AccessTools.Method(typeof(Humanoid), "EquipItem");
+            yield return AccessTools.Method(typeof(Humanoid), "EquipBestWeapon");
+            yield return AccessTools.Method(typeof(Player), "Update");
+        }
+
+        private static void Prefix() => _depth++;
+        private static void Postfix() => _depth = Mathf.Max(0, _depth - 1);
     }
 
     [HarmonyPatch(typeof(Humanoid))]

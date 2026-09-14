@@ -27,6 +27,7 @@
         { title: "Water", items: [
           ["Swim speed hack", "×1–10", false, 40],
           ["Jump while swimming", ""],
+          ["Use items while swimming", "Weapons and tools stay out; equip, attack and use hotbar in water"],
           ["Underwater camera", "Camera follows you below the surface"],
           ["Walk on water", "Surface behaves like ground"],
           ["Walk on seabed", "Sink and walk underwater"]
@@ -44,6 +45,12 @@
         ]},
         { title: "Attack speed", items: [
           ["Attack speed hack", "×1–5 on attack animations — swings, draws and combos finish faster", false, 45]
+        ]},
+        { title: "Ranged", items: [
+          ["Insta-focus", "Bows are fully drawn the moment you start aiming"],
+          ["Insta-shot", "One full-draw shot per press, or full-auto while held"],
+          ["Insta-reload", "Crossbows are loaded the moment they fire"],
+          ["Hitscan", "Straight line from the bow to the reticle — no drop, no spread"]
         ]},
         { title: "Damage", items: [
           ["Damage multiplier", "Master toggle", true],
@@ -103,11 +110,12 @@
     },
     {
       name: "Teleport",
-      intro: "Instant travel. Fast teleport shortens the portal vortex for both portals and menu teleports.",
+      intro: "Menu teleports are instant — no fade, no vortex. Real portals get a separate speed multiplier.",
       groups: [
         { title: "Map", items: [
           ["Ctrl + left-click on the big map to teleport", "", true],
-          ["Fast teleport / portals", "×1–40 on the vortex timer", true, 25]
+          ["Instant menu teleports", "No fade, no vortex wait", true],
+          ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
         ], chips: ["Start temple", "Bed / spawn point"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }
