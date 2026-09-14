@@ -49,7 +49,7 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 | Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (full-draw shot on press; semi-auto or full-auto), **insta-reload** (crossbows), **hitscan** (straight line to the reticle, no drop or spread) |
 
 ### World
-Free build (no piece cost) · no placement delay · free crafting · instant crafting · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
+Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
 
 ### Skills
 Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all* and *Set all to N*. Written straight into `Skills.Skill.m_level`, so it persists with the character.
@@ -62,7 +62,7 @@ Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all*
 Searchable catalog of every item and creature. Items are filtered to those that belong in an inventory (icon + item type); *Show all* lifts the filter. Give items with stack and quality; spawn creatures with level, count and *tamed*; kill everything within a radius.
 
 ### Teleport
-Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
+Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · portals accept any item · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
 
 ### ESP
 Labels for players, creatures / bosses (name, level, HP) and resources (pickables, ore, trees) with distance and optional tracer lines. Range and label cap are configurable.
@@ -85,7 +85,7 @@ Who made it and what it runs on.
    ```
 2. Launch Valheim once so BepInEx creates its folders, then quit.
 3. Drop `MjolnirMenu.dll` into `<Valheim>\BepInEx\plugins\MjolnirMenu\` — from a [release](https://github.com/RGB-Outl4w/MjolnirMenu/releases) or by [building from source](#building-from-source).
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.5.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.6.0]`.
 
 ## Usage
 

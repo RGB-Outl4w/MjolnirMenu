@@ -67,6 +67,8 @@ namespace MjolnirMenu.Core
         public static bool InstantCraft;
         public static bool FreeCraft;
         public static bool LockTimeOfDay;
+        public static bool BigStations;
+        public static float StationMultiplier = 20f;
         public static float TimeOfDay = 0.5f;
         public static string ForcedWeather = "";
 
@@ -75,6 +77,7 @@ namespace MjolnirMenu.Core
         public static bool FastTeleport;
         public static float TeleportSpeed = 10f;
         public static bool InstantTeleport = true;
+        public static bool PortalAnyItem;
 
         // Misc
         public static bool HideCheatTags = true;
@@ -109,6 +112,8 @@ namespace MjolnirMenu.Core
             Features.Effects.Frozen.Clear();
             FreeBuild = NoPlaceDelay = InstantCraft = FreeCraft = false;
             LockTimeOfDay = false;
+            BigStations = false;
+            PortalAnyItem = false;
             ForcedWeather = "";
             MapClickTeleport = false;
             EspPlayers = EspCreatures = EspResources = EspLines = false;

@@ -130,19 +130,19 @@ dotnet build src\MjolnirMenu -c Release   # auto-deploys into BepInEx\plugins wh
   <div class="cols">
     <div>
       <h3><code>com.mjolnir.menu.cfg</code></h3>
-      <table class="cfg">
+      <div class="table-wrap"><table class="cfg">
         <tr><th>Key</th><th>Default</th><th>What</th></tr>
         <tr><td>Hotkeys.*</td><td>Insert / F6 / F7 / End</td><td>Key bindings</td></tr>
         <tr><td>General.HideCheatTags</td><td><code>true</code></td><td>Never tag loot as "obtained using cheats"</td></tr>
         <tr><td>General.AutoLoadPreset</td><td><em>empty</em></td><td>Preset applied when you enter a world</td></tr>
         <tr><td>Player.SpeedMultiplier / JumpMultiplier</td><td>2.0</td><td>Default multipliers</td></tr>
         <tr><td>ESP.Range / MaxEntities / *Color</td><td>150 m / 250</td><td>Overlay tuning</td></tr>
-      </table>
+      </table></div>
     </div>
     <div>
       <h3>Presets</h3>
       <p>Save the whole menu state under a name from the Settings tab. Presets are plain <code>Key=Value</code> files in <code>MjolnirMenu.presets/</code> — safe to share, easy to hand-edit. Mark one <em>Auto-load</em> and it's applied the moment you spawn in.</p>
-      <pre><code># MjolnirMenu preset  v0.4.2
+      <pre><code># MjolnirMenu preset  v0.6.0
 GodMode=true
 Fly=false
 SpeedHack=true
