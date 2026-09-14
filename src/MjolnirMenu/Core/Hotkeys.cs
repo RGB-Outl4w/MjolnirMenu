@@ -8,11 +8,7 @@ namespace MjolnirMenu.Core
         public static void Update()
         {
             if (MenuConfig.MenuKey.Value.IsDown())
-            {
-                State.MenuOpen = !State.MenuOpen;
-                Cursor.visible = State.MenuOpen;
-                Cursor.lockState = State.MenuOpen ? CursorLockMode.None : CursorLockMode.Locked;
-            }
+                SetMenuOpen(!State.MenuOpen);
 
             // Skip quick-toggles while console or chat is eating keyboard input.
             if (Console.IsVisible() || (Chat.instance != null && Chat.instance.HasFocus()))
@@ -36,6 +32,27 @@ namespace MjolnirMenu.Core
             {
                 State.ResetAll();
                 Notify("All cheats OFF");
+            }
+        }
+
+        /// <summary>
+        /// Open/close the menu and hand the cursor back correctly. In a world, GameCamera owns the
+        /// cursor (our UpdateMouseCapture patch keeps it free while the menu is open); at the main
+        /// menu nothing re-shows it, so never hide it there.
+        /// </summary>
+        public static void SetMenuOpen(bool open)
+        {
+            State.MenuOpen = open;
+            bool inWorld = Player.m_localPlayer != null && GameCamera.instance != null;
+            if (open || !inWorld)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
 

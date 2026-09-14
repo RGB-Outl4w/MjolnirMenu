@@ -36,7 +36,7 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 | Sit / stand animation speed | ×1–5 on the emote animator, including the stand-up transition |
 | Heal + refill | Instant full health, stamina and eitr |
 
-**Water:** swim speed hack (×1–10) · jump while swimming · walk on water · walk on the seabed · underwater camera (removes the camera's water clamp so it follows you when you dive).
+**Water:** swim speed hack (×1–10) · jump while swimming · use items while swimming · walk on water · walk on the seabed · underwater camera (removes the camera's water clamp so it follows you when you dive).
 
 ### Combat
 | Toggle | Effect |
@@ -46,6 +46,7 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 | Infinite interaction | Interacting with a dropped item, bush, mushroom, pickable or beehive gives you a copy and leaves the source untouched. Walk-over pickup is disabled while this is on so nothing is double-collected |
 | Damage multiplier | Separate ×1–50 sliders for melee, ranged, **trees**, **stones / ores**, **player structures** and **world structures / destructibles** |
 | Attack speed hack | ×1–5 on attack animations — swings, draws and combos all finish faster |
+| Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (fires at full draw on press), **hitscan** (projectile lands where you aimed, no ballistics) |
 
 ### World
 Free build (no piece cost) · no placement delay · free crafting · instant crafting · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.

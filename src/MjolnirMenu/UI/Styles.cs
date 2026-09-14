@@ -85,7 +85,7 @@ namespace MjolnirMenu.UI
             FillTex = Rounded(8, 3, GoldDim, null);
 
             var winTex = Rounded(24, 8, Bg, Line);
-            var titleTex = Flat(Bg2);
+            var titleTex = Rounded(24, 7, Bg2, null, null, 0, true);
             var chipTex = Rounded(12, 4, Chip, null);
             var chipHoverTex = Rounded(12, 4, ChipHover, null);
             var activeTex = Rounded(12, 4, Active, null);
@@ -121,7 +121,7 @@ namespace MjolnirMenu.UI
             Tab.active.textColor = Color.white;
             Tab.border = new RectOffset(5, 5, 5, 5);
             Tab.padding = new RectOffset(13, 13, 5, 5);
-            Tab.margin = new RectOffset(2, 2, 0, 0);
+            Tab.margin = new RectOffset(3, 3, 0, 0);
 
             TabActive = new GUIStyle(Tab);
             TabActive.normal.background = activeTex;
@@ -131,6 +131,7 @@ namespace MjolnirMenu.UI
             Button = new GUIStyle(Tab);
             Button.normal.textColor = Hex("#eeeeee");
             Button.padding = new RectOffset(10, 10, 4, 4);
+            Button.margin = new RectOffset(2, 2, 2, 2);
             Button.fontSize = 12;
 
             ButtonActive = new GUIStyle(Button);
@@ -271,10 +272,22 @@ namespace MjolnirMenu.UI
         public static Color Hex(string hex)
             => ColorUtility.TryParseHtmlString(hex, out var c) ? c : Color.magenta;
 
+        /// <summary>
+        /// The game renders IMGUI in linear colour space and our runtime textures end up being
+        /// sRGB-encoded on output, which lifts every dark colour (#111317 showed as #3b3b3b).
+        /// Storing the linear equivalent cancels that out. Vertex colours (text) are unaffected.
+        /// </summary>
+        private static Color Lin(Color c)
+        {
+            var l = c.linear;
+            l.a = c.a;
+            return l;
+        }
+
         public static Texture2D Flat(Color c)
         {
             var t = new Texture2D(1, 1, TextureFormat.RGBA32, false) { hideFlags = HideFlags.HideAndDontSave };
-            t.SetPixel(0, 0, c);
+            t.SetPixel(0, 0, Lin(c));
             t.Apply();
             return t;
         }
@@ -283,7 +296,7 @@ namespace MjolnirMenu.UI
         /// Anti-aliased rounded square usable as a 9-slice (border = radius). Optional 1px outline
         /// and an optional inner filled square (for the "on" checkbox).
         /// </summary>
-        public static Texture2D Rounded(int size, int radius, Color fill, Color? outline, Color? inner = null, int innerInset = 0)
+        public static Texture2D Rounded(int size, int radius, Color fill, Color? outline, Color? inner = null, int innerInset = 0, bool topOnly = false)
         {
             var t = new Texture2D(size, size, TextureFormat.RGBA32, false) { hideFlags = HideFlags.HideAndDontSave, filterMode = FilterMode.Bilinear };
             var px = new Color[size * size];
@@ -291,7 +304,9 @@ namespace MjolnirMenu.UI
             for (int y = 0; y < size; y++)
             for (int x = 0; x < size; x++)
             {
-                float d = RoundedDist(x + 0.5f, y + 0.5f, size, size, r); // <0 inside
+                // Texture row 0 is the bottom; "top only" keeps the lower half square.
+                float rr = topOnly && y < size / 2 ? 0f : r;
+                float d = RoundedDist(x + 0.5f, y + 0.5f, size, size, rr); // <0 inside
                 float aOuter = Mathf.Clamp01(0.5f - d);
                 Color c = fill;
                 if (outline.HasValue)
@@ -306,7 +321,7 @@ namespace MjolnirMenu.UI
                     c = Color.Lerp(c, inner.Value, ai);
                 }
                 c.a *= aOuter;
-                px[y * size + x] = c;
+                px[y * size + x] = Lin(c);
             }
             t.SetPixels(px);
             t.Apply();
@@ -324,7 +339,7 @@ namespace MjolnirMenu.UI
                 float d = Mathf.Sqrt((x + 0.5f - c) * (x + 0.5f - c) + (y + 0.5f - c) * (y + 0.5f - c)) - rad;
                 var col = fill;
                 col.a *= Mathf.Clamp01(0.5f - d);
-                px[y * size + x] = col;
+                px[y * size + x] = Lin(col);
             }
             t.SetPixels(px);
             t.Apply();

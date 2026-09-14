@@ -27,6 +27,7 @@
         { title: "Water", items: [
           ["Swim speed hack", "×1–10", false, 40],
           ["Jump while swimming", ""],
+          ["Use items while swimming", "Weapons and tools stay out; equip, attack and use hotbar in water"],
           ["Underwater camera", "Camera follows you below the surface"],
           ["Walk on water", "Surface behaves like ground"],
           ["Walk on seabed", "Sink and walk underwater"]
@@ -44,6 +45,11 @@
         ]},
         { title: "Attack speed", items: [
           ["Attack speed hack", "×1–5 on attack animations — swings, draws and combos finish faster", false, 45]
+        ]},
+        { title: "Ranged", items: [
+          ["Insta-focus", "Bows are fully drawn the moment you start aiming"],
+          ["Insta-shot", "Fires at full draw on press — no aiming phase at all"],
+          ["Hitscan", "No ballistics: the projectile lands where you were looking"]
         ]},
         { title: "Damage", items: [
           ["Damage multiplier", "Master toggle", true],

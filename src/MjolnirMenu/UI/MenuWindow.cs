@@ -69,10 +69,6 @@ namespace MjolnirMenu.UI
                     _rect.y = Mathf.Clamp(MenuConfig.WindowY.Value, 0, Mathf.Max(0, Screen.height - _rect.height));
                 }
 
-                // Make sure the cursor is usable even if something else re-locked it.
-                if (Cursor.lockState != CursorLockMode.None) Cursor.lockState = CursorLockMode.None;
-                if (!Cursor.visible) Cursor.visible = true;
-
                 var before = _rect;
                 _rect = GUILayout.Window(WindowId, _rect, DrawWindow, GUIContent.none, Styles.Window);
                 if (before.x != _rect.x || before.y != _rect.y)
@@ -101,6 +97,7 @@ namespace MjolnirMenu.UI
             GUILayout.EndHorizontal();
 
             // Tabs
+            GUILayout.Space(10);
             GUILayout.BeginHorizontal();
             GUILayout.Space(10);
             for (int i = 0; i < Tabs.Length; i++)
@@ -110,7 +107,7 @@ namespace MjolnirMenu.UI
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
-            GUILayout.Space(8);
+            GUILayout.Space(14);
 
             // Body
             GUILayout.BeginVertical();
@@ -154,11 +151,7 @@ namespace MjolnirMenu.UI
             }
             GUILayout.Space(4);
             if (Ui.Button("Close", GUILayout.Width(60)))
-            {
-                State.MenuOpen = false;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+                Hotkeys.SetMenuOpen(false);
             GUILayout.Space(14);
             GUILayout.EndHorizontal();
             GUILayout.Space(10);
@@ -210,6 +203,7 @@ namespace MjolnirMenu.UI
             if (Ui.Toggle(ref State.SwimSpeedHack, "Swim speed hack", $"×{State.SwimSpeedMultiplier:0.0}")) PlayerCheats.ApplySwimSpeed();
             if (Ui.Slider(ref State.SwimSpeedMultiplier, 1f, 10f, SliderW)) PlayerCheats.ApplySwimSpeed();
             Ui.Toggle(ref State.WaterJump, "Jump while swimming");
+            Ui.Toggle(ref State.SwimUseItems, "Use items while swimming", "Weapons and tools stay out; equip, attack and use hotbar in water");
             if (Ui.Toggle(ref State.UnderwaterCamera, "Underwater camera", "Camera follows you below the surface")) PlayerCheats.ApplyCamera();
             GUILayout.EndVertical();
             GUILayout.BeginVertical();
@@ -234,6 +228,11 @@ namespace MjolnirMenu.UI
             Ui.Header("Attack speed");
             Ui.Toggle(ref State.AttackSpeedHack, "Attack speed hack", $"×{State.AttackSpeedMultiplier:0.0} on attack animations — swings, draws and combos finish faster");
             Ui.Slider(ref State.AttackSpeedMultiplier, 1f, 5f, SliderW);
+            Ui.Space();
+            Ui.Header("Ranged");
+            Ui.Toggle(ref State.InstaFocus, "Insta-focus", "Bows are fully drawn the moment you start aiming");
+            if (Ui.Toggle(ref State.InstaShot, "Insta-shot", "Fires at full draw on press — no aiming phase at all") && State.InstaShot) State.InstaFocus = false;
+            Ui.Toggle(ref State.Hitscan, "Hitscan", "No ballistics: the projectile lands where you were looking");
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
@@ -398,7 +397,7 @@ namespace MjolnirMenu.UI
             Ui.Space();
             Ui.Header("Time of day");
             Ui.Toggle(ref State.LockTimeOfDay, "Lock time", WorldCheats.CurrentTimeLabel());
-            Ui.Slider(ref State.TimeOfDay, 0f, 1f, SliderW);
+            if (Ui.Slider(ref State.TimeOfDay, 0f, 1f, SliderW)) State.LockTimeOfDay = true;
             GUILayout.BeginHorizontal();
             GUILayout.Space(Ui.Indent);
             if (Ui.Button("Dawn")) { State.TimeOfDay = 0.25f; State.LockTimeOfDay = true; }

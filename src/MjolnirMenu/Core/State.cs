@@ -36,6 +36,7 @@ namespace MjolnirMenu.Core
         public static bool WalkOnWater;
         public static bool SeabedWalk;
         public static bool UnderwaterCamera;
+        public static bool SwimUseItems;
 
         // Combat
         public static bool InfiniteDurability;
@@ -50,6 +51,9 @@ namespace MjolnirMenu.Core
         public static float WorldStructureMultiplier = 1f;
         public static bool InfiniteItems;
         public static bool InfiniteInteract;
+        public static bool InstaFocus;
+        public static bool InstaShot;
+        public static bool Hitscan;
 
         // Effects
         public static bool NoPowerCooldown;
@@ -92,7 +96,8 @@ namespace MjolnirMenu.Core
         {
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
             Fly = SpeedHack = JumpHack = InfiniteCarryWeight = false;
-            SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = false;
+            SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = SwimUseItems = false;
+            InstaFocus = InstaShot = Hitscan = false;
             CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;
             FastTeleport = false;
             InfiniteDurability = DamageHack = AttackSpeedHack = false;
