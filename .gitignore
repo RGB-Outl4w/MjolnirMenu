@@ -8,3 +8,6 @@ Directory.Build.props.user
 
 # graphify knowledge graph (dev tooling, generated locally)
 graphify-out/
+
+# local editor/agent config
+.claude/

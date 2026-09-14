@@ -12,7 +12,7 @@
 
 Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 
-[Features](#features) · [Installation](#installation) · [Usage](#usage) · [Configuration](#configuration) · [Building](#building-from-source) · [Architecture](#architecture) · [FAQ](#faq)
+**[Website](https://rgb-outl4w.github.io/MjolnirMenu/)** · [Features](#features) · [Installation](#installation) · [Usage](#usage) · [Configuration](#configuration) · [Building](#building-from-source) · [Architecture](#architecture) · [FAQ](#faq)
 
 </div>
 
