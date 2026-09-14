@@ -20,6 +20,9 @@ namespace MjolnirMenu.Features
         public static readonly List<SavedPos> Saved = new List<SavedPos>();
         private static bool _loaded;
 
+        /// <summary>True while one of our own teleports is in flight and the black screen should stay hidden.</summary>
+        public static bool Silent { get; private set; }
+
         private static string FilePath => Path.Combine(Paths.ConfigPath, "MjolnirMenu.positions.txt");
 
         public static void To(Vector3 pos)
@@ -32,7 +35,22 @@ namespace MjolnirMenu.Features
                 return;
             }
             // distantTeleport=true makes Player.UpdateTeleport wait for the zone to load and snap to the floor.
-            p.TeleportTo(pos, p.transform.rotation, true);
+            p.m_teleportCooldown = 2f; // TeleportTo refuses within 2s of the last one
+            if (!p.TeleportTo(pos, p.transform.rotation, true)) return;
+            if (State.InstantTeleport)
+            {
+                // Skip the 2s pre-move wait: the next UpdateTeleport moves us and finishes as soon as the area is ready.
+                p.m_teleportTimer = 100f;
+                Silent = true;
+            }
+        }
+
+        /// <summary>Clears the silent flag once the game finishes (or abandons) the teleport.</summary>
+        public static void Tick()
+        {
+            if (!Silent) return;
+            var p = Player.m_localPlayer;
+            if (p == null || !p.m_teleporting) Silent = false;
         }
 
         public static void ToMapPoint(Vector3 worldPos)

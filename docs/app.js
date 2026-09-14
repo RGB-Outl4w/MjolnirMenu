@@ -48,8 +48,9 @@
         ]},
         { title: "Ranged", items: [
           ["Insta-focus", "Bows are fully drawn the moment you start aiming"],
-          ["Insta-shot", "Fires at full draw on press — no aiming phase at all"],
-          ["Hitscan", "No ballistics: the projectile lands where you were looking"]
+          ["Insta-shot", "One full-draw shot per press, or full-auto while held"],
+          ["Insta-reload", "Crossbows are loaded the moment they fire"],
+          ["Hitscan", "Straight line from the bow to the reticle — no drop, no spread"]
         ]},
         { title: "Damage", items: [
           ["Damage multiplier", "Master toggle", true],
@@ -113,7 +114,8 @@
       groups: [
         { title: "Map", items: [
           ["Ctrl + left-click on the big map to teleport", "", true],
-          ["Fast teleport / portals", "×1–40 on the vortex timer", true, 25]
+          ["Instant menu teleports", "No fade, no vortex wait", true],
+          ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
         ], chips: ["Start temple", "Bed / spawn point"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }

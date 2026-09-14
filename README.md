@@ -46,7 +46,7 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 | Infinite interaction | Interacting with a dropped item, bush, mushroom, pickable or beehive gives you a copy and leaves the source untouched. Walk-over pickup is disabled while this is on so nothing is double-collected |
 | Damage multiplier | Separate ×1–50 sliders for melee, ranged, **trees**, **stones / ores**, **player structures** and **world structures / destructibles** |
 | Attack speed hack | ×1–5 on attack animations — swings, draws and combos all finish faster |
-| Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (fires at full draw on press), **hitscan** (projectile lands where you aimed, no ballistics) |
+| Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (full-draw shot on press; semi-auto or full-auto), **insta-reload** (crossbows), **hitscan** (straight line to the reticle, no drop or spread) |
 
 ### World
 Free build (no piece cost) · no placement delay · free crafting · instant crafting · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
@@ -62,7 +62,7 @@ Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all*
 Searchable catalog of every item and creature. Items are filtered to those that belong in an inventory (icon + item type); *Show all* lifts the filter. Give items with stack and quality; spawn creatures with level, count and *tamed*; kill everything within a radius.
 
 ### Teleport
-Fast teleport / portals (×1–40 on the vortex timer) · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
+Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
 
 ### ESP
 Labels for players, creatures / bosses (name, level, HP) and resources (pickables, ore, trees) with distance and optional tracer lines. Range and label cap are configurable.

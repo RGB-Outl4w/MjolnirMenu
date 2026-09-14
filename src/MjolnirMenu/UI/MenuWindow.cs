@@ -230,9 +230,11 @@ namespace MjolnirMenu.UI
             Ui.Slider(ref State.AttackSpeedMultiplier, 1f, 5f, SliderW);
             Ui.Space();
             Ui.Header("Ranged");
-            Ui.Toggle(ref State.InstaFocus, "Insta-focus", "Bows are fully drawn the moment you start aiming");
-            if (Ui.Toggle(ref State.InstaShot, "Insta-shot", "Fires at full draw on press — no aiming phase at all") && State.InstaShot) State.InstaFocus = false;
-            Ui.Toggle(ref State.Hitscan, "Hitscan", "No ballistics: the projectile lands where you were looking");
+            if (Ui.Toggle(ref State.InstaFocus, "Insta-focus", "Bows are fully drawn the moment you start aiming") && State.InstaFocus) State.InstaShot = false;
+            if (Ui.Toggle(ref State.InstaShot, "Insta-shot", State.InstaShotAuto ? "Full-auto: fires at full draw while the key is held" : "Semi-auto: one full-draw shot per press") && State.InstaShot) State.InstaFocus = false;
+            Ui.Toggle(ref State.InstaShotAuto, "    Full-auto", "Hold to keep firing; release to stop");
+            Ui.Toggle(ref State.InstaReload, "Insta-reload", "Crossbows are loaded the moment they fire");
+            Ui.Toggle(ref State.Hitscan, "Hitscan", "Straight line from the bow to where the reticle points — no drop, no spread");
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
@@ -524,7 +526,8 @@ namespace MjolnirMenu.UI
             GUILayout.BeginVertical(GUILayout.Width(Col));
             Ui.Header("Map");
             Ui.Toggle(ref State.MapClickTeleport, "Ctrl + left-click on the big map to teleport");
-            Ui.Toggle(ref State.FastTeleport, "Fast teleport / portals", $"×{State.TeleportSpeed:0} on the vortex timer");
+            Ui.Toggle(ref State.InstantTeleport, "Instant menu teleports", "Map click / saved positions / players: no fade, no vortex wait");
+            Ui.Toggle(ref State.FastTeleport, "Fast portals", $"×{State.TeleportSpeed:0} on the vortex timer for real portals");
             float ts = State.TeleportSpeed;
             if (Ui.Slider(ref ts, 1f, 40f, SliderW)) State.TeleportSpeed = Mathf.Round(ts);
             Ui.Space(6);

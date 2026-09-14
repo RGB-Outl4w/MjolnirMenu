@@ -53,6 +53,8 @@ namespace MjolnirMenu.Core
         public static bool InfiniteInteract;
         public static bool InstaFocus;
         public static bool InstaShot;
+        public static bool InstaShotAuto;
+        public static bool InstaReload;
         public static bool Hitscan;
 
         // Effects
@@ -72,6 +74,7 @@ namespace MjolnirMenu.Core
         public static bool MapClickTeleport;
         public static bool FastTeleport;
         public static float TeleportSpeed = 10f;
+        public static bool InstantTeleport = true;
 
         // Misc
         public static bool HideCheatTags = true;
@@ -97,7 +100,7 @@ namespace MjolnirMenu.Core
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
             Fly = SpeedHack = JumpHack = InfiniteCarryWeight = false;
             SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = SwimUseItems = false;
-            InstaFocus = InstaShot = Hitscan = false;
+            InstaFocus = InstaShot = InstaShotAuto = InstaReload = Hitscan = false;
             CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;
             FastTeleport = false;
             InfiniteDurability = DamageHack = AttackSpeedHack = false;

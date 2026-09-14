@@ -84,7 +84,7 @@ namespace MjolnirMenu.UI
             TrackTex = Rounded(8, 3, Track, null);
             FillTex = Rounded(8, 3, GoldDim, null);
 
-            var winTex = Rounded(24, 8, Bg, Line);
+            var winTex = Rounded(24, 8, Bg, null);
             var titleTex = Rounded(24, 7, Bg2, null, null, 0, true);
             var chipTex = Rounded(12, 4, Chip, null);
             var chipHoverTex = Rounded(12, 4, ChipHover, null);

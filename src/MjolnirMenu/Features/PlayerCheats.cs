@@ -54,6 +54,9 @@ namespace MjolnirMenu.Features
 
                 if (State.InfiniteDurability)
                     RefillDurability(p);
+
+                if (State.InstaReload)
+                    InstaReload(p);
             }
 
             ApplyCamera();
@@ -152,6 +155,16 @@ namespace MjolnirMenu.Features
             float target = State.UnderwaterCamera ? UnderwaterClamp : _origMinWaterDistance;
             if (!Mathf.Approximately(cam.m_minWaterDistance, target))
                 cam.m_minWaterDistance = target;
+        }
+
+        /// <summary>Crossbows: mark the weapon loaded the moment it isn't, skipping the reload action.</summary>
+        private static void InstaReload(Player p)
+        {
+            var w = p.GetCurrentWeapon();
+            if (w?.m_shared?.m_attack == null || !w.m_shared.m_attack.m_requiresReload) return;
+            if (p.IsWeaponLoaded()) return;
+            p.CancelReloadAction();
+            p.SetWeaponLoaded(w);
         }
 
         /// <summary>Tops up every durability-using item in the inventory (weapons, armor, tools).</summary>
