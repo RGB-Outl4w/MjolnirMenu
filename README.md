@@ -182,7 +182,7 @@ Save a preset in *Settings*, then mark it *Auto-load*.
 
 ## Development
 
-This repository was built with [Claude Code](https://claude.com/claude-code), using two community add-ons: [caveman](https://github.com/JuliusBrussee/caveman) for terse assistant output and [graphify](https://github.com/safishamsi/graphify) for a queryable knowledge graph of the codebase (`graphify-out/graph.html` — open it in a browser; regenerate with `graphify update .`).
+This repository was built with [Claude Code](https://claude.com/claude-code), using two community add-ons: [caveman](https://github.com/JuliusBrussee/caveman) for terse assistant output and [graphify](https://github.com/safishamsi/graphify) for a queryable knowledge graph of the codebase. The graph is generated locally (`graphify .`) and is not part of the repository.
 
 Game method signatures were verified against `assembly_valheim.dll` with Mono.Cecil rather than guessed; the IL for every patched method was read before the patch was written.
 
