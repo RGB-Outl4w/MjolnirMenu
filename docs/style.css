@@ -31,11 +31,11 @@ body {
 a { color: var(--gold); text-decoration: none; }
 a:hover { color: var(--gold-2); text-decoration: underline; }
 code, kbd, pre { font-family: var(--mono); font-size: 0.92em; }
-code { background: var(--bg-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+code { background: var(--bg-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; overflow-wrap: anywhere; word-break: break-word; }
 pre { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; overflow-x: auto; }
 pre code { background: none; border: 0; padding: 0; }
 kbd {
-  display: inline-block; min-width: 1.6em; text-align: center;
+  display: inline-block; min-width: 1.6em; text-align: center; white-space: nowrap; flex: 0 0 auto;
   background: linear-gradient(#2a2e36, #1c2026); border: 1px solid #3a3f49; border-bottom-width: 3px;
   border-radius: 6px; padding: 1px 8px; color: var(--gold-2); font-weight: 600;
 }
@@ -164,16 +164,17 @@ p { margin: 0 0 1em; }
   background: var(--gold); color: #1a1400; font-weight: 800; display: grid; place-items: center; font-size: .85rem;
 }
 .steps li h3 { margin-top: 4px; }
-.steps li p { color: #c9c8c3; margin: 0; font-size: .95rem; }
+.steps li p { color: #c9c8c3; margin: 0; font-size: .95rem; overflow-wrap: anywhere; }
 .build { margin-top: 26px; border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 16px; background: var(--panel); }
 .build summary { cursor: pointer; font-weight: 600; color: var(--gold); }
 .build pre { margin: 12px 0; }
 
 /* ---------- hotkeys ---------- */
 .keys { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-.key { display: flex; gap: 14px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.key { display: flex; gap: 14px; align-items: center; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; min-width: 0; }
 .key kbd { font-size: 1rem; }
-.key span { color: #c9c8c3; }
+.key > span { color: #c9c8c3; min-width: 0; }
+.key .combo { flex: 0 0 auto; white-space: nowrap; color: var(--muted); }
 
 /* ---------- config ---------- */
 .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }

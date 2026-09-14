@@ -118,7 +118,7 @@ dotnet build src\MjolnirMenu -c Release   # auto-deploys into BepInEx\plugins wh
     <div class="key"><kbd>F6</kbd><span>Toggle god mode</span></div>
     <div class="key"><kbd>F7</kbd><span>Toggle fly</span></div>
     <div class="key"><kbd>End</kbd><span>Panic — every cheat off at once</span></div>
-    <div class="key"><kbd>Ctrl</kbd> + <kbd>Click</kbd><span>On the big map: teleport there (when map teleport is on)</span></div>
+    <div class="key"><span class="combo"><kbd>Ctrl</kbd> + <kbd>Click</kbd></span><span>On the big map: teleport there (when map teleport is on)</span></div>
   </div>
 </section>
 
@@ -158,7 +158,7 @@ HideCheatTags=true</code></pre>
     <h2>FAQ</h2>
   </div>
   <div class="faq">
-    <details open>
+    <details>
       <summary>Does it work in multiplayer?</summary>
       <p>Client-side effects (movement, ESP, the menu) work anywhere. Damage multipliers are applied before a hit is sent to the target's owner, so they work too. Nothing is hidden from a server or other players — see the fair play notice.</p>
     </details>
