@@ -18,7 +18,7 @@ namespace MjolnirMenu.Features
         private static int _origRows;
 
         private static InventoryGui? _trackedGui;
-        private static float _guiGrow;
+        private static Vector2 _origPanelSize, _origContainerPos;
 
         public const int MaxExtraRows = 6;
 
@@ -136,36 +136,38 @@ namespace MjolnirMenu.Features
         }
 
         /// <summary>
-        /// Grow the player grid by N rows. Inventory keeps items outside the grid in its list, so shrinking
-        /// never loses anything; hidden items are pulled back into free slots when possible.
+        /// Grow the player grid by N rows. Inventory keeps items outside the grid in its list (saves and
+        /// loads them too), so nothing is lost; hidden items are pulled back into free slots whenever one exists.
         /// </summary>
         private static void ApplyInventoryRows(Player p)
         {
             var inv = p.GetInventory();
             int rows = _origRows + Mathf.Clamp(State.ExtraInventoryRows, 0, MaxExtraRows);
-            if (inv.m_height != rows)
-            {
-                if (rows < inv.m_height)
-                    foreach (var item in inv.GetAllItems())
-                        if (item.m_gridPos.y >= rows)
-                        {
-                            var slot = inv.FindEmptySlot(true);
-                            if (slot.x >= 0 && slot.y < rows) item.m_gridPos = slot;
-                        }
-                inv.m_height = rows;
-                inv.Changed();
-            }
+            bool changed = inv.m_height != rows;
+            inv.m_height = rows;
+            foreach (var item in inv.GetAllItems())
+                if (item.m_gridPos.y >= rows)
+                {
+                    var slot = inv.FindEmptySlot(true);
+                    if (slot.x < 0) break;
+                    item.m_gridPos = slot;
+                    changed = true;
+                }
+            if (changed) inv.Changed();
 
             var gui = InventoryGui.instance;
             if (gui == null) { _trackedGui = null; return; }
-            if (!ReferenceEquals(gui, _trackedGui)) { _trackedGui = gui; _guiGrow = 0f; }
-            // ponytail: stretch the player panel and push the container panel down; >6 rows walks off screen.
-            float grow = (rows - _origRows) * gui.m_playerGrid.m_elementSpace;
-            if (Mathf.Approximately(grow, _guiGrow)) return;
-            var d = new Vector2(0f, grow - _guiGrow);
-            gui.m_player.sizeDelta += d;
-            gui.m_container.anchoredPosition -= d;
-            _guiGrow = grow;
+            if (!ReferenceEquals(gui, _trackedGui))
+            {
+                _trackedGui = gui;
+                _origPanelSize = gui.m_player.sizeDelta;
+                _origContainerPos = gui.m_container.anchoredPosition;
+            }
+            // ponytail: absolute values from a per-instance snapshot, re-applied every frame — the game resets the
+            // panel on respawn. Stretches the player panel, pushes the container down; >6 rows walks off screen.
+            var d = new Vector2(0f, (rows - _origRows) * gui.m_playerGrid.m_elementSpace);
+            if (gui.m_player.sizeDelta != _origPanelSize + d) gui.m_player.sizeDelta = _origPanelSize + d;
+            if (gui.m_container.anchoredPosition != _origContainerPos - d) gui.m_container.anchoredPosition = _origContainerPos - d;
         }
 
         /// <summary>Drop extras that left the inventory; unequip all of them when the toggle goes off.</summary>

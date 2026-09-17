@@ -138,6 +138,15 @@ namespace MjolnirMenu.Patches
             return false;
         }
 
+        /// <summary>Death: vanilla only strips the slot items, and the grave skips anything still flagged equipped.</summary>
+        [HarmonyPostfix, HarmonyPatch(nameof(Humanoid.UnequipAllItems))]
+        private static void UnequipAllItems_Postfix(Humanoid __instance)
+        {
+            if (!Local(__instance)) return;
+            foreach (var e in PlayerCheats.ExtraEquipped) e.m_equipped = false;
+            PlayerCheats.ExtraEquipped.Clear();
+        }
+
         [HarmonyPostfix, HarmonyPatch(nameof(Humanoid.IsItemEquiped))]
         private static void IsItemEquiped_Postfix(ItemDrop.ItemData item, ref bool __result)
         {
