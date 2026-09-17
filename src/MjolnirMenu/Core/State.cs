@@ -21,6 +21,8 @@ namespace MjolnirMenu.Core
         public static bool SpeedHack;
         public static bool JumpHack;
         public static bool InfiniteCarryWeight;
+        public static int ExtraInventoryRows;   // 0 = vanilla 4 rows
+        public static bool MultiEquip;
         public static float SpeedMultiplier = 2f;
         public static float JumpMultiplier = 2f;
         public static bool CrouchSpeedHack;
@@ -101,7 +103,8 @@ namespace MjolnirMenu.Core
         public static void ResetAll()
         {
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
-            Fly = SpeedHack = JumpHack = InfiniteCarryWeight = false;
+            Fly = SpeedHack = JumpHack = InfiniteCarryWeight = MultiEquip = false;
+            ExtraInventoryRows = 0;
             SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = SwimUseItems = false;
             InstaFocus = InstaShot = InstaShotAuto = InstaReload = Hitscan = false;
             CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;

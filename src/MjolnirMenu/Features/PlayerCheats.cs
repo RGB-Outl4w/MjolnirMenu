@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MjolnirMenu.Core;
 using UnityEngine;
 
@@ -14,6 +15,15 @@ namespace MjolnirMenu.Features
         private static float _origJumpForce;
         private static float _origSwimSpeed;
         private static float _origCrouchSpeed;
+        private static int _origRows;
+
+        private static InventoryGui? _trackedGui;
+        private static float _guiGrow;
+
+        public const int MaxExtraRows = 6;
+
+        /// <summary>Armor pieces equipped on top of an occupied slot (multi-equip). Local player only.</summary>
+        public static readonly HashSet<ItemDrop.ItemData> ExtraEquipped = new HashSet<ItemDrop.ItemData>();
 
         private static GameCamera? _trackedCamera;
         private static float _origMinWaterDistance;
@@ -37,6 +47,8 @@ namespace MjolnirMenu.Features
                     _origJumpForce = p.m_jumpForce;
                     _origSwimSpeed = p.m_swimSpeed;
                     _origCrouchSpeed = p.m_crouchSpeed;
+                    _origRows = p.GetInventory().m_height;
+                    ExtraEquipped.Clear();
                 }
 
                 ApplyGodMode();
@@ -45,6 +57,8 @@ namespace MjolnirMenu.Features
                 ApplyJump();
                 ApplySwimSpeed();
                 ApplyCrouchSpeed();
+                ApplyInventoryRows(p);
+                ApplyMultiEquip(p);
 
                 if (State.InfiniteStamina && p.m_stamina < p.GetMaxStamina())
                     p.m_stamina = p.GetMaxStamina();
@@ -119,6 +133,52 @@ namespace MjolnirMenu.Features
             float target = State.CrouchSpeedHack ? _origCrouchSpeed * State.CrouchSpeedMultiplier : _origCrouchSpeed;
             if (!Mathf.Approximately(p.m_crouchSpeed, target))
                 p.m_crouchSpeed = target;
+        }
+
+        /// <summary>
+        /// Grow the player grid by N rows. Inventory keeps items outside the grid in its list, so shrinking
+        /// never loses anything; hidden items are pulled back into free slots when possible.
+        /// </summary>
+        private static void ApplyInventoryRows(Player p)
+        {
+            var inv = p.GetInventory();
+            int rows = _origRows + Mathf.Clamp(State.ExtraInventoryRows, 0, MaxExtraRows);
+            if (inv.m_height != rows)
+            {
+                if (rows < inv.m_height)
+                    foreach (var item in inv.GetAllItems())
+                        if (item.m_gridPos.y >= rows)
+                        {
+                            var slot = inv.FindEmptySlot(true);
+                            if (slot.x >= 0 && slot.y < rows) item.m_gridPos = slot;
+                        }
+                inv.m_height = rows;
+                inv.Changed();
+            }
+
+            var gui = InventoryGui.instance;
+            if (gui == null) { _trackedGui = null; return; }
+            if (!ReferenceEquals(gui, _trackedGui)) { _trackedGui = gui; _guiGrow = 0f; }
+            // ponytail: stretch the player panel and push the container panel down; >6 rows walks off screen.
+            float grow = (rows - _origRows) * gui.m_playerGrid.m_elementSpace;
+            if (Mathf.Approximately(grow, _guiGrow)) return;
+            var d = new Vector2(0f, grow - _guiGrow);
+            gui.m_player.sizeDelta += d;
+            gui.m_container.anchoredPosition -= d;
+            _guiGrow = grow;
+        }
+
+        /// <summary>Drop extras that left the inventory; unequip all of them when the toggle goes off.</summary>
+        private static void ApplyMultiEquip(Player p)
+        {
+            if (ExtraEquipped.Count == 0) return;
+            var inv = p.GetInventory();
+            if (!State.MultiEquip || ExtraEquipped.RemoveWhere(i => !inv.ContainsItem(i)) > 0)
+            {
+                foreach (var item in new List<ItemDrop.ItemData>(ExtraEquipped)) p.UnequipItem(item, false);
+                if (!State.MultiEquip) ExtraEquipped.Clear();
+                p.SetupEquipment();
+            }
         }
 
         /// <summary>Strip the 'obtained using cheats' flag from everything currently carried.</summary>

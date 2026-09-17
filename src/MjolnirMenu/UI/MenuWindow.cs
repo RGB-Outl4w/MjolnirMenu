@@ -175,6 +175,10 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.InfiniteEitr, "Infinite eitr", "Magic pool never drains");
             Ui.Toggle(ref State.NoFallDamage, "No fall damage");
             Ui.Toggle(ref State.InfiniteCarryWeight, "Infinite carry weight", "Max weight → 100 000");
+            Ui.Toggle(ref State.MultiEquip, "Multi-equip armor", "Stack helmets, chests, legs, capes; extras add armor + effects, not visuals");
+            float rows = State.ExtraInventoryRows;
+            Ui.LabeledSlider($"Extra inventory rows  +{rows:0}", ref rows, 0f, PlayerCheats.MaxExtraRows, SliderW);
+            State.ExtraInventoryRows = Mathf.RoundToInt(rows);
             Ui.Space(6);
             GUI.enabled = inGame;
             if (Ui.Button("Heal + refill", GUILayout.Width(110))) PlayerCheats.HealFull();
