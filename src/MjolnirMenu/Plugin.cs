@@ -38,6 +38,7 @@ namespace MjolnirMenu
             Effects.Tick();
             Presets.Tick();
             Warp.Tick();
+            Vehicles.Tick();
             Esp.Tick();
         }
 

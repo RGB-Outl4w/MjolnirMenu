@@ -83,6 +83,23 @@
       ]
     },
     {
+      name: "Vehicles",
+      intro: "Ships and carts. Wind, force and physics, restored the moment you step off.",
+      groups: [
+        { title: "Ship", items: [
+          ["Tailwind", "Wind always blows where the bow points", true],
+          ["Ship speed hack", "×1–20 sail and paddle force", true, 15]
+        ]},
+        { title: "Cart", items: [
+          ["Cart speed hack", "Cart weighs nothing and follows at full run speed", true],
+          ["Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors"]
+        ]},
+        { title: "Ships and carts", items: [
+          ["Impact immunity", "No collision damage taken or dealt — rocks, shores, each other", true]
+        ]}
+      ]
+    },
+    {
       name: "Skills",
       intro: "Every skill as a slider. Written straight into the game's skill data, so it saves with the character.",
       groups: [
