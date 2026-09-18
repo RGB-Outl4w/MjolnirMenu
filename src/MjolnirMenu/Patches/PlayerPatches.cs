@@ -81,6 +81,7 @@ namespace MjolnirMenu.Patches
             {
                 Spawner.Invalidate();
                 Effects.Invalidate();
+                PlayerCheats.ExtraEquipped.Clear();
             }
         }
     }
@@ -92,6 +93,86 @@ namespace MjolnirMenu.Patches
         private static void Postfix(Humanoid __instance, ref bool __result)
         {
             if (State.PortalAnyItem && ReferenceEquals(__instance, Player.m_localPlayer)) __result = true;
+        }
+    }
+
+    /// <summary>
+    /// Multi-equip: equipping armor into an occupied slot marks it equipped and parks it in
+    /// <see cref="PlayerCheats.ExtraEquipped"/> instead of swapping. Armor value and equip status effects
+    /// of extras are added on top; the model only shows the slot item (VisEquipment has one per type).
+    /// </summary>
+    [HarmonyPatch(typeof(Humanoid))]
+    internal static class MultiEquipPatches
+    {
+        private static bool Local(Humanoid h) => ReferenceEquals(h, Player.m_localPlayer);
+
+        private static ItemDrop.ItemData? SlotOf(Humanoid h, ItemDrop.ItemData i) => i.m_shared.m_itemType switch
+        {
+            ItemDrop.ItemData.ItemType.Helmet => h.m_helmetItem,
+            ItemDrop.ItemData.ItemType.Chest => h.m_chestItem,
+            ItemDrop.ItemData.ItemType.Legs => h.m_legItem,
+            ItemDrop.ItemData.ItemType.Shoulder => h.m_shoulderItem,
+            ItemDrop.ItemData.ItemType.Utility => h.m_utilityItem,
+            _ => null,
+        };
+
+        [HarmonyPrefix, HarmonyPatch(nameof(Humanoid.EquipItem))]
+        private static bool EquipItem_Prefix(Humanoid __instance, ItemDrop.ItemData item, ref bool __result)
+        {
+            if (!State.MultiEquip || !Local(__instance) || item == null || PlayerCheats.ExtraEquipped.Contains(item)) return true;
+            var slot = SlotOf(__instance, item);
+            if (slot == null || ReferenceEquals(slot, item) || !__instance.m_inventory.ContainsItem(item)) return true;
+            item.m_equipped = true;
+            PlayerCheats.ExtraEquipped.Add(item);
+            __instance.SetupEquipment();
+            __result = true;
+            return false;
+        }
+
+        [HarmonyPrefix, HarmonyPatch(nameof(Humanoid.UnequipItem))]
+        private static bool UnequipItem_Prefix(Humanoid __instance, ItemDrop.ItemData item)
+        {
+            if (item == null || !PlayerCheats.ExtraEquipped.Remove(item)) return true;
+            item.m_equipped = false;
+            __instance.SetupEquipment();
+            return false;
+        }
+
+        /// <summary>Death: vanilla only strips the slot items, and the grave skips anything still flagged equipped.</summary>
+        [HarmonyPostfix, HarmonyPatch(nameof(Humanoid.UnequipAllItems))]
+        private static void UnequipAllItems_Postfix(Humanoid __instance)
+        {
+            if (!Local(__instance)) return;
+            foreach (var e in PlayerCheats.ExtraEquipped) e.m_equipped = false;
+            PlayerCheats.ExtraEquipped.Clear();
+        }
+
+        [HarmonyPostfix, HarmonyPatch(nameof(Humanoid.IsItemEquiped))]
+        private static void IsItemEquiped_Postfix(ItemDrop.ItemData item, ref bool __result)
+        {
+            if (!__result && item != null && PlayerCheats.ExtraEquipped.Contains(item)) __result = true;
+        }
+
+        [HarmonyPostfix, HarmonyPatch("UpdateEquipmentStatusEffects")]
+        private static void StatusEffects_Postfix(Humanoid __instance)
+        {
+            if (!Local(__instance)) return;
+            foreach (var e in PlayerCheats.ExtraEquipped)
+            {
+                var se = e.m_shared.m_equipStatusEffect;
+                if (se != null && __instance.m_equipmentStatusEffects.Add(se))
+                    __instance.m_seman.AddStatusEffect(se, false, 0, 0f, -1);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
+    internal static class BodyArmorPatch
+    {
+        private static void Postfix(Player __instance, ref float __result)
+        {
+            if (!ReferenceEquals(__instance, Player.m_localPlayer)) return;
+            foreach (var e in PlayerCheats.ExtraEquipped) __result += e.GetArmor();
         }
     }
 
