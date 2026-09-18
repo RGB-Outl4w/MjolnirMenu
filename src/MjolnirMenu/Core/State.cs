@@ -31,6 +31,14 @@ namespace MjolnirMenu.Core
         public static bool EmoteSpeedHack;
         public static float EmoteSpeedMultiplier = 3f;
 
+        // Vehicles
+        public static bool ShipTailwind;
+        public static bool ShipSpeedHack;
+        public static float ShipSpeedMultiplier = 3f;
+        public static bool CartSpeedHack;
+        public static bool CartNoClip;
+        public static bool VehicleGod;
+
         // Water
         public static bool SwimSpeedHack;
         public static float SwimSpeedMultiplier = 3f;
@@ -105,6 +113,7 @@ namespace MjolnirMenu.Core
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
             Fly = SpeedHack = JumpHack = InfiniteCarryWeight = MultiEquip = false;
             ExtraInventoryRows = 0;
+            ShipTailwind = ShipSpeedHack = CartSpeedHack = CartNoClip = VehicleGod = false;
             SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = SwimUseItems = false;
             InstaFocus = InstaShot = InstaShotAuto = InstaReload = Hitscan = false;
             CrouchSpeedHack = CrouchInfiniteStamina = EmoteSpeedHack = false;

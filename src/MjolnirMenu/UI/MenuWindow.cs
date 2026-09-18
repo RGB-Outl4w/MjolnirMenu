@@ -8,7 +8,7 @@ namespace MjolnirMenu.UI
     public static class MenuWindow
     {
         private const int WindowId = 0x4D4A4F4C; // "MJOL"
-        private static readonly string[] Tabs = { "Player", "Combat", "World", "Skills", "Effects", "Spawner", "Teleport", "ESP", "Settings", "Credits" };
+        private static readonly string[] Tabs = { "Player", "Combat", "World", "Vehicles", "Skills", "Effects", "Spawner", "Teleport", "ESP", "Settings", "Credits" };
 
         private const float Col = 340f;      // left column width in two-column tabs
         private const float SliderW = 250f;
@@ -119,12 +119,13 @@ namespace MjolnirMenu.UI
                 case 0: DrawPlayer(); break;
                 case 1: DrawCombat(); break;
                 case 2: DrawWorld(); break;
-                case 3: DrawSkills(); break;
-                case 4: DrawEffects(); break;
-                case 5: DrawSpawner(); break;
-                case 6: DrawTeleport(); break;
-                case 7: DrawEsp(); break;
-                case 8: DrawSettings(); break;
+                case 3: DrawVehicles(); break;
+                case 4: DrawSkills(); break;
+                case 5: DrawEffects(); break;
+                case 6: DrawSpawner(); break;
+                case 7: DrawTeleport(); break;
+                case 8: DrawEsp(); break;
+                case 9: DrawSettings(); break;
                 default: DrawCredits(); break;
             }
             GUILayout.EndVertical();
@@ -389,6 +390,30 @@ namespace MjolnirMenu.UI
         }
 
         // ---------------- World ----------------
+
+        private static void DrawVehicles()
+        {
+            bool aboard = Ship.GetLocalShip() != null;
+            bool hitched = Vehicles.Cart != null;
+            GUILayout.BeginHorizontal();
+            GUILayout.BeginVertical(GUILayout.Width(Col));
+            Ui.Header($"Ship  —  {(aboard ? "aboard" : "not aboard")}");
+            Ui.Toggle(ref State.ShipTailwind, "Tailwind", "Wind always blows where the bow points");
+            Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
+            Ui.Slider(ref State.ShipSpeedMultiplier, 1f, 20f, SliderW);
+            Ui.Hint("Too much sail force flips small boats. Start low.");
+            GUILayout.EndVertical();
+
+            GUILayout.BeginVertical();
+            Ui.Header($"Cart  —  {(hitched ? "hitched" : "not hitched")}");
+            Ui.Toggle(ref State.CartSpeedHack, "Cart speed hack", "Cart weighs nothing and follows at full run speed — pair with Speed hack");
+            Ui.Toggle(ref State.CartNoClip, "Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors");
+            Ui.Space(6);
+            Ui.Header("Ships and carts");
+            Ui.Toggle(ref State.VehicleGod, "Impact immunity", "No collision damage taken or dealt — rocks, shores, each other");
+            GUILayout.EndVertical();
+            GUILayout.EndHorizontal();
+        }
 
         private static void DrawWorld()
         {
