@@ -16,7 +16,7 @@
           ["No fall damage", ""],
           ["Infinite carry weight", "Max weight → 100 000"],
           ["Multi-equip armor", "Stack helmets, chests, legs, capes; extras add armor + effects"],
-          ["Extra inventory rows  +2", "Up to 6 extra rows; hidden rows keep their items", false, 33]
+          ["Extra inventory rows  +2", "Up to 9 rows via the game's own resize; survives relog", false, 40]
         ]},
         { title: "Movement", items: [
           ["Fly", "Vanilla debug fly, no console needed"],

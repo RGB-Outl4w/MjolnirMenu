@@ -31,7 +31,7 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 | Infinite stamina while crouched | Crouch-only variant; overridden by the global toggle |
 | No fall damage | Fall hits are dropped before they apply |
 | Infinite carry weight | `GetMaxCarryWeight` → 100 000 |
-| Extra inventory rows | Up to +6 rows on the player grid; shrinking never drops items (tombstones copy the size) |
+| Extra inventory rows | Up to +5 rows through the game's own `SetInventorySize`; native panel, survives relog; shrinking packs items into free slots and drops the rest at your feet |
 | Multi-equip armor | Equip several helmets / chests / legs / capes at once; extras add armor and equip effects, the model shows only the slot item |
 | Fly | Vanilla debug fly, no console required |
 | Speed / jump / crouch hacks | ×1–10 multipliers on run, jog, jump force and crouch speed |
