@@ -419,7 +419,7 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.CartRidesShips, "Carts ride ships", "Loose carts on a deck move with the ship instead of rolling aft");
             Ui.Space(6);
             Ui.Header("Ships and carts");
-            Ui.Toggle(ref State.VehicleGod, "Hull immunity", "No collision damage taken or dealt, no capsize damage");
+            Ui.Toggle(ref State.VehicleGod, "Hull immunity", "No collision, wave-slam or capsize damage; deals none either");
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }

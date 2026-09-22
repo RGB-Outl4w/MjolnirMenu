@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MjolnirMenu.Core;
 using UnityEngine;
 
@@ -29,6 +30,108 @@ namespace MjolnirMenu.Features
             var p = Player.m_localPlayer;
             TickShip(p);
             TickCart(p);
+
+            // Ship sank / unloaded / changed owner while carrying a cart: let it go.
+            List<Vagon>? gone = null;
+            foreach (var kv in _riders)
+                if (kv.Key == null || kv.Value.Ship == null || kv.Value.Ship.m_body == null) (gone ??= new List<Vagon>()).Add(kv.Key!);
+            if (gone != null) foreach (var c in gone) Release(c);
+        }
+
+        private sealed class Rider
+        {
+            public Ship Ship = null!;
+            public Rigidbody[] Bodies = null!;
+            public Pose[] Local = null!;
+            public Collider[] Cols = null!, ShipCols = null!;
+        }
+
+        private static readonly Dictionary<Vagon, Rider> _riders = new Dictionary<Vagon, Rider>();
+
+        /// <summary>
+        /// Carts ride ships: a loose cart on the deck turns kinematic, stops colliding with the hull and is moved to its
+        /// deck-relative pose every physics step. No contacts means it can't drag the ship. Hitching it releases it.
+        /// </summary>
+        public static void RideShip(Ship ship)
+        {
+            var sb = ship.m_body;
+            var box = ship.m_floatCollider;
+            if (sb == null || box == null) return;
+
+            if (State.CartRidesShips)
+                foreach (var cart in Vagon.m_instances)
+                {
+                    if (cart == null || _riders.ContainsKey(cart) || !Loose(cart)) continue;
+                    var local = box.transform.InverseTransformPoint(cart.transform.position) - box.center;
+                    if (Mathf.Abs(local.x) > box.size.x * 0.5f || Mathf.Abs(local.z) > box.size.z * 0.5f || local.y < -2f || local.y > 6f) continue;
+                    Capture(cart, ship);
+                }
+
+            // Ship pose at the end of this step, so the cart doesn't trail one frame behind at speed.
+            float dt = Time.fixedDeltaTime;
+            var w = sb.angularVelocity;
+            var rot = w.sqrMagnitude > 1e-6f ? Quaternion.AngleAxis(w.magnitude * Mathf.Rad2Deg * dt, w.normalized) * sb.rotation : sb.rotation;
+            var pos = sb.position + sb.linearVelocity * dt;
+
+            List<Vagon>? drop = null;
+            foreach (var kv in _riders)
+            {
+                if (!ReferenceEquals(kv.Value.Ship, ship)) continue;
+                if (!State.CartRidesShips || !Loose(kv.Key)) { (drop ??= new List<Vagon>()).Add(kv.Key); continue; }
+                var r = kv.Value;
+                for (int i = 0; i < r.Bodies.Length; i++)
+                {
+                    if (r.Bodies[i] == null) continue;
+                    r.Bodies[i].MovePosition(pos + rot * r.Local[i].position);
+                    r.Bodies[i].MoveRotation(rot * r.Local[i].rotation);
+                }
+            }
+            if (drop != null) foreach (var c in drop) Release(c);
+        }
+
+        private static bool Loose(Vagon c) => c != null && !c.IsAttached() && c.m_nview != null && c.m_nview.IsValid() && c.m_nview.IsOwner();
+
+        private static void Capture(Vagon cart, Ship ship)
+        {
+            var sb = ship.m_body;
+            var inv = Quaternion.Inverse(sb.rotation);
+            var r = new Rider
+            {
+                Ship = ship,
+                Bodies = cart.m_bodies,
+                Local = new Pose[cart.m_bodies.Length],
+                Cols = cart.GetComponentsInChildren<Collider>(),
+                ShipCols = ship.GetComponentsInChildren<Collider>(),
+            };
+            for (int i = 0; i < r.Bodies.Length; i++)
+            {
+                var b = r.Bodies[i];
+                r.Local[i] = new Pose(inv * (b.position - sb.position), inv * b.rotation);
+                b.isKinematic = true;
+            }
+            SetIgnore(r, true);
+            _riders[cart] = r;
+        }
+
+        private static void Release(Vagon cart)
+        {
+            if (!_riders.TryGetValue(cart, out var r)) return;
+            _riders.Remove(cart);
+            SetIgnore(r, false);
+            var sb = r.Ship != null ? r.Ship.m_body : null;
+            foreach (var b in r.Bodies)
+            {
+                if (b == null) continue;
+                b.isKinematic = false;
+                if (sb != null) b.linearVelocity = sb.GetPointVelocity(b.worldCenterOfMass);
+            }
+        }
+
+        private static void SetIgnore(Rider r, bool ignore)
+        {
+            foreach (var a in r.Cols)
+                foreach (var b in r.ShipCols)
+                    if (a != null && b != null) Physics.IgnoreCollision(a, b, ignore);
         }
 
         private static void TickShip(Player? p)
