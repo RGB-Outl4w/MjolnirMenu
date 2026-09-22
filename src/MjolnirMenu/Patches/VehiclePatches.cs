@@ -8,11 +8,30 @@ namespace MjolnirMenu.Patches
     [HarmonyPatch(typeof(Vagon))]
     internal static class VagonPatches
     {
+        private static bool IsLocal(GameObject go) => Player.m_localPlayer != null && go == Player.m_localPlayer.gameObject;
+
+        /// <summary>
+        /// Also runs every frame while hitched (false → detach). Sticky keeps the hitch through sharp turns, dodges
+        /// and tipping; snap lets you hitch from anywhere. Teleporting still unhitches, or the cart would fly after you.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch("CanAttach")]
+        private static void CanAttach_Postfix(Vagon __instance, GameObject go, ref bool __result)
+        {
+            if (__result || !IsLocal(go) || Player.m_localPlayer.IsTeleporting()) return;
+            bool hitched = ReferenceEquals(Vehicles.Cart, __instance) && __instance.IsAttached();
+            if (hitched ? State.CartSticky : State.CartSnap) __result = true;
+        }
+
+        [HarmonyPrefix, HarmonyPatch("AttachTo")]
+        private static void AttachTo_Prefix(Vagon __instance, GameObject go)
+        {
+            if (State.CartSnap && IsLocal(go)) Vehicles.SnapCart(__instance, Player.m_localPlayer);
+        }
+
         [HarmonyPostfix, HarmonyPatch("AttachTo")]
         private static void AttachTo_Postfix(Vagon __instance, GameObject go)
         {
-            var p = Player.m_localPlayer;
-            if (p != null && go == p.gameObject) Vehicles.Cart = __instance;
+            if (IsLocal(go)) Vehicles.Cart = __instance;
         }
 
         [HarmonyPostfix, HarmonyPatch("Detach")]
@@ -20,6 +39,34 @@ namespace MjolnirMenu.Patches
         {
             if (ReferenceEquals(Vehicles.Cart, __instance)) Vehicles.Cart = null;
         }
+    }
+
+    [HarmonyPatch(typeof(Ship))]
+    internal static class ShipPatches
+    {
+        private static bool Mine(Ship s) => ReferenceEquals(s, Vehicles.CurrentShip);
+
+        /// <summary>
+        /// Vanilla pushes the sail force at the mast top, so scaling it scales the pitch torque and flips the hull.
+        /// Speed hack adds the extra at the centre of mass instead: all thrust, no torque.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch("GetSailForce")]
+        private static void GetSailForce_Postfix(Ship __instance, Vector3 __result)
+        {
+            float mul = Vehicles.SpeedMul;
+            if (mul > 1f && Mine(__instance))
+                __instance.m_body.AddForce(__result * (__instance.m_body.mass * (mul - 1f)));
+        }
+
+        /// <summary>Tailwind: vanilla gives a dead-astern wind only 70 % — full sail from any angle.</summary>
+        [HarmonyPostfix, HarmonyPatch(nameof(Ship.GetWindAngleFactor))]
+        private static void GetWindAngleFactor_Postfix(Ship __instance, ref float __result)
+        {
+            if (State.ShipTailwind && Mine(__instance)) __result = 1f;
+        }
+
+        [HarmonyPrefix, HarmonyPatch("UpdateUpsideDmg")]
+        private static bool UpdateUpsideDmg_Prefix() => !State.VehicleGod;
     }
 
     /// <summary>

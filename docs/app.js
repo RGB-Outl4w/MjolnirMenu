@@ -87,15 +87,18 @@
       intro: "Ships and carts. Wind, force and physics, restored the moment you step off.",
       groups: [
         { title: "Ship", items: [
-          ["Tailwind", "Wind always blows where the bow points", true],
-          ["Ship speed hack", "×1–20 sail and paddle force", true, 15]
-        ]},
+          ["Tailwind", "Full wind wherever you look while steering", true],
+          ["Ship speed hack", "×1–20 sail and paddle force", true, 15],
+          ["Responsive steering", "×1–10 rudder speed and turning force", true, 22]
+        ], chips: ["Flip nearest ship upright"] },
         { title: "Cart", items: [
           ["Cart speed hack", "Cart weighs nothing and follows at full run speed", true],
-          ["Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors"]
+          ["Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors"],
+          ["Sticky hitch", "Never unhitches on its own", true],
+          ["Hitch from anywhere", "Cart swings into place behind you"]
         ]},
         { title: "Ships and carts", items: [
-          ["Impact immunity", "No collision damage taken or dealt — rocks, shores, each other", true]
+          ["Hull immunity", "No collision damage taken or dealt, no capsize damage", true]
         ]}
       ]
     },

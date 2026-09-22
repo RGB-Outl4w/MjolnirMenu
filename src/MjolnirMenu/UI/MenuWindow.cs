@@ -398,19 +398,27 @@ namespace MjolnirMenu.UI
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical(GUILayout.Width(Col));
             Ui.Header($"Ship  —  {(aboard ? "aboard" : "not aboard")}");
-            Ui.Toggle(ref State.ShipTailwind, "Tailwind", "Wind always blows where the bow points");
+            Ui.Toggle(ref State.ShipTailwind, "Tailwind", "Full wind wherever you look while steering (bow for passengers)");
             Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
             Ui.Slider(ref State.ShipSpeedMultiplier, 1f, 20f, SliderW);
-            Ui.Hint("Too much sail force flips small boats. Start low.");
+            Ui.Toggle(ref State.ShipSteering, "Responsive steering", $"×{State.ShipSteeringMultiplier:0.0} rudder speed and turning force");
+            Ui.Slider(ref State.ShipSteeringMultiplier, 1f, 10f, SliderW);
+            Ui.Space(6);
+            GUI.enabled = Player.m_localPlayer != null;
+            if (Ui.Button("Flip nearest ship upright", GUILayout.Width(190)))
+                Hotkeys.Notify(Vehicles.FlipNearestShip() ? "Ship flipped upright" : "No ship within 50 m");
+            GUI.enabled = true;
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
             Ui.Header($"Cart  —  {(hitched ? "hitched" : "not hitched")}");
             Ui.Toggle(ref State.CartSpeedHack, "Cart speed hack", "Cart weighs nothing and follows at full run speed — pair with Speed hack");
             Ui.Toggle(ref State.CartNoClip, "Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors");
+            Ui.Toggle(ref State.CartSticky, "Sticky hitch", "Never unhitches on its own; use the cart again to let go");
+            Ui.Toggle(ref State.CartSnap, "Hitch from anywhere", "Use the cart from any side — it swings into place behind you");
             Ui.Space(6);
             Ui.Header("Ships and carts");
-            Ui.Toggle(ref State.VehicleGod, "Impact immunity", "No collision damage taken or dealt — rocks, shores, each other");
+            Ui.Toggle(ref State.VehicleGod, "Hull immunity", "No collision damage taken or dealt, no capsize damage");
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }
