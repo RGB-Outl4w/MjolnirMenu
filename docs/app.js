@@ -87,7 +87,7 @@
       intro: "Ships and carts. Wind, force and physics, restored the moment you step off.",
       groups: [
         { title: "Ship", items: [
-          ["Tailwind", "Full wind wherever you look while steering", true],
+          ["Tailwind", "At the helm: full wind wherever you look; waves stay natural", true],
           ["Ship speed hack", "×1–20 sail and paddle force", true, 15],
           ["Responsive steering", "×1–10 rudder speed and turning force", true, 22]
         ], chips: ["Flip nearest ship upright"] },

@@ -15,7 +15,9 @@ namespace MjolnirMenu.Features
 
         private static Ship? _ship;
         private static float _origBackwardForce, _origStearForce, _origStearVelForce, _origRudderSpeed;
-        private static bool _windForced;
+
+        /// <summary>Private wind for the ship you steer; null = vanilla. Never written to EnvMan, so waves stay natural.</summary>
+        public static Vector3? TailwindDir;
 
         private static Vagon? _cart;
         private static bool _cartLight, _cartNoClip;
@@ -150,26 +152,13 @@ namespace MjolnirMenu.Features
                 }
             }
 
-            var env = EnvMan.instance;
-            if (State.ShipTailwind && ship != null && p != null && env != null)
+            // Only while you're at the helm: wind follows your camera. Passengers get vanilla wind.
+            TailwindDir = null;
+            if (State.ShipTailwind && ship != null && p != null && ReferenceEquals(p.GetControlledShip(), ship) && GameCamera.instance != null)
             {
-                // Driver: wind follows the camera. Passenger: wind follows the bow.
-                var f = ReferenceEquals(p.GetControlledShip(), ship) && GameCamera.instance != null
-                    ? GameCamera.instance.transform.forward : ship.transform.forward;
+                var f = GameCamera.instance.transform.forward;
                 f.y = 0f;
-                if (f.sqrMagnitude < 0.01f) f = ship.transform.forward;
-                f.Normalize();
-                env.SetDebugWind(Mathf.Atan2(f.x, f.z) * Mathf.Rad2Deg, 1f);
-                // Skip the game's slow wind transition: pin the current wind so SetTargetWind sees nothing to blend.
-                var w = new Vector4(f.x, 0f, f.z, 1f);
-                env.m_wind = env.m_windDir1 = env.m_windDir2 = w;
-                env.m_windTransitionTimer = -1f;
-                _windForced = true;
-            }
-            else if (_windForced)
-            {
-                if (env != null) env.ResetDebugWind();
-                _windForced = false;
+                TailwindDir = f.sqrMagnitude > 0.01f ? f.normalized : ship.transform.forward;
             }
 
             if (ship == null) return;

@@ -58,11 +58,41 @@ namespace MjolnirMenu.Patches
                 __instance.m_body.AddForce(__result * (__instance.m_body.mass * (mul - 1f)));
         }
 
-        /// <summary>Tailwind: vanilla gives a dead-astern wind only 70 % — full sail from any angle.</summary>
+        /// <summary>
+        /// Tailwind: the sail force and the sail's swing read the wind through EnvMan. Swap in the helmsman's wind
+        /// for just those two calls, then put the real one back — waves and everything else keep the natural wind.
+        /// </summary>
+        [HarmonyPrefix, HarmonyPatch("GetSailForce")]
+        private static void SailForce_Prefix(Ship __instance, out Vector4? __state) => SwapWind(__instance, out __state);
+
+        [HarmonyPrefix, HarmonyPatch("UpdateSail")]
+        private static void UpdateSail_Prefix(Ship __instance, out Vector4? __state) => SwapWind(__instance, out __state);
+
+        [HarmonyPostfix, HarmonyPatch("GetSailForce")]
+        private static void SailForce_Postfix(Vector4? __state) => RestoreWind(__state);
+
+        [HarmonyPostfix, HarmonyPatch("UpdateSail")]
+        private static void UpdateSail_Postfix(Vector4? __state) => RestoreWind(__state);
+
+        private static void SwapWind(Ship __instance, out Vector4? __state)
+        {
+            __state = null;
+            var env = EnvMan.instance;
+            if (Vehicles.TailwindDir is not Vector3 d || env == null || !Mine(__instance)) return;
+            __state = env.m_wind;
+            env.m_wind = new Vector4(d.x, 0f, d.z, 1f);
+        }
+
+        private static void RestoreWind(Vector4? __state)
+        {
+            if (__state is Vector4 w && EnvMan.instance != null) EnvMan.instance.m_wind = w;
+        }
+
+        /// <summary>Vanilla gives a dead-astern wind only 70 % — full sail from any angle while Tailwind steers.</summary>
         [HarmonyPostfix, HarmonyPatch(nameof(Ship.GetWindAngleFactor))]
         private static void GetWindAngleFactor_Postfix(Ship __instance, ref float __result)
         {
-            if (State.ShipTailwind && Mine(__instance)) __result = 1f;
+            if (Vehicles.TailwindDir != null && Mine(__instance)) __result = 1f;
         }
 
         [HarmonyPostfix, HarmonyPatch(nameof(Ship.CustomFixedUpdate))]

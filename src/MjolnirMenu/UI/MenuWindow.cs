@@ -398,7 +398,7 @@ namespace MjolnirMenu.UI
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical(GUILayout.Width(Col));
             Ui.Header($"Ship  —  {(aboard ? "aboard" : "not aboard")}");
-            Ui.Toggle(ref State.ShipTailwind, "Tailwind", "Full wind wherever you look while steering (bow for passengers)");
+            Ui.Toggle(ref State.ShipTailwind, "Tailwind", "At the helm: full wind wherever you look; waves stay natural");
             Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
             Ui.Slider(ref State.ShipSpeedMultiplier, 1f, 20f, SliderW);
             Ui.Toggle(ref State.ShipSteering, "Responsive steering", $"×{State.ShipSteeringMultiplier:0.0} rudder speed and turning force");
