@@ -10,7 +10,7 @@
 [![BepInEx](https://img.shields.io/badge/BepInEx-5.4-2d7d46?style=flat-square)](https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/)
 [![Valheim](https://img.shields.io/badge/Valheim-PC%20%2F%20Steam-8b4513?style=flat-square)](https://store.steampowered.com/app/892970/Valheim/)
 
-Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
+Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 
 **[Website](https://rgb-outl4w.github.io/MjolnirMenu/)** · [Features](#features) · [Installation](#installation) · [Usage](#usage) · [Configuration](#configuration) · [Building](#building-from-source) · [Architecture](#architecture) · [FAQ](#faq)
 
@@ -53,6 +53,11 @@ Press <kbd>Insert</kbd> in-game. Ten tabs. Everything reversible.
 ### World
 Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
 
+### Vehicles — *Sails & Trails* (v0.8)
+* **Ship** — every ship cheat applies only while *you* hold the helm, and is restored the moment you let go. *Tailwind* ( the sail sees a private full-strength wind from where you look, full sail from any angle; the world's wind and waves are untouched) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
+* **Cart** — *Cart speed hack* (cart mass → 1, no extra pull mass on the player, so it follows at full run speed) · *Cart no-clip* (`Rigidbody.excludeLayers` on every cart body: rolls through everything but `terrain` and `piece`) · *Sticky hitch* (unbreakable joint, never unhitches on its own) · *Hitch from anywhere* (cart swings into place behind you) · *Carts ride ships* (on by default: a loose cart on a deck is locked to it — kinematic, no hull contact, so it can't slow the ship; hitching releases it).
+* **Hull immunity** — `ImpactEffect.OnCollisionEnter` is skipped whenever a ship or cart is on either side, and ships take no wave-slam (`UpdateWaterForce`) or capsize damage.
+
 ### Skills
 Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all* and *Set all to N*. Written straight into `Skills.Skill.m_level`, so it persists with the character.
 
@@ -87,7 +92,7 @@ Who made it and what it runs on.
    ```
 2. Launch Valheim once so BepInEx creates its folders, then quit.
 3. Drop `MjolnirMenu.dll` into `<Valheim>\BepInEx\plugins\MjolnirMenu\` — from a [release](https://github.com/RGB-Outl4w/MjolnirMenu/releases) or by [building from source](#building-from-source).
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.7.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.8.0]`.
 
 ## Usage
 

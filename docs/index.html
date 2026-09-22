@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MjolnirMenu — Valheim trainer &amp; mod menu</title>
-  <meta name="description" content="MjolnirMenu is an in-game trainer and mod menu for Valheim built on BepInEx and HarmonyX. Ten tabs, one hotkey, everything reversible.">
+  <meta name="description" content="MjolnirMenu is an in-game trainer and mod menu for Valheim built on BepInEx and HarmonyX. Eleven tabs, one hotkey, everything reversible.">
   <meta property="og:title" content="MjolnirMenu — Valheim trainer &amp; mod menu">
   <meta property="og:description" content="God mode, fly, spawner, skills, effects, teleport, ESP and more. Open source, MIT.">
   <meta property="og:type" content="website">
@@ -40,8 +40,8 @@
     <p class="eyebrow">For Valheim · BepInEx · HarmonyX · MIT</p>
     <h1>The mod menu Odin would ban you for.</h1>
     <p class="lede">
-      MjolnirMenu is an in-game trainer for Valheim. Press <kbd>Insert</kbd>, get ten tabs of toggles —
-      survival, movement, combat, world, skills, effects, spawner, teleport, ESP — and switch every one of
+      MjolnirMenu is an in-game trainer for Valheim. Press <kbd>Insert</kbd>, get eleven tabs of toggles —
+      survival, movement, combat, world, vehicles, skills, effects, spawner, teleport, ESP — and switch every one of
       them back off in a single keypress. No console commands, no config editing, nothing left behind on logout.
     </p>
     <div class="cta">
@@ -51,7 +51,7 @@
       <a class="btn btn-ghost" href="https://github.com/RGB-Outl4w/MjolnirMenu" rel="noopener">View source</a>
     </div>
     <ul class="stats">
-      <li><b id="stat-tabs">10</b><span>tabs</span></li>
+      <li><b id="stat-tabs">11</b><span>tabs</span></li>
       <li><b id="stat-toggles">60+</b><span>toggles &amp; sliders</span></li>
       <li><b>1</b><span>DLL, zero dependencies beyond BepInEx</span></li>
     </ul>
@@ -65,7 +65,7 @@
 <section id="features" class="section">
   <div class="section-head">
     <h2>Every tab, explained</h2>
-    <p>Click a tab — the same ten you'll see in game.</p>
+    <p>Click a tab — the same eleven you'll see in game.</p>
   </div>
 
   <div class="menu" role="tablist" aria-label="Menu tabs">
@@ -142,7 +142,7 @@ dotnet build src\MjolnirMenu -c Release   # auto-deploys into BepInEx\plugins wh
     <div>
       <h3>Presets</h3>
       <p>Save the whole menu state under a name from the Settings tab. Presets are plain <code>Key=Value</code> files in <code>MjolnirMenu.presets/</code> — safe to share, easy to hand-edit. Mark one <em>Auto-load</em> and it's applied the moment you spawn in.</p>
-      <pre><code># MjolnirMenu preset  v0.7.0
+      <pre><code># MjolnirMenu preset  v0.8.0
 GodMode=true
 Fly=false
 SpeedHack=true

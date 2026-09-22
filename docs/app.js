@@ -83,6 +83,27 @@
       ]
     },
     {
+      name: "Vehicles",
+      intro: "Sails & Trails: ships and carts. Ship cheats apply only while you hold the helm and are restored the moment you let go.",
+      groups: [
+        { title: "Ship", items: [
+          ["Tailwind", "At the helm: full wind wherever you look; waves stay natural", true],
+          ["Ship speed hack", "At the helm: ×1–20 sail and paddle force", true, 15],
+          ["Responsive steering", "At the helm: ×1–10 rudder speed and turning force", true, 22]
+        ], chips: ["Flip nearest ship upright"] },
+        { title: "Cart", items: [
+          ["Cart speed hack", "Cart weighs nothing and follows at full run speed", true],
+          ["Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors"],
+          ["Sticky hitch", "Never unhitches on its own", true],
+          ["Hitch from anywhere", "Cart swings into place behind you"],
+          ["Carts ride ships", "Loose carts on a deck move with the ship", true]
+        ]},
+        { title: "Ships and carts", items: [
+          ["Hull immunity", "No collision, wave-slam or capsize damage; deals none either", true]
+        ]}
+      ]
+    },
+    {
       name: "Skills",
       intro: "Every skill as a slider. Written straight into the game's skill data, so it saves with the character.",
       groups: [
