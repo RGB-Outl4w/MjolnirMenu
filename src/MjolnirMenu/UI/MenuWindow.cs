@@ -416,6 +416,7 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.CartNoClip, "Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors");
             Ui.Toggle(ref State.CartSticky, "Sticky hitch", "Never unhitches on its own; use the cart again to let go");
             Ui.Toggle(ref State.CartSnap, "Hitch from anywhere", "Use the cart from any side — it swings into place behind you");
+            Ui.Toggle(ref State.CartRidesShips, "Carts ride ships", "Loose carts on a deck move with the ship instead of rolling aft");
             Ui.Space(6);
             Ui.Header("Ships and carts");
             Ui.Toggle(ref State.VehicleGod, "Hull immunity", "No collision damage taken or dealt, no capsize damage");

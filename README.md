@@ -55,7 +55,7 @@ Free build (no piece cost) · no placement delay · free crafting · instant cra
 
 ### Vehicles
 * **Ship** — *Tailwind* (full-strength wind pinned to where the helmsman looks, no transition lag, full sail from any angle) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
-* **Cart** — *Cart speed hack* (cart mass → 1, no extra pull mass on the player, so it follows at full run speed) · *Cart no-clip* (`Rigidbody.excludeLayers` on every cart body: rolls through everything but `terrain` and `piece`) · *Sticky hitch* (unbreakable joint, never unhitches on its own) · *Hitch from anywhere* (cart swings into place behind you).
+* **Cart** — *Cart speed hack* (cart mass → 1, no extra pull mass on the player, so it follows at full run speed) · *Cart no-clip* (`Rigidbody.excludeLayers` on every cart body: rolls through everything but `terrain` and `piece`) · *Sticky hitch* (unbreakable joint, never unhitches on its own) · *Hitch from anywhere* (cart swings into place behind you) · *Carts ride ships* (on by default: a loose cart on a deck takes the ship's velocity instead of rolling aft).
 * **Hull immunity** — `ImpactEffect.OnCollisionEnter` is skipped whenever a ship or cart is on either side, and ships take no capsize damage.
 
 ### Skills

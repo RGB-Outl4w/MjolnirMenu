@@ -95,7 +95,8 @@
           ["Cart speed hack", "Cart weighs nothing and follows at full run speed", true],
           ["Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors"],
           ["Sticky hitch", "Never unhitches on its own", true],
-          ["Hitch from anywhere", "Cart swings into place behind you"]
+          ["Hitch from anywhere", "Cart swings into place behind you"],
+          ["Carts ride ships", "Loose carts on a deck move with the ship", true]
         ]},
         { title: "Ships and carts", items: [
           ["Hull immunity", "No collision damage taken or dealt, no capsize damage", true]

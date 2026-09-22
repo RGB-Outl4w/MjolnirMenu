@@ -39,6 +39,7 @@ namespace MjolnirMenu.Core
         public static float ShipSteeringMultiplier = 3f;
         public static bool CartSticky;
         public static bool CartSnap;
+        public static bool CartRidesShips = true;
         public static bool CartSpeedHack;
         public static bool CartNoClip;
         public static bool VehicleGod;

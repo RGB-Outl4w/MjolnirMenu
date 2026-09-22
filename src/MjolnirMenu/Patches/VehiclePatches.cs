@@ -65,6 +65,29 @@ namespace MjolnirMenu.Patches
             if (State.ShipTailwind && Mine(__instance)) __result = 1f;
         }
 
+        /// <summary>
+        /// Players ride ships because Character adds the deck's velocity; carts only have wheel friction and roll
+        /// aft. Loose carts we simulate that sit on this deck get the deck's horizontal velocity every physics step.
+        /// </summary>
+        [HarmonyPostfix, HarmonyPatch(nameof(Ship.CustomFixedUpdate))]
+        private static void CustomFixedUpdate_Postfix(Ship __instance)
+        {
+            if (!State.CartRidesShips || __instance.m_floatCollider == null) return;
+            var box = __instance.m_floatCollider;
+            foreach (var cart in Vagon.m_instances)
+            {
+                if (cart == null || cart.IsAttached() || cart.m_nview == null || !cart.m_nview.IsOwner()) continue;
+                var local = box.transform.InverseTransformPoint(cart.transform.position) - box.center;
+                if (Mathf.Abs(local.x) > box.size.x * 0.5f || Mathf.Abs(local.z) > box.size.z * 0.5f || local.y < -2f || local.y > 6f) continue;
+                foreach (var b in cart.m_bodies)
+                {
+                    var v = __instance.m_body.GetPointVelocity(b.worldCenterOfMass);
+                    b.linearVelocity = new Vector3(v.x, b.linearVelocity.y, v.z);
+                    b.angularVelocity = __instance.m_body.angularVelocity;
+                }
+            }
+        }
+
         [HarmonyPrefix, HarmonyPatch("UpdateUpsideDmg")]
         private static bool UpdateUpsideDmg_Prefix() => !State.VehicleGod;
     }
