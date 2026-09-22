@@ -10,7 +10,7 @@ namespace MjolnirMenu.Features
         /// <summary>Cart hitched to the local player; maintained by the Vagon patches.</summary>
         public static Vagon? Cart;
 
-        /// <summary>Ship the local player is aboard; read by the Ship patches.</summary>
+        /// <summary>Ship the local player is steering; every ship cheat applies only to it.</summary>
         public static Ship? CurrentShip => _ship;
 
         private static Ship? _ship;
@@ -138,7 +138,7 @@ namespace MjolnirMenu.Features
 
         private static void TickShip(Player? p)
         {
-            var ship = p != null ? Ship.GetLocalShip() : null;
+            var ship = p != null ? p.GetControlledShip() : null;
             if (!ReferenceEquals(ship, _ship))
             {
                 RestoreShip();
@@ -154,7 +154,7 @@ namespace MjolnirMenu.Features
 
             // Only while you're at the helm: wind follows your camera. Passengers get vanilla wind.
             TailwindDir = null;
-            if (State.ShipTailwind && ship != null && p != null && ReferenceEquals(p.GetControlledShip(), ship) && GameCamera.instance != null)
+            if (State.ShipTailwind && ship != null && p != null && GameCamera.instance != null)
             {
                 var f = GameCamera.instance.transform.forward;
                 f.y = 0f;

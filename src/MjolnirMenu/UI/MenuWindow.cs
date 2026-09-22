@@ -399,9 +399,9 @@ namespace MjolnirMenu.UI
             GUILayout.BeginVertical(GUILayout.Width(Col));
             Ui.Header($"Ship  —  {(aboard ? "aboard" : "not aboard")}");
             Ui.Toggle(ref State.ShipTailwind, "Tailwind", "At the helm: full wind wherever you look; waves stay natural");
-            Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
+            Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"At the helm: ×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
             Ui.Slider(ref State.ShipSpeedMultiplier, 1f, 20f, SliderW);
-            Ui.Toggle(ref State.ShipSteering, "Responsive steering", $"×{State.ShipSteeringMultiplier:0.0} rudder speed and turning force");
+            Ui.Toggle(ref State.ShipSteering, "Responsive steering", $"At the helm: ×{State.ShipSteeringMultiplier:0.0} rudder speed and turning force");
             Ui.Slider(ref State.ShipSteeringMultiplier, 1f, 10f, SliderW);
             Ui.Space(6);
             GUI.enabled = Player.m_localPlayer != null;

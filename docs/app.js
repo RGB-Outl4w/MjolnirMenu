@@ -84,12 +84,12 @@
     },
     {
       name: "Vehicles",
-      intro: "Ships and carts. Wind, force and physics, restored the moment you step off.",
+      intro: "Sails & Trails: ships and carts. Ship cheats apply only while you hold the helm and are restored the moment you let go.",
       groups: [
         { title: "Ship", items: [
           ["Tailwind", "At the helm: full wind wherever you look; waves stay natural", true],
-          ["Ship speed hack", "×1–20 sail and paddle force", true, 15],
-          ["Responsive steering", "×1–10 rudder speed and turning force", true, 22]
+          ["Ship speed hack", "At the helm: ×1–20 sail and paddle force", true, 15],
+          ["Responsive steering", "At the helm: ×1–10 rudder speed and turning force", true, 22]
         ], chips: ["Flip nearest ship upright"] },
         { title: "Cart", items: [
           ["Cart speed hack", "Cart weighs nothing and follows at full run speed", true],
