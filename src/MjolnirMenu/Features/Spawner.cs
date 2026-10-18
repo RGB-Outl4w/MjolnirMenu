@@ -89,7 +89,7 @@ namespace MjolnirMenu.Features
             var prefab = ObjectDB.instance?.GetItemPrefab(prefabName);
             if (prefab == null)
             {
-                Hotkeys.Notify($"Unknown item '{prefabName}'");
+                Hotkeys.Notify(L.F("Unknown item '{0}'", prefabName));
                 return;
             }
 
@@ -131,12 +131,12 @@ namespace MjolnirMenu.Features
             var prefab = ZNetScene.instance?.GetPrefab(prefabName);
             if (prefab == null)
             {
-                Hotkeys.Notify($"Unknown prefab '{prefabName}'");
+                Hotkeys.Notify(L.F("Unknown prefab '{0}'", prefabName));
                 return;
             }
 
             count = Mathf.Clamp(count, 1, 50);
-            level = Mathf.Clamp(level, 1, 10);
+            level = Mathf.Max(1, level); // vanilla tops out at 10; health and damage just keep scaling
             for (int i = 0; i < count; i++)
             {
                 var offset = UnityEngine.Random.insideUnitCircle * (1.5f + count * 0.2f);
@@ -148,9 +148,10 @@ namespace MjolnirMenu.Features
                 {
                     var t = go.GetComponent<Tameable>();
                     if (t != null) t.Tame();
+                    else ch?.SetTamed(true); // bosses and other untameables: tamed flag alone makes them friendly
                 }
             }
-            Hotkeys.Notify($"Spawned {count}x {prefabName} (lvl {level})");
+            Hotkeys.Notify(L.F("Spawned {0}x {1} (lvl {2})", count, prefabName, level));
         }
 
         /// <summary>Kill every non-player character within <paramref name="radius"/> meters.</summary>
@@ -177,7 +178,7 @@ namespace MjolnirMenu.Features
                 c.Damage(hit);
                 killed++;
             }
-            Hotkeys.Notify($"Killed {killed}");
+            Hotkeys.Notify(L.F("Killed {0}", killed));
             return killed;
         }
     }

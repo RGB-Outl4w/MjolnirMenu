@@ -12,6 +12,8 @@
 
 Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 
+**English** · [Русский](README.ru.md)
+
 **[Website](https://rgb-outl4w.github.io/MjolnirMenu/)** · [Features](#features) · [Installation](#installation) · [Usage](#usage) · [Configuration](#configuration) · [Building](#building-from-source) · [Architecture](#architecture) · [FAQ](#faq)
 
 </div>
@@ -36,7 +38,10 @@ Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 | Fly | Vanilla debug fly, no console required |
 | Speed / jump / crouch hacks | ×1–10 multipliers on run, jog, jump force and crouch speed |
 | Sit / stand animation speed | ×1–5 on the emote animator, including the stand-up transition |
+| No hunger | Eaten food never runs out (`Player.m_foods` timers pinned), so its health and stamina stay full |
+| No knockback / stagger | `Character.Stagger` and `ApplyPushback` skipped for you: hits, broken blocks and parries never push or stun |
 | Heal + refill | Instant full health, stamina and eitr |
+| Rested now | Rested buff as if you slept in a max-comfort base |
 
 **Water:** swim speed hack (×1–10) · jump while swimming · use items while swimming · walk on water · walk on the seabed · underwater camera (removes the camera's water clamp so it follows you when you dive).
 
@@ -51,10 +56,10 @@ Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 | Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (full-draw shot on press; semi-auto or full-auto), **insta-reload** (crossbows), **hitscan** (straight line to the reticle, no drop or spread) |
 
 ### World
-Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
+Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · instant stations (smelters / kilns / windmills 1 item per second, fermenters 2 s, cooking 1 s and never burns) · instant growth (crops and saplings) · *Repair all nearby* (10–200 m radius) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
 
 ### Vehicles
-* **Ship** — every ship cheat applies only while *you* hold the helm, and is restored the moment you let go. *Tailwind* ( the sail sees a private full-strength wind from where you look, full sail from any angle; the world's wind and waves are untouched) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
+* **Ship** — every ship cheat applies only while *you* hold the helm, and is restored the moment you let go. *Tailwind* (the sail sees a private full-strength wind from where you look, full sail from any angle; the world's wind and waves are untouched) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
 * **Cart** — *Cart speed hack* (cart mass → 1, no extra pull mass on the player, so it follows at full run speed) · *Cart no-clip* (`Rigidbody.excludeLayers` on every cart body: rolls through everything but `terrain` and `piece`) · *Sticky hitch* (unbreakable joint, never unhitches on its own) · *Hitch from anywhere* (cart swings into place behind you) · *Carts ride ships* (on by default: a loose cart on a deck is locked to it — kinematic, no hull contact, so it can't slow the ship; hitching releases it).
 * **Hull immunity** — `ImpactEffect.OnCollisionEnter` is skipped whenever a ship or cart is on either side, and ships take no wave-slam (`UpdateWaterForce`) or capsize damage.
 
@@ -66,10 +71,10 @@ Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all*
 * **Status effect manager** — list of everything currently on you with remaining time; **extend** (+60 s / +10 min), **freeze** (timer pinned at zero) or **remove** each one. Searchable catalog of every `StatusEffect` in the game with one-click *Apply*.
 
 ### Spawner
-Searchable catalog of every item and creature. Items are filtered to those that belong in an inventory (icon + item type); *Show all* lifts the filter. Give items with stack and quality; spawn creatures with level, count and *tamed*; kill everything within a radius.
+Searchable catalog of every item and creature. Items are filtered to those that belong in an inventory (icon + item type); *Show all* lifts the filter. Give items with stack and quality; spawn creatures at **any level** (past the vanilla 10; loot keeps scaling — vanilla doubling up to level 10, then linear, dropped as full stacks) with count and *tamed* — tamed works on untameable creatures and bosses too, which makes them friendly. **Morph** into any creature (at the Level you set) and *Morph back*: you take control of a real, networked creature — everyone sees it, with its own model, animations, attacks, effects, sounds, health and hitboxes. Movement is camera-relative, the creature faces and aims where the camera looks; flying creatures take off / climb with jump and descend / land with crouch; sleeping bosses are woken up first, attack uses the selected creature attack and secondary attack picks the next one (panel above the hotbar shows health and attacks). Your own body waits hidden and invulnerable under the ground. Without *Spoof morph* the creature carries your name; with it, others see an ordinary wild creature. Kill everything within a radius.
 
 ### Teleport
-Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · portals accept any item · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
+Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · portals accept any item · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed / last death point · every boss altar up to Kall Fimbulbringer (host / single-player; clients see altars revealed by a Vegvisir) · pin every dungeon, trader, village and boss altar at once (*Reveal POIs*, host / single-player) · reveal the whole map, then restore the fog later (also removes the POI pins, keeps your own and Vegvisir ones) — what you explored yourself stays explored, including what you walked through while the map was revealed (snapshot per character + world in `BepInEx/config/MjolnirMenu.fog/`) · named saved positions · teleport to other players who share their location.
 
 ### ESP
 Labels for players, creatures / bosses (name, level, HP) and resources (pickables, ore, trees) with distance and optional tracer lines. Range and label cap are configurable.
@@ -77,7 +82,10 @@ Labels for players, creatures / bosses (name, level, HP) and resources (pickable
 ### Settings
 * **Presets** — save the whole menu state under a name, load it later, delete it, or mark one as *Auto-load* to have it applied the moment you enter a world.
 * **Cheat tags** — the game marks you as a cheater the first time you deal damage in god / ghost / fly mode and stamps every drop afterwards with *"obtained using cheats"*. MjolnirMenu reports the game's own `bypasscheatchecks` key instead (on by default) and can clear tags on items you already carry.
-* Hotkey overview, watermark toggle, persistent defaults for multipliers.
+* **Character rename** — main menu only (character select). Changes just the name stored in the profile: the save file name and player ID stay the same, so worlds, beds, wards, portals and tombstones keep working. Same rules as character creation (3–15 letters), confirm-twice, and a `.fch.mjolnir-rename.bak` copy is written before saving.
+* **Hotkeys** — rebind every key in the menu (click, press the new key; Ctrl / Shift / Alt combos work). Five extra quick-toggles ship unbound: ghost mode, speed hack, infinite stamina, ESP, map teleport.
+* **Language** — English or Russian (*Auto* follows the game's language).
+* **Window** — scale 75–150 %, opacity 40–100 %, remembers the last tab, watermark toggle, persistent defaults for multipliers.
 
 ### Credits
 Who made it and what it runs on.
@@ -92,7 +100,7 @@ Who made it and what it runs on.
    ```
 2. Launch Valheim once so BepInEx creates its folders, then quit.
 3. Drop `MjolnirMenu.dll` into `<Valheim>\BepInEx\plugins\MjolnirMenu\` — from a [release](https://github.com/RGB-Outl4w/MjolnirMenu/releases) or by [building from source](#building-from-source).
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.8.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.9.0]`.
 
 ## Usage
 
@@ -113,7 +121,10 @@ The in-game window uses the same design as the [website](https://rgb-outl4w.gith
 
 | Section | Key | Default | Purpose |
 |---|---|---|---|
-| Hotkeys | `MenuToggle` `GodToggle` `FlyToggle` `PanicReset` | Insert / F6 / F7 / End | Key bindings |
+| Hotkeys | `MenuToggle` `GodToggle` `FlyToggle` `PanicReset` | Insert / F6 / F7 / End | Key bindings (also editable in the menu) |
+| Hotkeys | `GhostToggle` `SpeedToggle` `StaminaToggle` `EspToggle` `MapTeleportToggle` | unbound | Extra quick-toggles |
+| UI | `Language` | `Auto` | `Auto` / `English` / `Russian` |
+| UI | `Scale` / `Opacity` / `LastTab` | 1.0 / 1.0 / 0 | Window look, tab it reopens on |
 | General | `HideCheatTags` | `true` | Report `bypasscheatchecks` so loot is never tagged |
 | General | `AutoLoadPreset` | *(empty)* | Preset applied when you enter a world |
 | Player | `SpeedMultiplier` `JumpMultiplier` | 2.0 | Default multipliers |
@@ -137,6 +148,7 @@ dotnet build src\MjolnirMenu -c Release
 * BepInEx and HarmonyX come from the BepInEx NuGet feed (`nuget.config`), so the project compiles even before BepInEx is installed.
 * [Krafs.Publicizer](https://github.com/krafs/Publicizer) exposes the private `m_*` fields the patches rely on — no reflection strings.
 * A successful build copies the DLL into `BepInEx\plugins\MjolnirMenu` automatically when that folder exists; `scripts\deploy.ps1` does the same explicitly.
+* `python scripts/check-translations.py` checks the menu's Russian table: every string has a translation and the `{0}` holes match.
 
 ## Architecture
 
@@ -146,26 +158,33 @@ src/MjolnirMenu/
 ├── Core/
 │   ├── State.cs          Every toggle and multiplier — the single source of truth
 │   ├── MenuConfig.cs     BepInEx ConfigEntry bindings
-│   └── Hotkeys.cs        Key handling and on-screen notifications
+│   ├── Hotkeys.cs        Rebindable keys and on-screen notifications
+│   └── L.cs              Menu language (English / Russian table)
 ├── Features/             Reconcile game state against State every frame; restore originals on toggle-off
 │   ├── PlayerCheats.cs   Survival, movement, water, camera, durability
 │   ├── WorldCheats.cs    Build, craft, time, weather
 │   ├── SkillCheats.cs    Skill levels
 │   ├── Effects.cs        Forsaken powers and the status-effect manager
 │   ├── Spawner.cs        Item / creature catalog and spawning
-│   ├── Warp.cs           Teleport and saved positions
+│   ├── Warp.cs           Teleport, saved positions, boss altars
+│   ├── MapFog.cs         Reveal map / POIs and restore the fog from a snapshot
+│   ├── Vehicles.cs       Ships and carts
+│   ├── Morph.cs          Possessing a creature
+│   ├── Rename.cs         Safe character rename
 │   ├── Esp.cs            Overlay scanning and drawing
 │   └── Presets.cs        Save / load / auto-load of State
 ├── Patches/              Harmony patches, grouped by game type
-│   ├── PlayerPatches.cs         stamina · carry weight · speed · crafting · input gate · teleport speed
+│   ├── PlayerPatches.cs         stamina · carry weight · speed · crafting · input gate · teleport speed · multi-equip · morph control & camera
 │   ├── CharacterPatches.cs      damage in/out · water jump · swim state · attack & emote speed
 │   ├── DestructiblePatches.cs   per-category damage for trees, rocks, pieces, destructibles
 │   ├── ItemPatches.cs           infinite items (scoped) · duplicate-on-interact
-│   ├── MinimapPatches.cs        map-click teleport
+│   ├── VehiclePatches.cs        tailwind · sail thrust · cart hitch · hull immunity
+│   ├── MinimapPatches.cs        map-click teleport · fog snapshot
 │   ├── EnvManPatches.cs         forced weather
-│   └── GamePatches.cs           reset on logout
+│   └── GamePatches.cs           reset on logout · instant growth · high-level loot
 └── UI/
     ├── MenuWindow.cs     Tabbed IMGUI window
+    ├── Ui.cs             Widgets (translated, auto-width)
     └── Styles.cs         Skin
 ```
 

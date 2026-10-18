@@ -19,5 +19,9 @@ namespace MjolnirMenu.Patches
             Warp.ToMapPoint(world);
             return false;
         }
+
+        /// <summary>Legit exploration while the map is revealed still goes into the fog snapshot.</summary>
+        [HarmonyPostfix, HarmonyPatch("Explore", typeof(Vector3), typeof(float))]
+        private static void Explore_Postfix(Minimap __instance, Vector3 p, float radius) => MapFog.OnExplore(__instance, p, radius);
     }
 }

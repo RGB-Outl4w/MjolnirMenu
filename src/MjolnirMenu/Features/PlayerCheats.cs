@@ -62,6 +62,10 @@ namespace MjolnirMenu.Features
                 if (State.InfiniteEitr && p.GetMaxEitr() > 0f && p.m_eitr < p.GetMaxEitr())
                     p.m_eitr = p.GetMaxEitr();
 
+                if (State.NoHunger)
+                    foreach (var food in p.m_foods)
+                        if (food.m_time < food.m_item.m_shared.m_foodBurnTime) food.m_time = food.m_item.m_shared.m_foodBurnTime;
+
                 if (State.InfiniteDurability)
                     RefillDurability(p);
 
@@ -188,7 +192,7 @@ namespace MjolnirMenu.Features
                 n++;
             }
             p.GetInventory().Changed();
-            Hotkeys.Notify($"Cleared cheat tag on {n} item(s)");
+            Hotkeys.Notify(L.F("Cleared cheat tag on {0} item(s)", n));
             return n;
         }
 
@@ -232,6 +236,16 @@ namespace MjolnirMenu.Features
                 float max = item.GetMaxDurability();
                 if (item.m_durability < max) item.m_durability = max;
             }
+        }
+
+        /// <summary>Rested buff as if you slept in a max-comfort base.</summary>
+        public static void RestNow()
+        {
+            var p = Player.m_localPlayer;
+            if (p == null) return;
+            // ponytail: comfort 20 is above anything buildable today; raise if the game adds more comfort pieces.
+            if (p.GetSEMan().AddStatusEffect(SEMan.s_statusEffectRested, true) is SE_Rested se)
+                se.m_ttl = se.m_baseTTL + se.m_TTLPerComfortLevel * 19f;
         }
 
         public static void HealFull()

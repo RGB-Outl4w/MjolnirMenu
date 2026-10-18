@@ -2,6 +2,10 @@
 (function () {
   "use strict";
 
+  // Russian page (ru/index.html) loads ru/strings.js first; everything else passes English through.
+  var RU = document.documentElement.lang === "ru" ? (window.MJOLNIR_RU || {}) : null;
+  function tr(s) { return RU && RU[s] ? RU[s] : s; }
+
   // Mirrors src/MjolnirMenu/UI/MenuWindow.cs. Keep in sync when tabs change.
   var TABS = [
     {
@@ -15,9 +19,11 @@
           ["Infinite eitr", "Magic pool never drains"],
           ["No fall damage", ""],
           ["Infinite carry weight", "Max weight → 100 000"],
+          ["No hunger", "Eaten food never runs out; its health and stamina stay full", true],
+          ["No knockback / stagger", "Hits, broken blocks and parries never push or stun you"],
           ["Multi-equip armor", "Stack helmets, chests, legs, capes; extras add armor + effects"],
           ["Extra inventory rows  +2", "Up to 9 rows via the game's own resize; survives relog", false, 40]
-        ]},
+        ], chips: ["Heal + refill", "Rested now"] },
         { title: "Movement", items: [
           ["Fly", "Vanilla debug fly, no console needed"],
           ["Speed hack", "×1–10 on run and jog", true, 35],
@@ -74,8 +80,11 @@
           ["No placement delay", ""],
           ["Free crafting", "No materials"],
           ["Instant crafting", ""],
-          ["Big stations", "×1–50 capacity for smelters, kilns, fires, beehives, sap collectors", true, 40]
-        ]},
+          ["Big stations", "×1–50 capacity for smelters, kilns, fires, beehives, sap collectors", true, 40],
+          ["Instant stations", "Smelters, kilns, windmills: 1 item/s. Fermenters 2 s. Cooking 1 s, never burns", true],
+          ["Instant growth", "Crops and saplings grow the moment their spot is valid"],
+          ["Repair radius  50 m", "", null, 22]
+        ], chips: ["Repair all nearby"] },
         { title: "Time of day", items: [
           ["Lock time", "Slider plus Dawn / Noon / Dusk / Night", true, 50]
         ], chips: ["Dawn", "Noon", "Dusk", "Night"] },
@@ -128,7 +137,7 @@
       intro: "Every item and creature the game knows, searchable. Items are filtered to real inventory items; Show all lifts the filter.",
       groups: [
         { title: "Items", list: [["Wood", "Wood"], ["Black metal sword", "SwordBlackmetal"], ["Mead: healing", "MeadHealthMedium"], ["Fenris hood", "HelmetFenring"]], chips: ["Stack", "Quality", "Give"] },
-        { title: "Creatures", list: [["Greydwarf", "Greydwarf"], ["Troll", "Troll"], ["★ Eikthyr", "Eikthyr"], ["Lox", "Lox"]], chips: ["Level", "Count", "Tamed", "Spawn"] },
+        { title: "Creatures", list: [["Greydwarf", "Greydwarf"], ["Troll", "Troll"], ["★ Eikthyr", "Eikthyr"], ["Lox", "Lox"]], chips: ["Level (any)", "Count", "Tamed (bosses too)", "Morph", "Spawn", "Morph back"] },
         { title: "Kill nearby", items: [["Radius", "5–200 m, optionally including tamed", null, 30]], chips: ["Kill"] }
       ]
     },
@@ -141,7 +150,8 @@
           ["Instant menu teleports", "No fade, no vortex wait", true],
           ["Portals accept any item", "Ore, eggs and other non-teleportable items go through", true],
           ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
-        ], chips: ["Start temple", "Bed / spawn point"] },
+        ], chips: ["Start temple", "Bed / spawn point", "Death point", "Reveal map", "Reveal POIs", "Restore fog"] },
+        { title: "Boss altars", chips: ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader", "Kall Fimbulbringer"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }
       ]
@@ -165,8 +175,16 @@
     },
     {
       name: "Settings",
-      intro: "Presets, cheat tags and defaults.",
+      intro: "Character rename, hotkeys, language, window look, presets, cheat tags and defaults.",
       groups: [
+        { title: "Character", list: [["bjorn", "→ ragnar"]], chips: ["Rename"] },
+        { title: "Hotkeys", list: [["Open / close menu", "Insert"], ["God mode", "F6"], ["Fly", "F7"], ["Ghost mode", "not set"], ["Speed hack", "not set"], ["Infinite stamina", "not set"], ["ESP", "not set"], ["Map click teleport", "not set"], ["Panic reset", "End"]], chips: ["Click a key, press the new one", "×", "Default"] },
+        { title: "Language", chips: ["Auto (game language)", "English", "Русский"] },
+        { title: "Window", items: [
+          ["Scale  100%", "75–150% in 5% steps"],
+          ["Opacity  100%", "", null, 100],
+          ["Show watermark", "Small MjolnirMenu tag in the top-left corner", true]
+        ] },
         { title: "Presets", list: [["speedrun", "Load · Auto-load: ON · ×"], ["building", "Load · Auto-load · ×"], ["chill", "Load · Auto-load · ×"]], chips: ["Save current"] },
         { title: "Cheat tags", items: [
           ["Never tag loot / crafts as \"obtained using cheats\"", "Reports the game's own bypass key", true]
@@ -196,7 +214,7 @@
   }
 
   function renderItem(it) {
-    var label = it[0], hint = it[1] || "", on = it[2], v = it[3];
+    var label = tr(it[0]), hint = tr(it[1] || ""), on = it[2], v = it[3];
     var html = '<div class="tog">';
     // null = value-only row (no checkbox); undefined = plain toggle that is off.
     if (on !== null) html += '<i class="' + (on ? "on" : "") + '" aria-hidden="true"></i>';
@@ -207,15 +225,15 @@
   }
 
   function renderGroup(g) {
-    var html = "<div><h4>" + esc(g.title) + "</h4>";
+    var html = "<div><h4>" + esc(tr(g.title)) + "</h4>";
     if (g.items) html += g.items.map(renderItem).join("");
     if (g.list) {
       html += '<ul class="list">' + g.list.map(function (r) {
         var dim = !r[1] && r[0].indexOf("…") === 0;
-        return '<li class="' + (dim ? "dim" : "") + '"><span>' + esc(r[0]) + "</span><span>" + esc(r[1] || "") + "</span></li>";
+        return '<li class="' + (dim ? "dim" : "") + '"><span>' + esc(tr(r[0])) + "</span><span>" + esc(tr(r[1] || "")) + "</span></li>";
       }).join("") + "</ul>";
     }
-    if (g.chips) html += '<div class="row">' + g.chips.map(function (c) { return '<button type="button" class="chip" tabindex="-1">' + esc(c) + "</button>"; }).join("") + "</div>";
+    if (g.chips) html += '<div class="row">' + g.chips.map(function (c) { return '<button type="button" class="chip" tabindex="-1">' + esc(tr(c)) + "</button>"; }).join("") + "</div>";
     return html + "</div>";
   }
 
@@ -225,7 +243,7 @@
       b.tabIndex = i === j ? 0 : -1;
     });
     var t = TABS[i];
-    bodyEl.innerHTML = '<div class="pane" role="tabpanel"><p class="intro">' + esc(t.intro) + "</p>" + t.groups.map(renderGroup).join("") + "</div>";
+    bodyEl.innerHTML = '<div class="pane" role="tabpanel"><p class="intro">' + esc(tr(t.intro)) + "</p>" + t.groups.map(renderGroup).join("") + "</div>";
     try { history.replaceState(null, "", "#tab-" + t.name.toLowerCase()); } catch (e) { /* ignore */ }
   }
 
@@ -233,7 +251,7 @@
     var b = document.createElement("button");
     b.type = "button";
     b.setAttribute("role", "tab");
-    b.textContent = t.name;
+    b.textContent = tr(t.name);
     b.addEventListener("click", function () { select(i); });
     b.addEventListener("keydown", function (e) {
       var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : -1;

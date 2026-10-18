@@ -1,6 +1,7 @@
 using HarmonyLib;
 using MjolnirMenu.Core;
 using MjolnirMenu.Features;
+using UnityEngine;
 
 namespace MjolnirMenu.Patches
 {
@@ -163,6 +164,38 @@ namespace MjolnirMenu.Patches
                 if (se != null && __instance.m_equipmentStatusEffects.Add(se))
                     __instance.m_seman.AddStatusEffect(se, false, 0, 0f, -1);
             }
+        }
+    }
+
+    /// <summary>Morphed: your movement and attack input drive the creature instead of your (hidden) player.</summary>
+    [HarmonyPatch(typeof(Player), nameof(Player.SetControls))]
+    internal static class MorphControlPatch
+    {
+        private static bool Prefix(Player __instance, Vector3 movedir, bool attack, bool attackHold, bool secondaryAttack, bool jump, bool crouch, bool run)
+        {
+            if (!Morph.Active || !ReferenceEquals(__instance, Player.m_localPlayer)) return true;
+            Morph.Control(movedir, attack, attackHold, secondaryAttack, jump, crouch, run);
+            return false;
+        }
+    }
+
+    /// <summary>Morphed creature turns with the camera like a player does, instead of only toward where it walks.</summary>
+    [HarmonyPatch(typeof(Character), nameof(Character.AlwaysRotateCamera))]
+    internal static class MorphRotatePatch
+    {
+        private static void Postfix(Character __instance, ref bool __result)
+        {
+            if (!__result && ReferenceEquals(__instance, Morph.Mob)) __result = true;
+        }
+    }
+
+    /// <summary>Morphed: the camera orbits the creature, not the player hidden under the ground.</summary>
+    [HarmonyPatch(typeof(GameCamera), "GetCameraPosition")]
+    internal static class MorphCameraPatch
+    {
+        private static void Postfix(GameCamera __instance, ref Vector3 pos, Quaternion rot)
+        {
+            if (Morph.Active) Morph.Camera(__instance, ref pos, rot);
         }
     }
 

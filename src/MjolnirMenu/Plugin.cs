@@ -39,18 +39,22 @@ namespace MjolnirMenu
             Presets.Tick();
             Warp.Tick();
             Vehicles.Tick();
+            MapFog.Tick();
+            Morph.Tick();
             Esp.Tick();
         }
 
         private void OnGUI()
         {
             Esp.Draw();
+            Morph.DrawHud();
             MenuWindow.Draw();
         }
 
         private void OnDestroy()
         {
             State.ResetAll();
+            MapFog.Save();
             _harmony?.UnpatchSelf();
         }
     }

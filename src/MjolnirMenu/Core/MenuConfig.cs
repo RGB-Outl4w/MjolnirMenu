@@ -10,12 +10,21 @@ namespace MjolnirMenu.Core
         public static ConfigEntry<KeyboardShortcut> GodKey = null!;
         public static ConfigEntry<KeyboardShortcut> FlyKey = null!;
         public static ConfigEntry<KeyboardShortcut> PanicKey = null!;
+        public static ConfigEntry<KeyboardShortcut> GhostKey = null!;
+        public static ConfigEntry<KeyboardShortcut> SpeedKey = null!;
+        public static ConfigEntry<KeyboardShortcut> StaminaKey = null!;
+        public static ConfigEntry<KeyboardShortcut> EspKey = null!;
+        public static ConfigEntry<KeyboardShortcut> MapTeleportKey = null!;
 
         public static ConfigEntry<bool> ShowWatermark = null!;
         public static ConfigEntry<bool> HideCheatTags = null!;
         public static ConfigEntry<string> AutoLoadPreset = null!;
+        public static ConfigEntry<string> Language = null!;
         public static ConfigEntry<float> WindowX = null!;
         public static ConfigEntry<float> WindowY = null!;
+        public static ConfigEntry<float> UiScale = null!;
+        public static ConfigEntry<float> UiOpacity = null!;
+        public static ConfigEntry<int> LastTab = null!;
 
         public static ConfigEntry<float> SpeedMultiplier = null!;
         public static ConfigEntry<float> JumpMultiplier = null!;
@@ -33,12 +42,21 @@ namespace MjolnirMenu.Core
             GodKey = cfg.Bind("Hotkeys", "GodToggle", new KeyboardShortcut(KeyCode.F6), "Quick-toggle god mode.");
             FlyKey = cfg.Bind("Hotkeys", "FlyToggle", new KeyboardShortcut(KeyCode.F7), "Quick-toggle fly.");
             PanicKey = cfg.Bind("Hotkeys", "PanicReset", new KeyboardShortcut(KeyCode.End), "Turn every cheat off at once.");
+            GhostKey = cfg.Bind("Hotkeys", "GhostToggle", KeyboardShortcut.Empty, "Quick-toggle ghost mode.");
+            SpeedKey = cfg.Bind("Hotkeys", "SpeedToggle", KeyboardShortcut.Empty, "Quick-toggle the speed hack.");
+            StaminaKey = cfg.Bind("Hotkeys", "StaminaToggle", KeyboardShortcut.Empty, "Quick-toggle infinite stamina.");
+            EspKey = cfg.Bind("Hotkeys", "EspToggle", KeyboardShortcut.Empty, "Quick-toggle ESP (players + creatures).");
+            MapTeleportKey = cfg.Bind("Hotkeys", "MapTeleportToggle", KeyboardShortcut.Empty, "Quick-toggle Ctrl+click map teleport.");
 
             ShowWatermark = cfg.Bind("UI", "ShowWatermark", true, "Small MjolnirMenu tag in the top-left corner.");
             AutoLoadPreset = cfg.Bind("General", "AutoLoadPreset", "", "Preset name (from BepInEx/config/MjolnirMenu.presets) applied automatically when you enter a world. Empty = off.");
             HideCheatTags = cfg.Bind("General", "HideCheatTags", true, "Report bypasscheatchecks to the game so loot/crafts are never tagged 'obtained using cheats'.");
+            Language = cfg.Bind("UI", "Language", "Auto", new ConfigDescription("Menu language. Auto follows the game's language.", new AcceptableValueList<string>("Auto", "English", "Russian")));
             WindowX = cfg.Bind("UI", "WindowX", 60f, "Saved window X position.");
             WindowY = cfg.Bind("UI", "WindowY", 60f, "Saved window Y position.");
+            UiScale = cfg.Bind("UI", "Scale", 1f, new ConfigDescription("Menu window scale.", new AcceptableValueRange<float>(0.75f, 1.5f)));
+            UiOpacity = cfg.Bind("UI", "Opacity", 1f, new ConfigDescription("Menu window opacity.", new AcceptableValueRange<float>(0.4f, 1f)));
+            LastTab = cfg.Bind("UI", "LastTab", 0, "Tab the menu reopens on.");
 
             SpeedMultiplier = cfg.Bind("Player", "SpeedMultiplier", 2f, new ConfigDescription("Run/jog speed multiplier when Speed Hack is on.", new AcceptableValueRange<float>(1f, 10f)));
             JumpMultiplier = cfg.Bind("Player", "JumpMultiplier", 2f, new ConfigDescription("Jump force multiplier when Jump Hack is on.", new AcceptableValueRange<float>(1f, 10f)));

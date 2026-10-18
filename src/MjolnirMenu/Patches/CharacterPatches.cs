@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MjolnirMenu.Core;
+using MjolnirMenu.Features;
 using UnityEngine;
 
 namespace MjolnirMenu.Patches
@@ -20,7 +21,7 @@ namespace MjolnirMenu.Patches
 
             if (ReferenceEquals(__instance, local))
             {
-                if (State.GodMode) return false;
+                if (State.GodMode || Morph.Active) return false;
                 if (State.NoFallDamage && hit.m_hitType == HitData.HitType.Fall) return false;
                 return true;
             }
@@ -30,6 +31,16 @@ namespace MjolnirMenu.Patches
 
             return true;
         }
+
+        /// <summary>No stagger: every stagger source (hits, broken blocks, parried attacks) ends in Character.Stagger.</summary>
+        [HarmonyPrefix, HarmonyPatch(nameof(Character.Stagger))]
+        private static bool Stagger_Prefix(Character __instance)
+            => !(State.NoKnockback && ReferenceEquals(__instance, Player.m_localPlayer));
+
+        /// <summary>No knockback: both pushback overloads end in this one.</summary>
+        [HarmonyPrefix, HarmonyPatch(nameof(Character.ApplyPushback), typeof(Vector3), typeof(float))]
+        private static bool Pushback_Prefix(Character __instance)
+            => !(State.NoKnockback && ReferenceEquals(__instance, Player.m_localPlayer));
 
         /// <summary>
         /// Vanilla only lets you jump in swim depth within 0.25s of hitting the water

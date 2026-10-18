@@ -33,7 +33,7 @@ namespace MjolnirMenu.Features
         public static void SetAll(float level)
         {
             foreach (var s in GetSkills()) SetLevel(s, level);
-            Hotkeys.Notify($"All skills set to {Mathf.Clamp(level, 0f, MaxLevel):0}");
+            Hotkeys.Notify(L.F("All skills set to {0:0}", Mathf.Clamp(level, 0f, MaxLevel)));
         }
 
         public static void MaxAll() => SetAll(MaxLevel);

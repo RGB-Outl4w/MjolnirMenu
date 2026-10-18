@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using BepInEx.Configuration;
 using MjolnirMenu.Core;
 using MjolnirMenu.Features;
 using UnityEngine;
@@ -47,6 +48,10 @@ namespace MjolnirMenu.UI
 
         // Settings tab
         private static string _presetName = "";
+        private static float _repairRadius = 50f;
+        private static float _fogConfirmUntil;
+        private static string _renameFor = "", _renameText = "";
+        private static float _renameConfirmUntil;
         private static Vector2 _settingsScroll;
 
         public static void Draw()
@@ -54,6 +59,8 @@ namespace MjolnirMenu.UI
             Styles.EnsureBuilt();
 
             var savedSkin = GUI.skin;
+            var savedMatrix = GUI.matrix;
+            var savedColor = GUI.color;
             GUI.skin = Styles.Skin;
             try
             {
@@ -61,12 +68,18 @@ namespace MjolnirMenu.UI
                     GUI.Label(new Rect(8, 4, 300, 20), $"MjolnirMenu  [{MenuConfig.MenuKey.Value}]", Styles.Watermark);
 
                 if (!State.MenuOpen) return;
+                CaptureRebind();
+
+                float scale = Mathf.Clamp(MenuConfig.UiScale.Value, 0.75f, 1.5f);
+                GUI.matrix = Matrix4x4.Scale(new Vector3(scale, scale, 1f));
+                GUI.color = WindowColor;
 
                 if (!_rectLoaded)
                 {
                     _rectLoaded = true;
-                    _rect.x = Mathf.Clamp(MenuConfig.WindowX.Value, 0, Mathf.Max(0, Screen.width - _rect.width));
-                    _rect.y = Mathf.Clamp(MenuConfig.WindowY.Value, 0, Mathf.Max(0, Screen.height - _rect.height));
+                    _rect.x = Mathf.Clamp(MenuConfig.WindowX.Value, 0, Mathf.Max(0, Screen.width / scale - _rect.width));
+                    _rect.y = Mathf.Clamp(MenuConfig.WindowY.Value, 0, Mathf.Max(0, Screen.height / scale - _rect.height));
+                    _tab = Mathf.Clamp(MenuConfig.LastTab.Value, 0, Tabs.Length - 1);
                 }
 
                 var before = _rect;
@@ -84,11 +97,35 @@ namespace MjolnirMenu.UI
             finally
             {
                 GUI.skin = savedSkin;
+                GUI.matrix = savedMatrix;
+                GUI.color = savedColor;
             }
+        }
+
+        private static Color WindowColor => new Color(1f, 1f, 1f, Mathf.Clamp(MenuConfig.UiOpacity.Value, 0.4f, 1f));
+
+        /// <summary>Settings → Hotkeys is waiting for a key: take the next non-modifier key press.</summary>
+        private static void CaptureRebind()
+        {
+            var b = Hotkeys.Rebinding;
+            var e = Event.current;
+            if (b == null || e.type != EventType.KeyDown || e.keyCode == KeyCode.None) return;
+            var k = e.keyCode;
+            if (k == KeyCode.LeftControl || k == KeyCode.RightControl || k == KeyCode.LeftShift || k == KeyCode.RightShift
+                || k == KeyCode.LeftAlt || k == KeyCode.RightAlt || k == KeyCode.LeftCommand || k == KeyCode.RightCommand) return;
+            e.Use();
+            Hotkeys.Rebinding = null;
+            if (k == KeyCode.Escape) return;
+            var mods = new List<KeyCode>();
+            if (e.control) mods.Add(KeyCode.LeftControl);
+            if (e.shift) mods.Add(KeyCode.LeftShift);
+            if (e.alt) mods.Add(KeyCode.LeftAlt);
+            b.Entry.Value = new KeyboardShortcut(k, mods.ToArray());
         }
 
         private static void DrawWindow(int id)
         {
+            GUI.color = WindowColor;
             // Title bar
             GUILayout.BeginHorizontal(Styles.TitleBar);
             GUILayout.Label("MJOLNIR MENU", Styles.TitleText);
@@ -102,8 +139,8 @@ namespace MjolnirMenu.UI
             GUILayout.Space(10);
             for (int i = 0; i < Tabs.Length; i++)
             {
-                if (GUILayout.Button(Tabs[i], i == _tab ? Styles.TabActive : Styles.Tab))
-                    _tab = i;
+                if (GUILayout.Button(L.T(Tabs[i]), i == _tab ? Styles.TabActive : Styles.Tab) && i != _tab)
+                    MenuConfig.LastTab.Value = _tab = i;
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -142,8 +179,8 @@ namespace MjolnirMenu.UI
             GUILayout.Space(14);
             var p = Player.m_localPlayer;
             GUILayout.Label(p != null
-                ? $"{p.GetPlayerName()}  •  {(ZNet.instance != null && ZNet.instance.IsServer() ? "local/host" : "client")}"
-                : "Not in game", Styles.Footer);
+                ? $"{p.GetPlayerName()}  •  {L.T(ZNet.instance != null && ZNet.instance.IsServer() ? "local/host" : "client")}"
+                : Time.unscaledTime - Hotkeys.LastMessageTime < 6f ? Hotkeys.LastMessage : L.T("Not in game"), Styles.Footer);
             GUILayout.FlexibleSpace();
             if (Ui.Button("Reset all", GUILayout.Width(76)))
             {
@@ -176,27 +213,33 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.InfiniteEitr, "Infinite eitr", "Magic pool never drains");
             Ui.Toggle(ref State.NoFallDamage, "No fall damage");
             Ui.Toggle(ref State.InfiniteCarryWeight, "Infinite carry weight", "Max weight → 100 000");
+            Ui.Toggle(ref State.NoHunger, "No hunger", "Eaten food never runs out; its health and stamina stay full");
+            Ui.Toggle(ref State.NoKnockback, "No knockback / stagger", "Hits, broken blocks and parries never push or stun you");
             Ui.Toggle(ref State.MultiEquip, "Multi-equip armor", "Stack helmets, chests, legs, capes; extras add armor + effects, not visuals");
             float rows = State.ExtraInventoryRows;
-            Ui.LabeledSlider($"Extra inventory rows  +{rows:0}", ref rows, 0f, PlayerCheats.MaxExtraRows, SliderW);
+            Ui.LabeledSlider(L.F("Extra inventory rows  +{0:0}", rows), ref rows, 0f, PlayerCheats.MaxExtraRows, SliderW);
             State.ExtraInventoryRows = Mathf.RoundToInt(rows);
             Ui.Space(6);
             GUI.enabled = inGame;
-            if (Ui.Button("Heal + refill", GUILayout.Width(110))) PlayerCheats.HealFull();
+            GUILayout.BeginHorizontal();
+            if (Ui.Button("Heal + refill", GUILayout.Width(120))) PlayerCheats.HealFull();
+            if (Ui.Button("Rested now", GUILayout.Width(120))) PlayerCheats.RestNow();
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
             GUI.enabled = true;
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
             Ui.Header("Movement");
             if (Ui.Toggle(ref State.Fly, "Fly", "Vanilla debug fly — jump = up, crouch = down")) PlayerCheats.ApplyFly();
-            Ui.Toggle(ref State.SpeedHack, "Speed hack", $"×{State.SpeedMultiplier:0.0} on run and jog");
+            Ui.Toggle(ref State.SpeedHack, "Speed hack", L.F("×{0:0.0} on run and jog", State.SpeedMultiplier));
             Ui.Slider(ref State.SpeedMultiplier, 1f, 10f, SliderW);
-            if (Ui.Toggle(ref State.JumpHack, "Jump hack", $"×{State.JumpMultiplier:0.0} on jump force")) PlayerCheats.ApplyJump();
+            if (Ui.Toggle(ref State.JumpHack, "Jump hack", L.F("×{0:0.0} on jump force", State.JumpMultiplier))) PlayerCheats.ApplyJump();
             if (Ui.Slider(ref State.JumpMultiplier, 1f, 10f, SliderW)) PlayerCheats.ApplyJump();
-            if (Ui.Toggle(ref State.CrouchSpeedHack, "Crouch speed hack", $"×{State.CrouchSpeedMultiplier:0.0} while sneaking")) PlayerCheats.ApplyCrouchSpeed();
+            if (Ui.Toggle(ref State.CrouchSpeedHack, "Crouch speed hack", L.F("×{0:0.0} while sneaking", State.CrouchSpeedMultiplier))) PlayerCheats.ApplyCrouchSpeed();
             if (Ui.Slider(ref State.CrouchSpeedMultiplier, 1f, 10f, SliderW)) PlayerCheats.ApplyCrouchSpeed();
             Ui.Toggle(ref State.CrouchInfiniteStamina, "Infinite stamina while crouched", "Overridden by the global toggle");
-            Ui.Toggle(ref State.EmoteSpeedHack, "Sit / stand animation speed", $"×{State.EmoteSpeedMultiplier:0.0} on the emote animator");
+            Ui.Toggle(ref State.EmoteSpeedHack, "Sit / stand animation speed", L.F("×{0:0.0} on the emote animator", State.EmoteSpeedMultiplier));
             Ui.Slider(ref State.EmoteSpeedMultiplier, 1f, 5f, SliderW);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -231,7 +274,7 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.InfiniteInteract, "Infinite interaction", "Pick-ups, bushes and beehives give you a copy and stay full. Walk-over pickup is off while on");
             Ui.Space();
             Ui.Header("Attack speed");
-            Ui.Toggle(ref State.AttackSpeedHack, "Attack speed hack", $"×{State.AttackSpeedMultiplier:0.0} on attack animations — swings, draws and combos finish faster");
+            Ui.Toggle(ref State.AttackSpeedHack, "Attack speed hack", L.F("×{0:0.0} on attack animations — swings, draws and combos finish faster", State.AttackSpeedMultiplier));
             Ui.Slider(ref State.AttackSpeedMultiplier, 1f, 5f, SliderW);
             Ui.Space();
             Ui.Header("Ranged");
@@ -245,8 +288,8 @@ namespace MjolnirMenu.UI
             GUILayout.BeginVertical();
             Ui.Header("Damage");
             Ui.Toggle(ref State.DamageHack, "Damage multiplier", "Master toggle for every slider below");
-            Ui.LabeledSlider($"Melee  ×{State.MeleeMultiplier:0.0}", ref State.MeleeMultiplier, 1f, 50f, SliderW);
-            Ui.LabeledSlider($"Ranged  ×{State.RangedMultiplier:0.0}", ref State.RangedMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("Melee  ×{0:0.0}", State.MeleeMultiplier), ref State.MeleeMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("Ranged  ×{0:0.0}", State.RangedMultiplier), ref State.RangedMultiplier, 1f, 50f, SliderW);
             GUILayout.BeginHorizontal();
             GUILayout.Space(Ui.Indent);
             if (Ui.Button("×1")) State.MeleeMultiplier = State.RangedMultiplier = 1f;
@@ -256,10 +299,10 @@ namespace MjolnirMenu.UI
             if (Ui.Button("One-shot")) State.MeleeMultiplier = State.RangedMultiplier = 50f;
             GUILayout.EndHorizontal();
             Ui.Space(4);
-            Ui.LabeledSlider($"Trees  ×{State.TreeMultiplier:0.0}", ref State.TreeMultiplier, 1f, 50f, SliderW);
-            Ui.LabeledSlider($"Stones / ores  ×{State.RockMultiplier:0.0}", ref State.RockMultiplier, 1f, 50f, SliderW);
-            Ui.LabeledSlider($"Player structures  ×{State.PlayerStructureMultiplier:0.0}", ref State.PlayerStructureMultiplier, 1f, 50f, SliderW);
-            Ui.LabeledSlider($"World structures / destructibles  ×{State.WorldStructureMultiplier:0.0}", ref State.WorldStructureMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("Trees  ×{0:0.0}", State.TreeMultiplier), ref State.TreeMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("Stones / ores  ×{0:0.0}", State.RockMultiplier), ref State.RockMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("Player structures  ×{0:0.0}", State.PlayerStructureMultiplier), ref State.PlayerStructureMultiplier, 1f, 50f, SliderW);
+            Ui.LabeledSlider(L.F("World structures / destructibles  ×{0:0.0}", State.WorldStructureMultiplier), ref State.WorldStructureMultiplier, 1f, 50f, SliderW);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
         }
@@ -275,7 +318,7 @@ namespace MjolnirMenu.UI
             }
 
             string cur = Effects.CurrentPower();
-            Ui.Header($"Forsaken power  —  {(string.IsNullOrEmpty(cur) ? "none" : cur)}");
+            Ui.Header(L.F("Forsaken power  —  {0}", string.IsNullOrEmpty(cur) ? L.T("none") : cur));
             GUILayout.BeginHorizontal();
             foreach (var gp in Effects.GuardianPowers())
             {
@@ -397,11 +440,11 @@ namespace MjolnirMenu.UI
             bool hitched = Vehicles.Cart != null;
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical(GUILayout.Width(Col));
-            Ui.Header($"Ship  —  {(aboard ? "aboard" : "not aboard")}");
+            Ui.Header(L.F("Ship  —  {0}", L.T(aboard ? "aboard" : "not aboard")));
             Ui.Toggle(ref State.ShipTailwind, "Tailwind", "At the helm: full wind wherever you look; waves stay natural");
-            Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", $"At the helm: ×{State.ShipSpeedMultiplier:0.0} sail and paddle force");
+            Ui.Toggle(ref State.ShipSpeedHack, "Ship speed hack", L.F("At the helm: ×{0:0.0} sail and paddle force", State.ShipSpeedMultiplier));
             Ui.Slider(ref State.ShipSpeedMultiplier, 1f, 20f, SliderW);
-            Ui.Toggle(ref State.ShipSteering, "Responsive steering", $"At the helm: ×{State.ShipSteeringMultiplier:0.0} rudder speed and turning force");
+            Ui.Toggle(ref State.ShipSteering, "Responsive steering", L.F("At the helm: ×{0:0.0} rudder speed and turning force", State.ShipSteeringMultiplier));
             Ui.Slider(ref State.ShipSteeringMultiplier, 1f, 10f, SliderW);
             Ui.Space(6);
             GUI.enabled = Player.m_localPlayer != null;
@@ -411,7 +454,7 @@ namespace MjolnirMenu.UI
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
-            Ui.Header($"Cart  —  {(hitched ? "hitched" : "not hitched")}");
+            Ui.Header(L.F("Cart  —  {0}", L.T(hitched ? "hitched" : "not hitched")));
             Ui.Toggle(ref State.CartSpeedHack, "Cart speed hack", "Cart weighs nothing and follows at full run speed — pair with Speed hack");
             Ui.Toggle(ref State.CartNoClip, "Cart no-clip", "Rolls through trees, rocks and mobs; still rides terrain and floors");
             Ui.Toggle(ref State.CartSticky, "Sticky hitch", "Never unhitches on its own; use the cart again to let go");
@@ -433,8 +476,17 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.NoPlaceDelay, "No placement delay");
             Ui.Toggle(ref State.FreeCraft, "Free crafting", "No materials");
             Ui.Toggle(ref State.InstantCraft, "Instant crafting");
-            Ui.Toggle(ref State.BigStations, "Big stations", $"×{State.StationMultiplier:0} capacity for smelters, kilns, fires, beehives, sap collectors");
+            Ui.Toggle(ref State.BigStations, "Big stations", L.F("×{0:0} capacity for smelters, kilns, fires, beehives, sap collectors", State.StationMultiplier));
             Ui.Slider(ref State.StationMultiplier, 1f, 50f, SliderW);
+            Ui.Toggle(ref State.InstantStations, "Instant stations", "Smelters, kilns, windmills: 1 item/s. Fermenters 2 s. Cooking 1 s, never burns");
+            Ui.Toggle(ref State.InstantGrowth, "Instant growth", "Crops and saplings grow the moment their spot is valid");
+            Ui.LabeledSlider(L.F("Repair radius  {0:0} m", _repairRadius), ref _repairRadius, 10f, 200f, SliderW);
+            GUILayout.BeginHorizontal();
+            GUILayout.Space(Ui.Indent);
+            GUI.enabled = Player.m_localPlayer != null;
+            if (Ui.Button("Repair all nearby", GUILayout.Width(150))) WorldCheats.RepairNearby(_repairRadius);
+            GUI.enabled = true;
+            GUILayout.EndHorizontal();
 
             Ui.Space();
             Ui.Header("Time of day");
@@ -450,7 +502,7 @@ namespace MjolnirMenu.UI
             GUILayout.EndVertical();
 
             GUILayout.BeginVertical();
-            Ui.Header($"Weather  —  {(string.IsNullOrEmpty(State.ForcedWeather) ? "natural" : State.ForcedWeather)}");
+            Ui.Header(L.F("Weather  —  {0}", string.IsNullOrEmpty(State.ForcedWeather) ? L.T("natural") : State.ForcedWeather));
             if (Ui.Button("Natural weather", string.IsNullOrEmpty(State.ForcedWeather), GUILayout.Width(140)))
                 State.ForcedWeather = "";
             Ui.Space(4);
@@ -482,10 +534,11 @@ namespace MjolnirMenu.UI
             }
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Items", !_showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = false;
-            if (GUILayout.Button("Creatures", _showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = true;
+            if (GUILayout.Button(L.T("Items"), !_showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.MinWidth(90))) _showCreatures = false;
+            if (GUILayout.Button(L.T("Creatures"), _showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.MinWidth(90))) _showCreatures = true;
             GUILayout.Space(10);
             if (!_showCreatures) Ui.Toggle(ref State.SpawnerShowAll, "Show all", null, GUILayout.Width(110));
+            else if (Morph.Active && Ui.Button(L.F("Morph back ({0})", Morph.Current), true)) Morph.Back();
             GUILayout.FlexibleSpace();
             Ui.Hint("Search", GUILayout.Width(44));
             GUI.SetNextControlName("mjolnir_search");
@@ -511,6 +564,8 @@ namespace MjolnirMenu.UI
                 _countText = Ui.TextField(_countText, GUILayout.Width(44));
                 GUILayout.Space(8);
                 Ui.Toggle(ref _tamed, "Tamed", null, GUILayout.Width(90));
+                Ui.Toggle(ref State.MorphSpoof, "Spoof morph", "Others see a real wild creature: its own name, no trace of you", GUILayout.Width(150));
+                Ui.Hint("Any level; tamed works on bosses too. Morph uses Level too");
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -525,9 +580,10 @@ namespace MjolnirMenu.UI
                 if (++shown > 300) { Ui.Hint("… refine your search"); break; }
                 GUILayout.BeginHorizontal();
                 string rowName = e.IsBoss ? $"★ {e.DisplayName}" : e.DisplayName;
-                if (!e.IsCreature && !e.InventorySafe) rowName += $"  <color={Styles.HintHex}>(not an inventory item)</color>";
+                if (!e.IsCreature && !e.InventorySafe) rowName += $"  <color={Styles.HintHex}>{L.T("(not an inventory item)")}</color>";
                 GUILayout.Label(rowName, Styles.ListRow, GUILayout.Width(260));
                 Ui.Hint(e.PrefabName, GUILayout.ExpandWidth(true));
+                if (_showCreatures && Ui.Button("Morph", Morph.Current == e.DisplayName, GUILayout.Width(70))) Morph.To(e.PrefabName, e.DisplayName, ParseInt(_levelText, 1));
                 if (Ui.Button(_showCreatures ? "Spawn" : "Give", GUILayout.Width(60)))
                 {
                     if (_showCreatures)
@@ -543,7 +599,7 @@ namespace MjolnirMenu.UI
             Ui.Rule();
             Ui.Space(4);
             GUILayout.BeginHorizontal();
-            Ui.Header($"Kill nearby  —  {_killRadius:0} m");
+            Ui.Header(L.F("Kill nearby  —  {0:0} m", _killRadius));
             GUILayout.Space(8);
             GUILayout.BeginVertical(GUILayout.Width(180));
             GUILayout.Space(4);
@@ -568,14 +624,37 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.MapClickTeleport, "Ctrl + left-click on the big map to teleport");
             Ui.Toggle(ref State.InstantTeleport, "Instant menu teleports", "Map click / saved positions / players: no fade, no vortex wait");
             Ui.Toggle(ref State.PortalAnyItem, "Portals accept any item", "Take ore, eggs and other non-teleportable items through portals");
-            Ui.Toggle(ref State.FastTeleport, "Fast portals", $"×{State.TeleportSpeed:0} on the vortex timer for real portals");
+            Ui.Toggle(ref State.FastTeleport, "Fast portals", L.F("×{0:0} on the vortex timer for real portals", State.TeleportSpeed));
             float ts = State.TeleportSpeed;
             if (Ui.Slider(ref ts, 1f, 40f, SliderW)) State.TeleportSpeed = Mathf.Round(ts);
             Ui.Space(6);
-            GUILayout.BeginHorizontal();
             GUI.enabled = inGame;
+            GUILayout.BeginHorizontal();
             if (Ui.Button("Start temple")) Warp.ToStart();
             if (Ui.Button("Bed / spawn point")) Warp.ToSpawnPoint();
+            if (Ui.Button("Death point")) Warp.ToDeathPoint();
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.BeginHorizontal();
+            if (Ui.Button("Reveal map")) MapFog.Reveal();
+            if (Ui.Button("Reveal POIs")) MapFog.RevealPois();
+            bool confirm = Time.unscaledTime < _fogConfirmUntil;
+            if (Ui.Button(confirm ? "Click again: erase exploration" : "Restore fog", confirm))
+            {
+                if (confirm) { MapFog.Restore(); _fogConfirmUntil = 0f; }
+                else _fogConfirmUntil = Time.unscaledTime + 3f;
+            }
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            Ui.Space();
+            Ui.Header("Boss altars");
+            GUILayout.BeginHorizontal();
+            for (int i = 0; i < Warp.BossAltars.GetLength(0); i++)
+            {
+                if (i == 4) { GUILayout.FlexibleSpace(); GUILayout.EndHorizontal(); GUILayout.BeginHorizontal(); }
+                if (Ui.Button(Warp.BossAltars[i, 0])) Warp.ToLocation(Warp.BossAltars[i, 0], Warp.BossAltars[i, 1]);
+            }
             GUI.enabled = true;
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -642,10 +721,10 @@ namespace MjolnirMenu.UI
             Ui.Toggle(ref State.EspLines, "Tracer lines");
             Ui.Space(4);
             float range = MenuConfig.EspRange.Value;
-            Ui.LabeledSlider($"Range  {range:0} m", ref range, 20f, 1000f, SliderW);
+            Ui.LabeledSlider(L.F("Range  {0:0} m", range), ref range, 20f, 1000f, SliderW);
             if (!Mathf.Approximately(range, MenuConfig.EspRange.Value)) MenuConfig.EspRange.Value = range;
             float cap = MenuConfig.EspMaxEntities.Value;
-            Ui.LabeledSlider($"Max labels  {cap:0}", ref cap, 10f, 2000f, SliderW);
+            Ui.LabeledSlider(L.F("Max labels  {0:0}", cap), ref cap, 10f, 2000f, SliderW);
             if (Mathf.RoundToInt(cap) != MenuConfig.EspMaxEntities.Value) MenuConfig.EspMaxEntities.Value = Mathf.RoundToInt(cap);
             GUILayout.EndVertical();
             GUILayout.EndHorizontal();
@@ -657,8 +736,73 @@ namespace MjolnirMenu.UI
         {
             _settingsScroll = Ui.BeginScroll(_settingsScroll, 420f);
 
+            Ui.Header("Character");
+            var sel = Rename.Selected;
+            if (sel == null)
+                Ui.Hint("Rename your character from the main menu (character select). In a world the name is in use and can't be changed safely.");
+            else
+            {
+                if (_renameFor != sel.m_filename) { _renameFor = sel.m_filename; _renameText = sel.GetName(); }
+                GUILayout.BeginHorizontal();
+                Ui.Label(sel.GetName(), GUILayout.Width(150));
+                _renameText = Ui.TextField(_renameText, GUILayout.Width(170));
+                string? err = Rename.Validate(_renameText);
+                GUI.enabled = err == null && _renameText.Trim().ToLowerInvariant() != sel.GetName();
+                bool confirm = Time.unscaledTime < _renameConfirmUntil;
+                if (Ui.Button(confirm ? "Click again to rename" : "Rename", confirm, GUILayout.Width(170)))
+                {
+                    if (confirm) { Rename.Apply(_renameText); _renameConfirmUntil = 0f; }
+                    else _renameConfirmUntil = Time.unscaledTime + 3f;
+                }
+                GUI.enabled = true;
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+                Ui.Hint(err ?? "Only the shown name changes. Save file, player ID and everything you own stay the same. A backup (.fch.mjolnir-rename.bak) is written first.");
+            }
+
+            Ui.Space();
+
             Ui.Header("Hotkeys");
-            Ui.Hint($"Menu  {MenuConfig.MenuKey.Value}     God  {MenuConfig.GodKey.Value}     Fly  {MenuConfig.FlyKey.Value}     Panic reset  {MenuConfig.PanicKey.Value}     —  edit in BepInEx/config/com.mjolnir.menu.cfg");
+            foreach (var b in Hotkeys.All)
+            {
+                GUILayout.BeginHorizontal();
+                Ui.Label(b.Name, GUILayout.Width(190));
+                bool waiting = Hotkeys.Rebinding == b;
+                var key = b.Entry.Value;
+                string text = waiting ? "Press a key… (Esc cancels)" : key.MainKey == KeyCode.None ? "not set" : key.ToString();
+                if (Ui.Button(text, waiting, GUILayout.Width(220))) Hotkeys.Rebinding = waiting ? null : b;
+                GUI.enabled = b.CanClear;
+                if (Ui.Button("×", GUILayout.Width(26))) b.Entry.Value = KeyboardShortcut.Empty;
+                GUI.enabled = true;
+                if (Ui.Button("Default", GUILayout.Width(80))) b.Entry.Value = (KeyboardShortcut)b.Entry.DefaultValue;
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+            }
+            Ui.Hint("Click a key, then press the new one. Ctrl / Shift / Alt held at the same time become part of the shortcut.");
+
+            Ui.Space();
+            Ui.Header("Language");
+            GUILayout.BeginHorizontal();
+            foreach (var lang in new[] { "Auto", "English", "Russian" })
+            {
+                string label = lang == "Auto" ? L.T("Auto (game language)") : lang == "Russian" ? "Русский" : "English";
+                if (GUILayout.Button(label, MenuConfig.Language.Value == lang ? Styles.ButtonActive : Styles.Button)) MenuConfig.Language.Value = lang;
+            }
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+
+            Ui.Space();
+            Ui.Header("Window");
+            GUILayout.BeginHorizontal();
+            Ui.Hint(L.F("Scale  {0:0}%", MenuConfig.UiScale.Value * 100f), GUILayout.Width(110));
+            if (Ui.Button("−", GUILayout.Width(28))) StepScale(-0.05f);
+            if (Ui.Button("+", GUILayout.Width(28))) StepScale(0.05f);
+            if (Ui.Button("100%", GUILayout.Width(54))) MenuConfig.UiScale.Value = 1f;
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            float op = MenuConfig.UiOpacity.Value;
+            Ui.LabeledSlider(L.F("Opacity  {0:0}%", op * 100f), ref op, 0.4f, 1f, SliderW);
+            if (!Mathf.Approximately(op, MenuConfig.UiOpacity.Value)) MenuConfig.UiOpacity.Value = op;
             bool wm = MenuConfig.ShowWatermark.Value;
             if (Ui.Toggle(ref wm, "Show watermark", "Small MjolnirMenu tag in the top-left corner")) MenuConfig.ShowWatermark.Value = wm;
 
@@ -712,7 +856,7 @@ namespace MjolnirMenu.UI
         private static void DrawCredits()
         {
             GUILayout.Label("MjolnirMenu", Styles.Title);
-            Ui.Hint($"v{MyPluginInfo.PLUGIN_VERSION}  •  Valheim trainer / mod menu  •  rgb-outl4w.github.io/MjolnirMenu");
+            Ui.Hint($"v{MyPluginInfo.PLUGIN_VERSION}  •  {L.T("Valheim trainer / mod menu")}  •  rgb-outl4w.github.io/MjolnirMenu");
             Ui.Space(10);
             GUILayout.BeginHorizontal();
             GUILayout.BeginVertical(GUILayout.Width(Col));
@@ -737,6 +881,10 @@ namespace MjolnirMenu.UI
         }
 
         // ---------------- helpers ----------------
+
+        // Buttons, not a slider: a slider would rescale the window under the cursor while you drag it.
+        private static void StepScale(float d)
+            => MenuConfig.UiScale.Value = Mathf.Clamp(Mathf.Round((MenuConfig.UiScale.Value + d) * 20f) / 20f, 0.75f, 1.5f);
 
         private static int ParseInt(string s, int fallback)
             => int.TryParse(s, out var v) ? v : fallback;
