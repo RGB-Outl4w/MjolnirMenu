@@ -82,7 +82,7 @@ namespace MjolnirMenu.Features
         public static readonly string[,] BossAltars =
         {
             { "Eikthyr", "Eikthyrnir" }, { "The Elder", "GDKing" }, { "Bonemass", "Bonemass" }, { "Moder", "Dragonqueen" },
-            { "Yagluth", "GoblinKing" }, { "The Queen", "Mistlands_DvergrBossEntrance1" }, { "Fader", "FaderLocation" }, { "Kall Fimbulbringer", "FimbulLocation01" },
+            { "Yagluth", "GoblinKing" }, { "The Queen", "Mistlands_DvergrBossEntrance1" }, { "Fader", "FaderLocation" }, { "Kall Fimbulbringer", "DN_Bossroom" },
         };
 
         /// <summary>
@@ -98,6 +98,8 @@ namespace MjolnirMenu.Features
                 To(li.m_position + Vector3.up * 2f);
             else if (zs.GetLocationIcon(prefab, out var pos))
                 To(pos + Vector3.up * 2f);
+            else if (ZNet.instance != null && ZNet.instance.IsServer())
+                Hotkeys.Notify(L.F("{0}: this world has no such altar (worlds made before that boss came out may lack it)", L.T(label)));
             else
                 Hotkeys.Notify(L.F("{0}: altar not found (clients only see altars revealed by a Vegvisir)", L.T(label)));
         }

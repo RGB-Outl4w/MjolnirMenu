@@ -47,6 +47,7 @@ namespace MjolnirMenu
         private void OnGUI()
         {
             Esp.Draw();
+            Morph.DrawHud();
             MenuWindow.Draw();
         }
 

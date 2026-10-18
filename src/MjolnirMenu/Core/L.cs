@@ -242,6 +242,10 @@ namespace MjolnirMenu.Core
             ["Morphed into {0}"] = "Вы превратились: {0}",
             ["Can't morph into {0}"] = "Нельзя превратиться: {0}",
             ["Back to your own shape"] = "Вы вернули свой облик",
+            ["Morph: {0}"] = "Облик: {0}",
+            ["No attacks — movement only"] = "Атак нет — только передвижение",
+            ["Attack: use selected · Secondary attack: next"] = "Атака: выбранная способность · Доп. атака: следующая",
+            ["Put your weapons away to use these"] = "Уберите оружие, чтобы использовать способности",
 
             // Teleport
             ["Map"] = "Карта",
@@ -270,8 +274,9 @@ namespace MjolnirMenu.Core
             ["Yagluth"] = "Яглут",
             ["The Queen"] = "Королева",
             ["Fader"] = "Фейдер",
-            ["Kall Fimbulbringer"] = "Калль Фимбульбрингер",
+            ["Kall Fimbulbringer"] = "Келл Вестник Зимы",
             ["{0}: altar not found (clients only see altars revealed by a Vegvisir)"] = "{0}: алтарь не найден (клиент видит только алтари, открытые Вегвизиром)",
+            ["{0}: this world has no such altar (worlds made before that boss came out may lack it)"] = "{0}: в этом мире нет такого алтаря (в мирах, созданных до выхода босса, его может не быть)",
             ["Players"] = "Игроки",
             ["No other players."] = "Других игроков нет.",
             ["Go"] = "Туда",

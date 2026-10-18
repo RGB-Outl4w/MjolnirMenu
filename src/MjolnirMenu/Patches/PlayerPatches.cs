@@ -166,6 +166,19 @@ namespace MjolnirMenu.Patches
         }
     }
 
+    /// <summary>Morphed with empty hands: attack presses become the creature's attacks instead of a punch.</summary>
+    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.StartAttack))]
+    internal static class MorphAttackPatch
+    {
+        private static bool Prefix(Humanoid __instance, bool secondaryAttack, ref bool __result)
+        {
+            if (!Morph.Claims(__instance)) return true;
+            Morph.OnAttack(secondaryAttack);
+            __result = false;
+            return false;
+        }
+    }
+
     [HarmonyPatch(typeof(Player), nameof(Player.GetBodyArmor))]
     internal static class BodyArmorPatch
     {
