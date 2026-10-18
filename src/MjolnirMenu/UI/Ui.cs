@@ -15,10 +15,29 @@ namespace MjolnirMenu.UI
             => GUILayout.Label(L.T(text).ToUpperInvariant(), Styles.Header);
 
         public static void Hint(string text, params GUILayoutOption[] opts)
-            => GUILayout.Label(L.T(text), Styles.Hint, opts);
+        {
+            string t = L.T(text);
+            GUILayout.Label(t, Styles.Hint, t == text ? opts : Fit(Styles.Hint, t, opts));
+        }
 
         public static void Label(string text, params GUILayoutOption[] opts)
-            => GUILayout.Label(L.T(text), Styles.Label, opts);
+        {
+            string t = L.T(text);
+            GUILayout.Label(t, Styles.Label, t == text ? opts : Fit(Styles.Label, t, opts));
+        }
+
+        /// <summary>
+        /// Fixed widths at call sites were sized for English; append MinWidth(text width) so a longer
+        /// translation widens the control instead of being cut (a later MinWidth overrides Width's max).
+        /// </summary>
+        private static GUILayoutOption[] Fit(GUIStyle style, string text, GUILayoutOption[] opts)
+        {
+            if (opts.Length == 0) return opts;
+            var all = new GUILayoutOption[opts.Length + 1];
+            opts.CopyTo(all, 0);
+            all[opts.Length] = GUILayout.MinWidth(style.CalcSize(new GUIContent(text)).x);
+            return all;
+        }
 
         public static string Rich(string label, string? hint)
             => string.IsNullOrEmpty(hint) ? label : $"{label}\n<size=11><color={Styles.HintHex}>{hint}</color></size>";
@@ -29,7 +48,8 @@ namespace MjolnirMenu.UI
         /// </summary>
         public static bool Toggle(ref bool value, string label, string? hint = null, params GUILayoutOption[] opts)
         {
-            bool clicked = GUILayout.Button(Rich(L.T(label), hint == null ? null : L.T(hint)), Styles.ToggleRow, opts);
+            string text = Rich(L.T(label), hint == null ? null : L.T(hint));
+            bool clicked = GUILayout.Button(text, Styles.ToggleRow, hint == null ? Fit(Styles.ToggleRow, text, opts) : opts);
             var r = GUILayoutUtility.GetLastRect();
             if (Event.current.type == EventType.Repaint)
             {
@@ -83,10 +103,14 @@ namespace MjolnirMenu.UI
         }
 
         public static bool Button(string text, params GUILayoutOption[] opts)
-            => GUILayout.Button(L.T(text), Styles.Button, opts);
+            => Button(text, false, opts);
 
         public static bool Button(string text, bool active, params GUILayoutOption[] opts)
-            => GUILayout.Button(L.T(text), active ? Styles.ButtonActive : Styles.Button, opts);
+        {
+            var style = active ? Styles.ButtonActive : Styles.Button;
+            string t = L.T(text);
+            return GUILayout.Button(t, style, Fit(style, t, opts));
+        }
 
         public static string TextField(string value, params GUILayoutOption[] opts)
             => GUILayout.TextField(value, Styles.TextField, opts);

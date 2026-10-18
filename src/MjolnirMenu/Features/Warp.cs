@@ -78,11 +78,11 @@ namespace MjolnirMenu.Features
                 Hotkeys.Notify("No death point yet");
         }
 
-        /// <summary>Boss name + the game's location prefab for its altar.</summary>
+        /// <summary>Boss name + the game's location prefab for its altar (names from valheim_Data/StreamingAssets/SoftRef/manifest).</summary>
         public static readonly string[,] BossAltars =
         {
-            { "Eikthyr", "Eikthymir" }, { "The Elder", "GDKing" }, { "Bonemass", "Bonemass" }, { "Moder", "Dragonqueen" },
-            { "Yagluth", "GoblinKing" }, { "The Queen", "Mistlands_DvergrBossEntrance1" }, { "Fader", "FaderLocation" },
+            { "Eikthyr", "Eikthyrnir" }, { "The Elder", "GDKing" }, { "Bonemass", "Bonemass" }, { "Moder", "Dragonqueen" },
+            { "Yagluth", "GoblinKing" }, { "The Queen", "Mistlands_DvergrBossEntrance1" }, { "Fader", "FaderLocation" }, { "Kall Fimbulbringer", "FimbulLocation01" },
         };
 
         /// <summary>
@@ -100,20 +100,6 @@ namespace MjolnirMenu.Features
                 To(pos + Vector3.up * 2f);
             else
                 Hotkeys.Notify(L.F("{0}: altar not found (clients only see altars revealed by a Vegvisir)", L.T(label)));
-        }
-
-        public static void RevealMap()
-        {
-            if (Minimap.instance == null) return;
-            Minimap.instance.ExploreAll();
-            Hotkeys.Notify("Map revealed");
-        }
-
-        public static void ResetFog()
-        {
-            if (Minimap.instance == null) return;
-            Minimap.instance.Reset();
-            Hotkeys.Notify("Map fog restored");
         }
 
         public static void ToSpawnPoint()

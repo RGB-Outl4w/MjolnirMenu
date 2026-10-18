@@ -534,10 +534,11 @@ namespace MjolnirMenu.UI
             }
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(L.T("Items"), !_showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = false;
-            if (GUILayout.Button(L.T("Creatures"), _showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.Width(90))) _showCreatures = true;
+            if (GUILayout.Button(L.T("Items"), !_showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.MinWidth(90))) _showCreatures = false;
+            if (GUILayout.Button(L.T("Creatures"), _showCreatures ? Styles.TabActive : Styles.Tab, GUILayout.MinWidth(90))) _showCreatures = true;
             GUILayout.Space(10);
             if (!_showCreatures) Ui.Toggle(ref State.SpawnerShowAll, "Show all", null, GUILayout.Width(110));
+            else if (Morph.Active && Ui.Button(L.F("Morph back ({0})", Morph.Current), true)) Morph.Back();
             GUILayout.FlexibleSpace();
             Ui.Hint("Search", GUILayout.Width(44));
             GUI.SetNextControlName("mjolnir_search");
@@ -563,6 +564,7 @@ namespace MjolnirMenu.UI
                 _countText = Ui.TextField(_countText, GUILayout.Width(44));
                 GUILayout.Space(8);
                 Ui.Toggle(ref _tamed, "Tamed", null, GUILayout.Width(90));
+                Ui.Hint("Any level; tamed works on bosses too");
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -580,6 +582,7 @@ namespace MjolnirMenu.UI
                 if (!e.IsCreature && !e.InventorySafe) rowName += $"  <color={Styles.HintHex}>{L.T("(not an inventory item)")}</color>";
                 GUILayout.Label(rowName, Styles.ListRow, GUILayout.Width(260));
                 Ui.Hint(e.PrefabName, GUILayout.ExpandWidth(true));
+                if (_showCreatures && Ui.Button("Morph", Morph.Current == e.DisplayName, GUILayout.Width(70))) Morph.To(e.PrefabName, e.DisplayName);
                 if (Ui.Button(_showCreatures ? "Spawn" : "Give", GUILayout.Width(60)))
                 {
                     if (_showCreatures)
@@ -632,11 +635,11 @@ namespace MjolnirMenu.UI
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
-            if (Ui.Button("Reveal map")) Warp.RevealMap();
+            if (Ui.Button("Reveal map")) MapFog.Reveal();
             bool confirm = Time.unscaledTime < _fogConfirmUntil;
             if (Ui.Button(confirm ? "Click again: erase exploration" : "Restore fog", confirm))
             {
-                if (confirm) { Warp.ResetFog(); _fogConfirmUntil = 0f; }
+                if (confirm) { MapFog.Restore(); _fogConfirmUntil = 0f; }
                 else _fogConfirmUntil = Time.unscaledTime + 3f;
             }
             GUILayout.FlexibleSpace();

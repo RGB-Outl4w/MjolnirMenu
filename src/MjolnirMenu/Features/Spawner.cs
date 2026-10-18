@@ -136,7 +136,7 @@ namespace MjolnirMenu.Features
             }
 
             count = Mathf.Clamp(count, 1, 50);
-            level = Mathf.Clamp(level, 1, 10);
+            level = Mathf.Max(1, level); // vanilla tops out at 10; health and damage just keep scaling
             for (int i = 0; i < count; i++)
             {
                 var offset = UnityEngine.Random.insideUnitCircle * (1.5f + count * 0.2f);
@@ -148,6 +148,7 @@ namespace MjolnirMenu.Features
                 {
                     var t = go.GetComponent<Tameable>();
                     if (t != null) t.Tame();
+                    else ch?.SetTamed(true); // bosses and other untameables: tamed flag alone makes them friendly
                 }
             }
             Hotkeys.Notify(L.F("Spawned {0}x {1} (lvl {2})", count, prefabName, level));

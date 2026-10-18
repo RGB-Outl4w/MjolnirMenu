@@ -236,6 +236,12 @@ namespace MjolnirMenu.Core
             ["Unknown prefab '{0}'"] = "Неизвестный префаб «{0}»",
             ["Spawned {0}x {1} (lvl {2})"] = "Создано {0}× {1} (ур. {2})",
             ["Killed {0}"] = "Убито: {0}",
+            ["Any level; tamed works on bosses too"] = "Любой уровень; приручение работает и на боссах",
+            ["Morph"] = "Облик",
+            ["Morph back ({0})"] = "Вернуть облик ({0})",
+            ["Morphed into {0}"] = "Вы превратились: {0}",
+            ["Can't morph into {0}"] = "Нельзя превратиться: {0}",
+            ["Back to your own shape"] = "Вы вернули свой облик",
 
             // Teleport
             ["Map"] = "Карта",
@@ -255,6 +261,7 @@ namespace MjolnirMenu.Core
             ["Restore fog"] = "Вернуть туман",
             ["Click again: erase exploration"] = "Ещё раз: стереть исследование",
             ["Map fog restored"] = "Туман на карте возвращён",
+            ["Map fog restored (no snapshot from Reveal — everything is fogged)"] = "Туман возвращён (нет снимка от «Открыть карту» — скрыто всё)",
             ["Boss altars"] = "Алтари боссов",
             ["Eikthyr"] = "Эйктюр",
             ["The Elder"] = "Древний",
@@ -263,6 +270,7 @@ namespace MjolnirMenu.Core
             ["Yagluth"] = "Яглут",
             ["The Queen"] = "Королева",
             ["Fader"] = "Фейдер",
+            ["Kall Fimbulbringer"] = "Калль Фимбульбрингер",
             ["{0}: altar not found (clients only see altars revealed by a Vegvisir)"] = "{0}: алтарь не найден (клиент видит только алтари, открытые Вегвизиром)",
             ["Players"] = "Игроки",
             ["No other players."] = "Других игроков нет.",

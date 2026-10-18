@@ -139,6 +139,7 @@ namespace MjolnirMenu.Core
             MapClickTeleport = false;
             EspPlayers = EspCreatures = EspResources = EspLines = false;
 
+            Morph.Back(false);
             PlayerCheats.ApplyAll();
             WorldCheats.ApplyAll();
         }

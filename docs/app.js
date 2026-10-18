@@ -133,7 +133,7 @@
       intro: "Every item and creature the game knows, searchable. Items are filtered to real inventory items; Show all lifts the filter.",
       groups: [
         { title: "Items", list: [["Wood", "Wood"], ["Black metal sword", "SwordBlackmetal"], ["Mead: healing", "MeadHealthMedium"], ["Fenris hood", "HelmetFenring"]], chips: ["Stack", "Quality", "Give"] },
-        { title: "Creatures", list: [["Greydwarf", "Greydwarf"], ["Troll", "Troll"], ["★ Eikthyr", "Eikthyr"], ["Lox", "Lox"]], chips: ["Level", "Count", "Tamed", "Spawn"] },
+        { title: "Creatures", list: [["Greydwarf", "Greydwarf"], ["Troll", "Troll"], ["★ Eikthyr", "Eikthyr"], ["Lox", "Lox"]], chips: ["Level (any)", "Count", "Tamed (bosses too)", "Morph", "Spawn", "Morph back"] },
         { title: "Kill nearby", items: [["Radius", "5–200 m, optionally including tamed", null, 30]], chips: ["Kill"] }
       ]
     },
@@ -147,7 +147,7 @@
           ["Portals accept any item", "Ore, eggs and other non-teleportable items go through", true],
           ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
         ], chips: ["Start temple", "Bed / spawn point", "Death point", "Reveal map", "Restore fog"] },
-        { title: "Boss altars", chips: ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader"] },
+        { title: "Boss altars", chips: ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader", "Kall Fimbulbringer"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }
       ]
