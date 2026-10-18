@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using BepInEx;
 using MjolnirMenu.Core;
@@ -17,7 +18,17 @@ namespace MjolnirMenu.Features
     {
         private static BitArray? _own, _others;
         private static string _key = "";
+        private static readonly List<Minimap.PinData> _poiPins = new List<Minimap.PinData>();
 
+        /// <summary>Location prefab prefix → map label. Boss altars come from Warp.BossAltars.</summary>
+        private static readonly string[,] Pois =
+        {
+            { "Vendor_BlackForest", "Trader" }, { "Hildir_camp", "Hildir" }, { "Crypt", "Burial chamber" },
+            { "SunkenCrypt", "Sunken crypt" }, { "TrollCave", "Troll cave" }, { "MountainCave", "Frost cave" },
+            { "Mistlands_DvergrTownEntrance", "Infested mine" }, { "CharredFortress", "Fortress" },
+            { "Hildir_crypt", "Hildir's crypt" }, { "Hildir_cave", "Hildir's cave" }, { "Hildir_plainsfortress", "Hildir's tower" },
+            { "GoblinCamp", "Fuling village" }, { "WoodVillage", "Draugr village" }, { "NorthVillage", "Village" },
+        };
         private static string Dir => Path.Combine(Paths.ConfigPath, "MjolnirMenu.fog");
         private static string FileFor(string key) => Path.Combine(Dir, key + ".bin");
 
@@ -40,7 +51,8 @@ namespace MjolnirMenu.Features
             Save();
             _key = key;
             _own = _others = null;
-            if (key.Length > 0) Load();
+            _poiPins.Clear();
+            if (key.Length > 0) { Load(); if (File.Exists(PoiFlag)) AddPoiPins(); }
         }
 
         public static void Reveal()
@@ -57,10 +69,68 @@ namespace MjolnirMenu.Features
             Hotkeys.Notify("Map revealed");
         }
 
+        private static string PoiFlag => FileFor(_key) + ".pois";
+
+        /// <summary>
+        /// Pins every dungeon, trader, village and boss altar in the world. Host / single-player only: clients
+        /// don't get the location list. Pins aren't saved with the profile; the flag file re-adds them next session,
+        /// and Restore fog removes them while keeping pins you placed or discovered yourself.
+        /// </summary>
+        public static void RevealPois()
+        {
+            var zs = ZoneSystem.instance;
+            if (Minimap.instance == null || zs == null) return;
+            if (ZNet.instance == null || !ZNet.instance.IsServer() || zs.m_locationInstances.Count == 0)
+            {
+                Hotkeys.Notify("Only the host / single-player knows where every location is");
+                return;
+            }
+            int n = AddPoiPins();
+            try { File.WriteAllText(PoiFlag, "1"); } catch (Exception e) { Plugin.Log.LogWarning($"POI flag write failed: {e.Message}"); }
+            Hotkeys.Notify(L.F("Pinned {0} places", n));
+        }
+
+        private static int AddPoiPins()
+        {
+            var mm = Minimap.instance;
+            var zs = ZoneSystem.instance;
+            if (mm == null || zs == null || _poiPins.Count > 0) return _poiPins.Count;
+            foreach (var li in zs.m_locationInstances.Values)
+            {
+                string name = li.m_location?.m_prefabName ?? "";
+                string? label = null;
+                var type = Minimap.PinType.Icon3;
+                for (int i = 0; i < Warp.BossAltars.GetLength(0) && label == null; i++)
+                    if (name == Warp.BossAltars[i, 1]) { label = Warp.BossAltars[i, 0]; type = Minimap.PinType.Boss; }
+                for (int i = 0; i < Pois.GetLength(0) && label == null; i++)
+                    if (name.StartsWith(Pois[i, 0])) label = Pois[i, 1];
+                if (label == null || HavePin(mm, li.m_position, type)) continue;
+                _poiPins.Add(mm.AddPin(li.m_position, type, L.T(label), false, false, 0L, default));
+            }
+            return _poiPins.Count;
+        }
+
+        /// <summary>A pin of this kind already there (Vegvisir, your own) wins: we don't stack ours on it.</summary>
+        private static bool HavePin(Minimap mm, Vector3 pos, Minimap.PinType type)
+        {
+            foreach (var p in mm.m_pins)
+                if (p.m_type == type && Vector3.Distance(p.m_pos, pos) < 30f) return true;
+            return false;
+        }
+
+        private static void RemovePoiPins()
+        {
+            var mm = Minimap.instance;
+            if (mm != null) foreach (var p in _poiPins) mm.RemovePin(p);
+            _poiPins.Clear();
+            try { if (_key.Length > 0) File.Delete(PoiFlag); } catch (Exception e) { Plugin.Log.LogWarning($"POI flag delete failed: {e.Message}"); }
+        }
+
         public static void Restore()
         {
             var mm = Minimap.instance;
             if (mm == null) return;
+            RemovePoiPins();
             mm.Reset();
             if (_own == null || _others == null || _own.Length != mm.m_explored.Length)
             {

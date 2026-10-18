@@ -637,6 +637,7 @@ namespace MjolnirMenu.UI
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             if (Ui.Button("Reveal map")) MapFog.Reveal();
+            if (Ui.Button("Reveal POIs")) MapFog.RevealPois();
             bool confirm = Time.unscaledTime < _fogConfirmUntil;
             if (Ui.Button(confirm ? "Click again: erase exploration" : "Restore fog", confirm))
             {

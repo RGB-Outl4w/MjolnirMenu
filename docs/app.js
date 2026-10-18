@@ -146,7 +146,7 @@
           ["Instant menu teleports", "No fade, no vortex wait", true],
           ["Portals accept any item", "Ore, eggs and other non-teleportable items go through", true],
           ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
-        ], chips: ["Start temple", "Bed / spawn point", "Death point", "Reveal map", "Restore fog"] },
+        ], chips: ["Start temple", "Bed / spawn point", "Death point", "Reveal map", "Reveal POIs", "Restore fog"] },
         { title: "Boss altars", chips: ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader", "Kall Fimbulbringer"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }

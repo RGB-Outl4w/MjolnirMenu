@@ -179,6 +179,16 @@ namespace MjolnirMenu.Patches
         }
     }
 
+    /// <summary>Morphed creature turns with the camera like a player does, instead of only toward where it walks.</summary>
+    [HarmonyPatch(typeof(Character), nameof(Character.AlwaysRotateCamera))]
+    internal static class MorphRotatePatch
+    {
+        private static void Postfix(Character __instance, ref bool __result)
+        {
+            if (!__result && ReferenceEquals(__instance, Morph.Mob)) __result = true;
+        }
+    }
+
     /// <summary>Morphed: the camera orbits the creature, not the player hidden under the ground.</summary>
     [HarmonyPatch(typeof(GameCamera), "GetCameraPosition")]
     internal static class MorphCameraPatch

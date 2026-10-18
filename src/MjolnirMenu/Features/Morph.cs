@@ -24,7 +24,7 @@ namespace MjolnirMenu.Features
         private static BaseAI? _ai;
         private static Player? _player;
         private static GameObject? _seat;
-        private static bool _canTakeOff, _alwaysFlies;
+        private static bool _canTakeOff, _canLand;
         private static float _heightRatio = 1f;
         private static float _nextCycle, _abilityRetryUntil;
         private static Vector3 _lastMobPos;
@@ -52,10 +52,12 @@ namespace MjolnirMenu.Features
             var mob = go.GetComponent<Character>();
             if (level > 1) mob.SetLevel(level);
             _ai = go.GetComponent<BaseAI>();
+            // Bosses and some monsters spawn asleep and only the AI wakes them; do it before switching the AI off.
+            if (_ai is MonsterAI monster && monster.IsSleeping()) monster.Wakeup();
             if (_ai != null) _ai.enabled = false; // unregisters its update; the creature only moves when we tell it to
-            var monster = _ai as MonsterAI;
-            _canTakeOff = monster != null && monster.m_randomFly;
-            _alwaysFlies = mob.m_flying && !_canTakeOff;
+            // Character.TakeOff / Land fire these animator triggers: a creature without them can't change state.
+            _canTakeOff = HasParam(mob.m_animator, "fly_takeoff");
+            _canLand = HasParam(mob.m_animator, "fly_land");
 
             if (!State.MorphSpoof)
             {
@@ -120,6 +122,13 @@ namespace MjolnirMenu.Features
             if (notify && was) Hotkeys.Notify("Back to your own shape");
         }
 
+        private static bool HasParam(Animator? a, string name)
+        {
+            if (a == null) return false;
+            foreach (var p in a.parameters) if (p.name == name) return true;
+            return false;
+        }
+
         private static Vector3 Flat(Vector3 v)
         {
             v.y = 0f;
@@ -177,22 +186,25 @@ namespace MjolnirMenu.Features
             var yaw = Quaternion.LookRotation(Flat(camFwd));
             var dir = yaw * new Vector3(movedir.x, 0f, movedir.z);
 
+            bool climb = jump || ZInput.GetButton("Jump");
+            bool sink = crouch || ZInput.GetButton("Crouch");
             if (mob.IsFlying())
             {
                 if (movedir.z != 0f) dir = (camFwd * movedir.z + yaw * Vector3.right * movedir.x).normalized * Mathf.Min(1f, movedir.magnitude);
-                if (jump || ZInput.GetButton("Jump")) dir.y += 1f;
-                if (crouch) dir.y -= 1f;
-                if (crouch && _canTakeOff && Altitude(mob) < 3f) mob.Land();
+                if (climb) dir.y += 1f;
+                if (sink) dir.y -= 1f;
+                if (sink && _canLand && Altitude(mob) < 8f) mob.Land();
             }
             else if (jump)
             {
-                if (_canTakeOff || _alwaysFlies) mob.TakeOff();
+                if (_canTakeOff) mob.TakeOff();
                 else mob.Jump(false);
             }
 
             mob.SetMoveDir(Vector3.ClampMagnitude(dir, 1f));
             mob.SetRun(run);
-            if (dir.sqrMagnitude > 0.01f) mob.SetLookDir(Flat(dir), 0f);
+            // Look where the camera looks: aim (GetAimDir = look dir) and head; body follows via AlwaysRotateCamera.
+            mob.SetLookDir(camFwd, 0f);
 
             if (secondary && Abilities.Count > 0 && Time.time >= _nextCycle)
             {
@@ -203,7 +215,6 @@ namespace MjolnirMenu.Features
             {
                 var a = Abilities[Mathf.Clamp(Selected, 0, Abilities.Count - 1)];
                 if (!ReferenceEquals(h.GetCurrentWeapon(), a.Item)) h.EquipItem(a.Item, false);
-                h.SetLookDir(Flat(camFwd), 0f);
                 h.StartAttack(null, a.Secondary);
             }
         }
@@ -268,7 +279,7 @@ namespace MjolnirMenu.Features
             GUILayout.Label(L.F("Morph: {0}", Current), Styles.Header);
             if (_mob != null) GUILayout.Label(L.F("Health {0:0} / {1:0}", _mob.GetHealth(), _mob.GetMaxHealth()), Styles.Hint);
             GUILayout.Label(L.T(Abilities.Count == 0 ? "No attacks — movement only" : "Attack: use selected · Secondary attack: next"), Styles.Hint);
-            if (_mob != null && (_canTakeOff || _alwaysFlies)) GUILayout.Label(L.T("Jump: take off / climb · Crouch: descend / land"), Styles.Hint);
+            if (_mob != null && (_canTakeOff || _canLand || _mob.IsFlying())) GUILayout.Label(L.T("Jump: take off / climb · Crouch: descend / land"), Styles.Hint);
             for (int i = 0; i < Abilities.Count; i++)
                 if (GUILayout.Button(Abilities[i].Label, i == Selected ? Styles.ButtonActive : Styles.Button)) Selected = i;
             GUILayout.Space(4);
