@@ -1,6 +1,7 @@
 using HarmonyLib;
 using MjolnirMenu.Core;
 using MjolnirMenu.Features;
+using UnityEngine;
 
 namespace MjolnirMenu.Patches
 {
@@ -166,16 +167,25 @@ namespace MjolnirMenu.Patches
         }
     }
 
-    /// <summary>Morphed with empty hands: attack presses become the creature's attacks instead of a punch.</summary>
-    [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.StartAttack))]
-    internal static class MorphAttackPatch
+    /// <summary>Morphed: your movement and attack input drive the creature instead of your (hidden) player.</summary>
+    [HarmonyPatch(typeof(Player), nameof(Player.SetControls))]
+    internal static class MorphControlPatch
     {
-        private static bool Prefix(Humanoid __instance, bool secondaryAttack, ref bool __result)
+        private static bool Prefix(Player __instance, Vector3 movedir, bool attack, bool attackHold, bool secondaryAttack, bool jump, bool crouch, bool run)
         {
-            if (!Morph.Claims(__instance)) return true;
-            Morph.OnAttack(secondaryAttack);
-            __result = false;
+            if (!Morph.Active || !ReferenceEquals(__instance, Player.m_localPlayer)) return true;
+            Morph.Control(movedir, attack, attackHold, secondaryAttack, jump, crouch, run);
             return false;
+        }
+    }
+
+    /// <summary>Morphed: the camera orbits the creature, not the player hidden under the ground.</summary>
+    [HarmonyPatch(typeof(GameCamera), "GetCameraPosition")]
+    internal static class MorphCameraPatch
+    {
+        private static void Postfix(GameCamera __instance, ref Vector3 pos, Quaternion rot)
+        {
+            if (Morph.Active) Morph.Camera(__instance, ref pos, rot);
         }
     }
 

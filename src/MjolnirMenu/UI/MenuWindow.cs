@@ -564,7 +564,8 @@ namespace MjolnirMenu.UI
                 _countText = Ui.TextField(_countText, GUILayout.Width(44));
                 GUILayout.Space(8);
                 Ui.Toggle(ref _tamed, "Tamed", null, GUILayout.Width(90));
-                Ui.Hint("Any level; tamed works on bosses too");
+                Ui.Toggle(ref State.MorphSpoof, "Spoof morph", "Others see a real wild creature: its own name, no trace of you", GUILayout.Width(150));
+                Ui.Hint("Any level; tamed works on bosses too. Morph uses Level too");
             }
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
@@ -582,7 +583,7 @@ namespace MjolnirMenu.UI
                 if (!e.IsCreature && !e.InventorySafe) rowName += $"  <color={Styles.HintHex}>{L.T("(not an inventory item)")}</color>";
                 GUILayout.Label(rowName, Styles.ListRow, GUILayout.Width(260));
                 Ui.Hint(e.PrefabName, GUILayout.ExpandWidth(true));
-                if (_showCreatures && Ui.Button("Morph", Morph.Current == e.DisplayName, GUILayout.Width(70))) Morph.To(e.PrefabName, e.DisplayName);
+                if (_showCreatures && Ui.Button("Morph", Morph.Current == e.DisplayName, GUILayout.Width(70))) Morph.To(e.PrefabName, e.DisplayName, ParseInt(_levelText, 1));
                 if (Ui.Button(_showCreatures ? "Spawn" : "Give", GUILayout.Width(60)))
                 {
                     if (_showCreatures)

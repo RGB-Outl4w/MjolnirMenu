@@ -1,5 +1,6 @@
 using HarmonyLib;
 using MjolnirMenu.Core;
+using MjolnirMenu.Features;
 using UnityEngine;
 
 namespace MjolnirMenu.Patches
@@ -20,7 +21,7 @@ namespace MjolnirMenu.Patches
 
             if (ReferenceEquals(__instance, local))
             {
-                if (State.GodMode) return false;
+                if (State.GodMode || Morph.Active) return false;
                 if (State.NoFallDamage && hit.m_hitType == HitData.HitType.Fall) return false;
                 return true;
             }

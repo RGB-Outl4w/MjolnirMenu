@@ -101,6 +101,7 @@ namespace MjolnirMenu.Core
         // Misc
         public static bool HideCheatTags = true;
         public static bool SpawnerShowAll;
+        public static bool MorphSpoof;
 
         // ESP
         public static bool EspPlayers;

@@ -236,7 +236,11 @@ namespace MjolnirMenu.Core
             ["Unknown prefab '{0}'"] = "Неизвестный префаб «{0}»",
             ["Spawned {0}x {1} (lvl {2})"] = "Создано {0}× {1} (ур. {2})",
             ["Killed {0}"] = "Убито: {0}",
-            ["Any level; tamed works on bosses too"] = "Любой уровень; приручение работает и на боссах",
+            ["Any level; tamed works on bosses too. Morph uses Level too"] = "Любой уровень; приручение работает и на боссах. Облик тоже берёт уровень",
+            ["Spoof morph"] = "Маскировка",
+            ["Others see a real wild creature: its own name, no trace of you"] = "Другие видят настоящее дикое существо: своё имя, никаких следов вас",
+            ["Health {0:0} / {1:0}"] = "Здоровье {0:0} / {1:0}",
+            ["Jump: take off / climb · Crouch: descend / land"] = "Прыжок: взлёт / вверх · Присед: вниз / посадка",
             ["Morph"] = "Облик",
             ["Morph back ({0})"] = "Вернуть облик ({0})",
             ["Morphed into {0}"] = "Вы превратились: {0}",
@@ -245,7 +249,6 @@ namespace MjolnirMenu.Core
             ["Morph: {0}"] = "Облик: {0}",
             ["No attacks — movement only"] = "Атак нет — только передвижение",
             ["Attack: use selected · Secondary attack: next"] = "Атака: выбранная способность · Доп. атака: следующая",
-            ["Put your weapons away to use these"] = "Уберите оружие, чтобы использовать способности",
 
             // Teleport
             ["Map"] = "Карта",
