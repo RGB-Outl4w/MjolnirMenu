@@ -15,9 +15,11 @@
           ["Infinite eitr", "Magic pool never drains"],
           ["No fall damage", ""],
           ["Infinite carry weight", "Max weight → 100 000"],
+          ["No hunger", "Eaten food never runs out; its health and stamina stay full", true],
+          ["No knockback / stagger", "Hits, broken blocks and parries never push or stun you"],
           ["Multi-equip armor", "Stack helmets, chests, legs, capes; extras add armor + effects"],
           ["Extra inventory rows  +2", "Up to 9 rows via the game's own resize; survives relog", false, 40]
-        ]},
+        ], chips: ["Heal + refill", "Rested now"] },
         { title: "Movement", items: [
           ["Fly", "Vanilla debug fly, no console needed"],
           ["Speed hack", "×1–10 on run and jog", true, 35],
@@ -74,8 +76,11 @@
           ["No placement delay", ""],
           ["Free crafting", "No materials"],
           ["Instant crafting", ""],
-          ["Big stations", "×1–50 capacity for smelters, kilns, fires, beehives, sap collectors", true, 40]
-        ]},
+          ["Big stations", "×1–50 capacity for smelters, kilns, fires, beehives, sap collectors", true, 40],
+          ["Instant stations", "Smelters, kilns, windmills: 1 item/s. Fermenters 2 s. Cooking 1 s, never burns", true],
+          ["Instant growth", "Crops and saplings grow the moment their spot is valid"],
+          ["Repair radius  50 m", "", null, 22]
+        ], chips: ["Repair all nearby"] },
         { title: "Time of day", items: [
           ["Lock time", "Slider plus Dawn / Noon / Dusk / Night", true, 50]
         ], chips: ["Dawn", "Noon", "Dusk", "Night"] },
@@ -141,7 +146,8 @@
           ["Instant menu teleports", "No fade, no vortex wait", true],
           ["Portals accept any item", "Ore, eggs and other non-teleportable items go through", true],
           ["Fast portals", "×1–40 on the vortex timer for real portals", true, 25]
-        ], chips: ["Start temple", "Bed / spawn point"] },
+        ], chips: ["Start temple", "Bed / spawn point", "Death point", "Reveal map", "Restore fog"] },
+        { title: "Boss altars", chips: ["Eikthyr", "The Elder", "Bonemass", "Moder", "Yagluth", "The Queen", "Fader"] },
         { title: "Saved positions", list: [["Base", "-120 / 340"], ["Silver vein", "88 / -1020"], ["Swamp crypt", "412 / 96"]], chips: ["Save here", "Go", "×"] },
         { title: "Players", list: [["Other players who share their position", "Go"]] }
       ]
@@ -165,8 +171,15 @@
     },
     {
       name: "Settings",
-      intro: "Presets, cheat tags and defaults.",
+      intro: "Hotkeys, language, window look, presets, cheat tags and defaults.",
       groups: [
+        { title: "Hotkeys", list: [["Open / close menu", "Insert"], ["God mode", "F6"], ["Fly", "F7"], ["Ghost mode", "not set"], ["Speed hack", "not set"], ["Infinite stamina", "not set"], ["ESP", "not set"], ["Map click teleport", "not set"], ["Panic reset", "End"]], chips: ["Click a key, press the new one", "×", "Default"] },
+        { title: "Language", chips: ["Auto (game language)", "English", "Русский"] },
+        { title: "Window", items: [
+          ["Scale  100%", "75–150% in 5% steps"],
+          ["Opacity  100%", "", null, 100],
+          ["Show watermark", "Small MjolnirMenu tag in the top-left corner", true]
+        ] },
         { title: "Presets", list: [["speedrun", "Load · Auto-load: ON · ×"], ["building", "Load · Auto-load · ×"], ["chill", "Load · Auto-load · ×"]], chips: ["Save current"] },
         { title: "Cheat tags", items: [
           ["Never tag loot / crafts as \"obtained using cheats\"", "Reports the game's own bypass key", true]

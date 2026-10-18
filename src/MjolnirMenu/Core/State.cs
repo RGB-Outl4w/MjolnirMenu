@@ -21,6 +21,8 @@ namespace MjolnirMenu.Core
         public static bool SpeedHack;
         public static bool JumpHack;
         public static bool InfiniteCarryWeight;
+        public static bool NoHunger;
+        public static bool NoKnockback;
         public static int ExtraInventoryRows;   // 0 = vanilla 4 rows
         public static bool MultiEquip;
         public static float SpeedMultiplier = 2f;
@@ -83,6 +85,8 @@ namespace MjolnirMenu.Core
         public static bool FreeCraft;
         public static bool LockTimeOfDay;
         public static bool BigStations;
+        public static bool InstantStations;
+        public static bool InstantGrowth;
         public static float StationMultiplier = 20f;
         public static float TimeOfDay = 0.5f;
         public static string ForcedWeather = "";
@@ -116,7 +120,7 @@ namespace MjolnirMenu.Core
         public static void ResetAll()
         {
             GodMode = GhostMode = InfiniteStamina = InfiniteEitr = NoFallDamage = false;
-            Fly = SpeedHack = JumpHack = InfiniteCarryWeight = MultiEquip = false;
+            Fly = SpeedHack = JumpHack = InfiniteCarryWeight = MultiEquip = NoHunger = NoKnockback = false;
             ExtraInventoryRows = 0;
             ShipTailwind = ShipSpeedHack = ShipSteering = CartSpeedHack = CartNoClip = CartSticky = CartSnap = VehicleGod = false;
             SwimSpeedHack = WaterJump = WalkOnWater = SeabedWalk = UnderwaterCamera = SwimUseItems = false;
@@ -129,7 +133,7 @@ namespace MjolnirMenu.Core
             Features.Effects.Frozen.Clear();
             FreeBuild = NoPlaceDelay = InstantCraft = FreeCraft = false;
             LockTimeOfDay = false;
-            BigStations = false;
+            BigStations = InstantStations = InstantGrowth = false;
             PortalAnyItem = false;
             ForcedWeather = "";
             MapClickTeleport = false;

@@ -89,7 +89,7 @@ namespace MjolnirMenu.Features
             var prefab = ObjectDB.instance?.GetItemPrefab(prefabName);
             if (prefab == null)
             {
-                Hotkeys.Notify($"Unknown item '{prefabName}'");
+                Hotkeys.Notify(L.F("Unknown item '{0}'", prefabName));
                 return;
             }
 
@@ -131,7 +131,7 @@ namespace MjolnirMenu.Features
             var prefab = ZNetScene.instance?.GetPrefab(prefabName);
             if (prefab == null)
             {
-                Hotkeys.Notify($"Unknown prefab '{prefabName}'");
+                Hotkeys.Notify(L.F("Unknown prefab '{0}'", prefabName));
                 return;
             }
 
@@ -150,7 +150,7 @@ namespace MjolnirMenu.Features
                     if (t != null) t.Tame();
                 }
             }
-            Hotkeys.Notify($"Spawned {count}x {prefabName} (lvl {level})");
+            Hotkeys.Notify(L.F("Spawned {0}x {1} (lvl {2})", count, prefabName, level));
         }
 
         /// <summary>Kill every non-player character within <paramref name="radius"/> meters.</summary>
@@ -177,7 +177,7 @@ namespace MjolnirMenu.Features
                 c.Damage(hit);
                 killed++;
             }
-            Hotkeys.Notify($"Killed {killed}");
+            Hotkeys.Notify(L.F("Killed {0}", killed));
             return killed;
         }
     }

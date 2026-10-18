@@ -1,20 +1,24 @@
+using MjolnirMenu.Core;
 using UnityEngine;
 
 namespace MjolnirMenu.UI
 {
-    /// <summary>Layout widgets that look like the website: toggle rows with hints, gold sliders, chips.</summary>
+    /// <summary>
+    /// Layout widgets that look like the website: toggle rows with hints, gold sliders, chips.
+    /// Every text goes through L.T, so call sites pass plain English and get the menu language.
+    /// </summary>
     public static class Ui
     {
         public const float Indent = 28f;
 
         public static void Header(string text)
-            => GUILayout.Label(text.ToUpperInvariant(), Styles.Header);
+            => GUILayout.Label(L.T(text).ToUpperInvariant(), Styles.Header);
 
         public static void Hint(string text, params GUILayoutOption[] opts)
-            => GUILayout.Label(text, Styles.Hint, opts);
+            => GUILayout.Label(L.T(text), Styles.Hint, opts);
 
         public static void Label(string text, params GUILayoutOption[] opts)
-            => GUILayout.Label(text, Styles.Label, opts);
+            => GUILayout.Label(L.T(text), Styles.Label, opts);
 
         public static string Rich(string label, string? hint)
             => string.IsNullOrEmpty(hint) ? label : $"{label}\n<size=11><color={Styles.HintHex}>{hint}</color></size>";
@@ -25,7 +29,7 @@ namespace MjolnirMenu.UI
         /// </summary>
         public static bool Toggle(ref bool value, string label, string? hint = null, params GUILayoutOption[] opts)
         {
-            bool clicked = GUILayout.Button(Rich(label, hint), Styles.ToggleRow, opts);
+            bool clicked = GUILayout.Button(Rich(L.T(label), hint == null ? null : L.T(hint)), Styles.ToggleRow, opts);
             var r = GUILayoutUtility.GetLastRect();
             if (Event.current.type == EventType.Repaint)
             {
@@ -73,16 +77,16 @@ namespace MjolnirMenu.UI
         {
             GUILayout.BeginHorizontal();
             GUILayout.Space(Indent);
-            GUILayout.Label(caption, Styles.Hint);
+            GUILayout.Label(L.T(caption), Styles.Hint);
             GUILayout.EndHorizontal();
             return Slider(ref value, min, max, width);
         }
 
         public static bool Button(string text, params GUILayoutOption[] opts)
-            => GUILayout.Button(text, Styles.Button, opts);
+            => GUILayout.Button(L.T(text), Styles.Button, opts);
 
         public static bool Button(string text, bool active, params GUILayoutOption[] opts)
-            => GUILayout.Button(text, active ? Styles.ButtonActive : Styles.Button, opts);
+            => GUILayout.Button(L.T(text), active ? Styles.ButtonActive : Styles.Button, opts);
 
         public static string TextField(string value, params GUILayoutOption[] opts)
             => GUILayout.TextField(value, Styles.TextField, opts);

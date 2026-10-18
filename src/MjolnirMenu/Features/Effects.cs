@@ -59,7 +59,7 @@ namespace MjolnirMenu.Features
             var p = Player.m_localPlayer;
             if (p == null) return;
             p.SetGuardianPower(name);
-            Hotkeys.Notify(string.IsNullOrEmpty(name) ? "Power cleared" : $"Power: {name}");
+            Hotkeys.Notify(string.IsNullOrEmpty(name) ? "Power cleared" : L.F("Power: {0}", name));
         }
 
         public static void ActivatePower()

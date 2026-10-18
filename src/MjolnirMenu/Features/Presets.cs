@@ -76,7 +76,7 @@ namespace MjolnirMenu.Features
                     lines.Add($"{f.Name}={s}");
                 }
                 File.WriteAllLines(PathFor(name), lines);
-                Hotkeys.Notify($"Preset '{name}' saved");
+                Hotkeys.Notify(L.F("Preset '{0}' saved", name));
                 return true;
             }
             catch (Exception e)
@@ -115,7 +115,7 @@ namespace MjolnirMenu.Features
                 PlayerCheats.ApplyAll();
                 WorldCheats.ApplyAll();
                 MenuConfig.HideCheatTags.Value = State.HideCheatTags;
-                if (!quiet) Hotkeys.Notify($"Preset '{name}' loaded");
+                if (!quiet) Hotkeys.Notify(L.F("Preset '{0}' loaded", name));
                 return true;
             }
             catch (Exception e)

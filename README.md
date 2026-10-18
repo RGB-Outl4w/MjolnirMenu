@@ -36,7 +36,10 @@ Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 | Fly | Vanilla debug fly, no console required |
 | Speed / jump / crouch hacks | ×1–10 multipliers on run, jog, jump force and crouch speed |
 | Sit / stand animation speed | ×1–5 on the emote animator, including the stand-up transition |
+| No hunger | Eaten food never runs out (`Player.m_foods` timers pinned), so its health and stamina stay full |
+| No knockback / stagger | `Character.Stagger` and `ApplyPushback` skipped for you: hits, broken blocks and parries never push or stun |
 | Heal + refill | Instant full health, stamina and eitr |
+| Rested now | Rested buff as if you slept in a max-comfort base |
 
 **Water:** swim speed hack (×1–10) · jump while swimming · use items while swimming · walk on water · walk on the seabed · underwater camera (removes the camera's water clamp so it follows you when you dive).
 
@@ -51,10 +54,10 @@ Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 | Ranged | **Insta-focus** (bow fully drawn instantly), **insta-shot** (full-draw shot on press; semi-auto or full-auto), **insta-reload** (crossbows), **hitscan** (straight line to the reticle, no drop or spread) |
 
 ### World
-Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
+Free build (no piece cost) · no placement delay · free crafting · instant crafting · big stations (×1–50 capacity for smelters, kilns, fires, beehives, sap collectors) · instant stations (smelters / kilns / windmills 1 item per second, fermenters 2 s, cooking 1 s and never burns) · instant growth (crops and saplings) · *Repair all nearby* (10–200 m radius) · lock time of day (slider, dawn / noon / dusk / night) · force any weather the game defines.
 
 ### Vehicles
-* **Ship** — every ship cheat applies only while *you* hold the helm, and is restored the moment you let go. *Tailwind* ( the sail sees a private full-strength wind from where you look, full sail from any angle; the world's wind and waves are untouched) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
+* **Ship** — every ship cheat applies only while *you* hold the helm, and is restored the moment you let go. *Tailwind* (the sail sees a private full-strength wind from where you look, full sail from any angle; the world's wind and waves are untouched) · *Ship speed hack* (×1–20; extra sail thrust applied at the centre of mass so it can't flip the hull, paddles scaled directly) · *Responsive steering* (×1–10 rudder speed and turning force) · *Flip nearest ship upright* button.
 * **Cart** — *Cart speed hack* (cart mass → 1, no extra pull mass on the player, so it follows at full run speed) · *Cart no-clip* (`Rigidbody.excludeLayers` on every cart body: rolls through everything but `terrain` and `piece`) · *Sticky hitch* (unbreakable joint, never unhitches on its own) · *Hitch from anywhere* (cart swings into place behind you) · *Carts ride ships* (on by default: a loose cart on a deck is locked to it — kinematic, no hull contact, so it can't slow the ship; hitching releases it).
 * **Hull immunity** — `ImpactEffect.OnCollisionEnter` is skipped whenever a ship or cart is on either side, and ships take no wave-slam (`UpdateWaterForce`) or capsize damage.
 
@@ -69,7 +72,7 @@ Every skill as a slider with 0 / 50 / 100 shortcuts, plus *Max all*, *Reset all*
 Searchable catalog of every item and creature. Items are filtered to those that belong in an inventory (icon + item type); *Show all* lifts the filter. Give items with stack and quality; spawn creatures with level, count and *tamed*; kill everything within a radius.
 
 ### Teleport
-Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · portals accept any item · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed · named saved positions · teleport to other players who share their location.
+Instant menu teleports (no fade, no vortex) · fast portals (×1–40 on the vortex timer) · portals accept any item · <kbd>Ctrl</kbd> + left-click the map to teleport · start temple / bed / last death point · every boss altar (host / single-player; clients see altars revealed by a Vegvisir) · reveal the whole map or restore the fog (asks twice) · named saved positions · teleport to other players who share their location.
 
 ### ESP
 Labels for players, creatures / bosses (name, level, HP) and resources (pickables, ore, trees) with distance and optional tracer lines. Range and label cap are configurable.
@@ -77,7 +80,9 @@ Labels for players, creatures / bosses (name, level, HP) and resources (pickable
 ### Settings
 * **Presets** — save the whole menu state under a name, load it later, delete it, or mark one as *Auto-load* to have it applied the moment you enter a world.
 * **Cheat tags** — the game marks you as a cheater the first time you deal damage in god / ghost / fly mode and stamps every drop afterwards with *"obtained using cheats"*. MjolnirMenu reports the game's own `bypasscheatchecks` key instead (on by default) and can clear tags on items you already carry.
-* Hotkey overview, watermark toggle, persistent defaults for multipliers.
+* **Hotkeys** — rebind every key in the menu (click, press the new key; Ctrl / Shift / Alt combos work). Five extra quick-toggles ship unbound: ghost mode, speed hack, infinite stamina, ESP, map teleport.
+* **Language** — English or Russian (*Auto* follows the game's language).
+* **Window** — scale 75–150 %, opacity 40–100 %, remembers the last tab, watermark toggle, persistent defaults for multipliers.
 
 ### Credits
 Who made it and what it runs on.
@@ -92,7 +97,7 @@ Who made it and what it runs on.
    ```
 2. Launch Valheim once so BepInEx creates its folders, then quit.
 3. Drop `MjolnirMenu.dll` into `<Valheim>\BepInEx\plugins\MjolnirMenu\` — from a [release](https://github.com/RGB-Outl4w/MjolnirMenu/releases) or by [building from source](#building-from-source).
-4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.8.0]`.
+4. Start the game. `BepInEx\LogOutput.log` should contain `Loading [MjolnirMenu 0.9.0]`.
 
 ## Usage
 
@@ -113,7 +118,10 @@ The in-game window uses the same design as the [website](https://rgb-outl4w.gith
 
 | Section | Key | Default | Purpose |
 |---|---|---|---|
-| Hotkeys | `MenuToggle` `GodToggle` `FlyToggle` `PanicReset` | Insert / F6 / F7 / End | Key bindings |
+| Hotkeys | `MenuToggle` `GodToggle` `FlyToggle` `PanicReset` | Insert / F6 / F7 / End | Key bindings (also editable in the menu) |
+| Hotkeys | `GhostToggle` `SpeedToggle` `StaminaToggle` `EspToggle` `MapTeleportToggle` | unbound | Extra quick-toggles |
+| UI | `Language` | `Auto` | `Auto` / `English` / `Russian` |
+| UI | `Scale` / `Opacity` / `LastTab` | 1.0 / 1.0 / 0 | Window look, tab it reopens on |
 | General | `HideCheatTags` | `true` | Report `bypasscheatchecks` so loot is never tagged |
 | General | `AutoLoadPreset` | *(empty)* | Preset applied when you enter a world |
 | Player | `SpeedMultiplier` `JumpMultiplier` | 2.0 | Default multipliers |

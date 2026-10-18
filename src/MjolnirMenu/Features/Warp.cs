@@ -69,6 +69,53 @@ namespace MjolnirMenu.Features
                 To(new Vector3(0f, 32f, 0f));
         }
 
+        public static void ToDeathPoint()
+        {
+            var profile = Game.instance?.GetPlayerProfile();
+            if (profile != null && profile.HaveDeathPoint())
+                To(profile.GetDeathPoint() + Vector3.up * 1f);
+            else
+                Hotkeys.Notify("No death point yet");
+        }
+
+        /// <summary>Boss name + the game's location prefab for its altar.</summary>
+        public static readonly string[,] BossAltars =
+        {
+            { "Eikthyr", "Eikthymir" }, { "The Elder", "GDKing" }, { "Bonemass", "Bonemass" }, { "Moder", "Dragonqueen" },
+            { "Yagluth", "GoblinKing" }, { "The Queen", "Mistlands_DvergrBossEntrance1" }, { "Fader", "FaderLocation" },
+        };
+
+        /// <summary>
+        /// Host / single-player knows every placed location; a client only knows map icons (start temple,
+        /// altars revealed by a Vegvisir).
+        /// </summary>
+        public static void ToLocation(string label, string prefab)
+        {
+            var zs = ZoneSystem.instance;
+            var p = Player.m_localPlayer;
+            if (zs == null || p == null) return;
+            if (zs.FindClosestLocation(prefab, p.transform.position, out var li))
+                To(li.m_position + Vector3.up * 2f);
+            else if (zs.GetLocationIcon(prefab, out var pos))
+                To(pos + Vector3.up * 2f);
+            else
+                Hotkeys.Notify(L.F("{0}: altar not found (clients only see altars revealed by a Vegvisir)", L.T(label)));
+        }
+
+        public static void RevealMap()
+        {
+            if (Minimap.instance == null) return;
+            Minimap.instance.ExploreAll();
+            Hotkeys.Notify("Map revealed");
+        }
+
+        public static void ResetFog()
+        {
+            if (Minimap.instance == null) return;
+            Minimap.instance.Reset();
+            Hotkeys.Notify("Map fog restored");
+        }
+
         public static void ToSpawnPoint()
         {
             var profile = Game.instance?.GetPlayerProfile();

@@ -61,6 +61,7 @@ namespace MjolnirMenu.Features
             }
 
             UpdateStations();
+            UpdateFastStations();
 
             var env = EnvMan.instance;
             if (env != null)
@@ -132,6 +133,54 @@ namespace MjolnirMenu.Features
             if (!_origCapacity.TryGetValue(c, out float orig)) _origCapacity[c] = orig = field;
             float target = Mathf.Max(1f, orig * mul);
             if (!Mathf.Approximately(field, target)) field = target;
+        }
+
+        private static readonly Dictionary<object, float> _origFast = new Dictionary<object, float>();
+        private static readonly Dictionary<CookingStation, bool> _origOvercook = new Dictionary<CookingStation, bool>();
+        private static float _nextFastScan;
+        private static bool _fastApplied;
+
+        /// <summary>
+        /// Instant stations: smelters / kilns / windmills / spinning wheels make one product per second (the most
+        /// their 1 s accumulator allows without burning extra fuel), fermenters finish in 2 s, cooking stations
+        /// cook in 1 s and can't burn food while this is on. Same rescan + restore pattern as Big stations.
+        /// </summary>
+        private static void UpdateFastStations()
+        {
+            bool on = State.InstantStations;
+            if (!on && !_fastApplied) return;
+            if (on == _fastApplied && Time.unscaledTime < _nextFastScan) return;
+            _nextFastScan = Time.unscaledTime + 2f;
+
+            foreach (var s in Object.FindObjectsByType<Smelter>(FindObjectsSortMode.None))
+                Fast(s, ref s.m_secPerProduct, 1f, on);
+            foreach (var f in Object.FindObjectsByType<Fermenter>(FindObjectsSortMode.None))
+                Fast(f, ref f.m_fermentationDuration, 2f, on);
+            foreach (var c in Object.FindObjectsByType<CookingStation>(FindObjectsSortMode.None))
+            {
+                foreach (var conv in c.m_conversion) Fast(conv, ref conv.m_cookTime, 1f, on);
+                if (!_origOvercook.TryGetValue(c, out bool burn)) _origOvercook[c] = burn = c.m_canOvercookItems;
+                c.m_canOvercookItems = !on && burn;
+            }
+            if (!on) { _origFast.Clear(); _origOvercook.Clear(); }
+            _fastApplied = on;
+        }
+
+        private static void Fast(object key, ref float field, float cap, bool on)
+        {
+            if (!_origFast.TryGetValue(key, out float orig)) _origFast[key] = orig = field;
+            field = on ? Mathf.Min(orig, cap) : orig;
+        }
+
+        /// <summary>Repair every damaged building piece within radius (same RPC the hammer uses).</summary>
+        public static void RepairNearby(float radius)
+        {
+            var p = Player.m_localPlayer;
+            if (p == null) return;
+            int n = 0;
+            foreach (var w in Object.FindObjectsByType<WearNTear>(FindObjectsSortMode.None))
+                if (Vector3.Distance(w.transform.position, p.transform.position) <= radius && w.Repair()) n++;
+            Hotkeys.Notify(L.F("Repaired {0} piece(s)", n));
         }
 
         /// <summary>Names of every environment the game knows (Clear, Rain, ThunderStorm, ...).</summary>
