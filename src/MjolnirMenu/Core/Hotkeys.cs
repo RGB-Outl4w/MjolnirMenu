@@ -87,9 +87,15 @@ namespace MjolnirMenu.Core
         }
 
         /// <summary>Top-left game message. Plain English strings are translated; pre-formatted ones pass through.</summary>
+        /// <summary>Last notification, shown in the menu footer where the game's message HUD doesn't exist (main menu).</summary>
+        public static string LastMessage = "";
+        public static float LastMessageTime = -100f;
+
         public static void Notify(string msg)
         {
             msg = L.T(msg);
+            LastMessage = msg;
+            LastMessageTime = Time.unscaledTime;
             var p = Player.m_localPlayer;
             if (p != null)
                 p.Message(MessageHud.MessageType.TopLeft, $"[Mjolnir] {msg}");

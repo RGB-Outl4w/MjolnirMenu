@@ -80,6 +80,7 @@ Labels for players, creatures / bosses (name, level, HP) and resources (pickable
 ### Settings
 * **Presets** — save the whole menu state under a name, load it later, delete it, or mark one as *Auto-load* to have it applied the moment you enter a world.
 * **Cheat tags** — the game marks you as a cheater the first time you deal damage in god / ghost / fly mode and stamps every drop afterwards with *"obtained using cheats"*. MjolnirMenu reports the game's own `bypasscheatchecks` key instead (on by default) and can clear tags on items you already carry.
+* **Character rename** — main menu only (character select). Changes just the name stored in the profile: the save file name and player ID stay the same, so worlds, beds, wards, portals and tombstones keep working. Same rules as character creation (3–15 letters), confirm-twice, and a `.fch.mjolnir-rename.bak` copy is written before saving.
 * **Hotkeys** — rebind every key in the menu (click, press the new key; Ctrl / Shift / Alt combos work). Five extra quick-toggles ship unbound: ghost mode, speed hack, infinite stamina, ESP, map teleport.
 * **Language** — English or Russian (*Auto* follows the game's language).
 * **Window** — scale 75–150 %, opacity 40–100 %, remembers the last tab, watermark toggle, persistent defaults for multipliers.

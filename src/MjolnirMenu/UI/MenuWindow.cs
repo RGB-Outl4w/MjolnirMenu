@@ -50,6 +50,8 @@ namespace MjolnirMenu.UI
         private static string _presetName = "";
         private static float _repairRadius = 50f;
         private static float _fogConfirmUntil;
+        private static string _renameFor = "", _renameText = "";
+        private static float _renameConfirmUntil;
         private static Vector2 _settingsScroll;
 
         public static void Draw()
@@ -178,7 +180,7 @@ namespace MjolnirMenu.UI
             var p = Player.m_localPlayer;
             GUILayout.Label(p != null
                 ? $"{p.GetPlayerName()}  •  {L.T(ZNet.instance != null && ZNet.instance.IsServer() ? "local/host" : "client")}"
-                : L.T("Not in game"), Styles.Footer);
+                : Time.unscaledTime - Hotkeys.LastMessageTime < 6f ? Hotkeys.LastMessage : L.T("Not in game"), Styles.Footer);
             GUILayout.FlexibleSpace();
             if (Ui.Button("Reset all", GUILayout.Width(76)))
             {
@@ -728,6 +730,32 @@ namespace MjolnirMenu.UI
         private static void DrawSettings()
         {
             _settingsScroll = Ui.BeginScroll(_settingsScroll, 420f);
+
+            Ui.Header("Character");
+            var sel = Rename.Selected;
+            if (sel == null)
+                Ui.Hint("Rename your character from the main menu (character select). In a world the name is in use and can't be changed safely.");
+            else
+            {
+                if (_renameFor != sel.m_filename) { _renameFor = sel.m_filename; _renameText = sel.GetName(); }
+                GUILayout.BeginHorizontal();
+                Ui.Label(sel.GetName(), GUILayout.Width(150));
+                _renameText = Ui.TextField(_renameText, GUILayout.Width(170));
+                string? err = Rename.Validate(_renameText);
+                GUI.enabled = err == null && _renameText.Trim().ToLowerInvariant() != sel.GetName();
+                bool confirm = Time.unscaledTime < _renameConfirmUntil;
+                if (Ui.Button(confirm ? "Click again to rename" : "Rename", confirm, GUILayout.Width(170)))
+                {
+                    if (confirm) { Rename.Apply(_renameText); _renameConfirmUntil = 0f; }
+                    else _renameConfirmUntil = Time.unscaledTime + 3f;
+                }
+                GUI.enabled = true;
+                GUILayout.FlexibleSpace();
+                GUILayout.EndHorizontal();
+                Ui.Hint(err ?? "Only the shown name changes. Save file, player ID and everything you own stay the same. A backup (.fch.mjolnir-rename.bak) is written first.");
+            }
+
+            Ui.Space();
 
             Ui.Header("Hotkeys");
             foreach (var b in Hotkeys.All)

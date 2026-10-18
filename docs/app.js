@@ -171,8 +171,9 @@
     },
     {
       name: "Settings",
-      intro: "Hotkeys, language, window look, presets, cheat tags and defaults.",
+      intro: "Character rename, hotkeys, language, window look, presets, cheat tags and defaults.",
       groups: [
+        { title: "Character", list: [["bjorn", "→ ragnar"]], chips: ["Rename"] },
         { title: "Hotkeys", list: [["Open / close menu", "Insert"], ["God mode", "F6"], ["Fly", "F7"], ["Ghost mode", "not set"], ["Speed hack", "not set"], ["Infinite stamina", "not set"], ["ESP", "not set"], ["Map click teleport", "not set"], ["Panic reset", "End"]], chips: ["Click a key, press the new one", "×", "Default"] },
         { title: "Language", chips: ["Auto (game language)", "English", "Русский"] },
         { title: "Window", items: [

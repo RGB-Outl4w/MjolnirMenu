@@ -318,6 +318,21 @@ namespace MjolnirMenu.Core
             ["Defaults saved"] = "Значения по умолчанию сохранены",
             ["MjolnirMenu is meant for single-player and servers you own. Respect other people's servers."] = "MjolnirMenu предназначен для одиночной игры и ваших серверов. Уважайте чужие серверы.",
 
+            // Character rename
+            ["Character"] = "Персонаж",
+            ["Rename your character from the main menu (character select). In a world the name is in use and can't be changed safely."] = "Переименовать персонажа можно в главном меню (выбор персонажа). В мире имя уже используется, и безопасно его не сменить.",
+            ["Rename"] = "Переименовать",
+            ["Click again to rename"] = "Ещё раз — переименовать",
+            ["Only the shown name changes. Save file, player ID and everything you own stay the same. A backup (.fch.mjolnir-rename.bak) is written first."] = "Меняется только отображаемое имя. Файл сохранения, ID игрока и всё ваше имущество остаются прежними. Сначала создаётся копия (.fch.mjolnir-rename.bak).",
+            ["Name must be {0}–{1} letters"] = "Имя: от {0} до {1} букв",
+            ["Letters only — no spaces, digits or symbols"] = "Только буквы — без пробелов, цифр и символов",
+            ["Rename only works on the main menu"] = "Переименование работает только в главном меню",
+            ["Renaming isn't supported on this platform's save storage"] = "На этой платформе переименование не поддерживается",
+            ["Couldn't read the character file — nothing changed"] = "Не удалось прочитать файл персонажа — ничего не изменено",
+            ["Couldn't back up the character file — nothing changed"] = "Не удалось сделать копию файла персонажа — ничего не изменено",
+            ["Saving failed — the character is unchanged"] = "Сохранить не удалось — персонаж не изменён",
+            ["Renamed {0} → {1}"] = "Переименовано: {0} → {1}",
+
             // Credits
             ["Valheim trainer / mod menu"] = "трейнер / мод-меню для Valheim",
             ["Made by"] = "Автор",
