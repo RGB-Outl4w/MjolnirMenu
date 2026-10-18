@@ -2,6 +2,10 @@
 (function () {
   "use strict";
 
+  // Russian page (ru/index.html) loads ru/strings.js first; everything else passes English through.
+  var RU = document.documentElement.lang === "ru" ? (window.MJOLNIR_RU || {}) : null;
+  function tr(s) { return RU && RU[s] ? RU[s] : s; }
+
   // Mirrors src/MjolnirMenu/UI/MenuWindow.cs. Keep in sync when tabs change.
   var TABS = [
     {
@@ -210,7 +214,7 @@
   }
 
   function renderItem(it) {
-    var label = it[0], hint = it[1] || "", on = it[2], v = it[3];
+    var label = tr(it[0]), hint = tr(it[1] || ""), on = it[2], v = it[3];
     var html = '<div class="tog">';
     // null = value-only row (no checkbox); undefined = plain toggle that is off.
     if (on !== null) html += '<i class="' + (on ? "on" : "") + '" aria-hidden="true"></i>';
@@ -221,15 +225,15 @@
   }
 
   function renderGroup(g) {
-    var html = "<div><h4>" + esc(g.title) + "</h4>";
+    var html = "<div><h4>" + esc(tr(g.title)) + "</h4>";
     if (g.items) html += g.items.map(renderItem).join("");
     if (g.list) {
       html += '<ul class="list">' + g.list.map(function (r) {
         var dim = !r[1] && r[0].indexOf("…") === 0;
-        return '<li class="' + (dim ? "dim" : "") + '"><span>' + esc(r[0]) + "</span><span>" + esc(r[1] || "") + "</span></li>";
+        return '<li class="' + (dim ? "dim" : "") + '"><span>' + esc(tr(r[0])) + "</span><span>" + esc(tr(r[1] || "")) + "</span></li>";
       }).join("") + "</ul>";
     }
-    if (g.chips) html += '<div class="row">' + g.chips.map(function (c) { return '<button type="button" class="chip" tabindex="-1">' + esc(c) + "</button>"; }).join("") + "</div>";
+    if (g.chips) html += '<div class="row">' + g.chips.map(function (c) { return '<button type="button" class="chip" tabindex="-1">' + esc(tr(c)) + "</button>"; }).join("") + "</div>";
     return html + "</div>";
   }
 
@@ -239,7 +243,7 @@
       b.tabIndex = i === j ? 0 : -1;
     });
     var t = TABS[i];
-    bodyEl.innerHTML = '<div class="pane" role="tabpanel"><p class="intro">' + esc(t.intro) + "</p>" + t.groups.map(renderGroup).join("") + "</div>";
+    bodyEl.innerHTML = '<div class="pane" role="tabpanel"><p class="intro">' + esc(tr(t.intro)) + "</p>" + t.groups.map(renderGroup).join("") + "</div>";
     try { history.replaceState(null, "", "#tab-" + t.name.toLowerCase()); } catch (e) { /* ignore */ }
   }
 
@@ -247,7 +251,7 @@
     var b = document.createElement("button");
     b.type = "button";
     b.setAttribute("role", "tab");
-    b.textContent = t.name;
+    b.textContent = tr(t.name);
     b.addEventListener("click", function () { select(i); });
     b.addEventListener("keydown", function (e) {
       var n = e.key === "ArrowRight" ? i + 1 : e.key === "ArrowLeft" ? i - 1 : -1;

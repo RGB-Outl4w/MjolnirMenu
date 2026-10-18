@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MjolnirMenu — трейнер и мод-меню для Valheim</title>
+  <meta name="description" content="MjolnirMenu — внутриигровой трейнер и мод-меню для Valheim на BepInEx и HarmonyX. Одиннадцать вкладок, одна клавиша, всё обратимо.">
+  <meta property="og:title" content="MjolnirMenu — трейнер и мод-меню для Valheim">
+  <meta property="og:description" content="Режим бога, полёт, корабли и телеги, спавн, навыки, эффекты, телепорт, ESP и многое другое. Открытый код, MIT.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rgb-outl4w.github.io/MjolnirMenu/ru/">
+  <link rel="alternate" hreflang="en" href="https://rgb-outl4w.github.io/MjolnirMenu/">
+  <link rel="alternate" hreflang="ru" href="https://rgb-outl4w.github.io/MjolnirMenu/ru/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23131519'/%3E%3Cpath d='M18 14h28v14H36v24h-8V28H18z' fill='%23e0b83a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../style.css?v=0.9.0">
+</head>
+<body>
+
+<a class="skip" href="#features">К содержимому</a>
+
+<header class="top">
+  <a class="brand" href="#">
+    <span class="brand-mark" aria-hidden="true"></span>
+    <span>Mjolnir<b>Menu</b></span>
+  </a>
+  <nav class="nav" aria-label="Основное">
+    <a href="#features">Возможности</a>
+    <a href="#install">Установка</a>
+    <a href="#hotkeys">Клавиши</a>
+    <a href="#config">Настройки</a>
+    <a href="#faq">Вопросы</a>
+    <a href="../" hreflang="en" lang="en">EN</a>
+    <a class="nav-gh" href="https://github.com/RGB-Outl4w/MjolnirMenu" rel="noopener">GitHub</a>
+  </nav>
+  <button class="nav-toggle" aria-label="Меню" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="eyebrow">Для Valheim · BepInEx · HarmonyX · MIT</p>
+    <h1>Мод-меню, за которое Один бы вас забанил.</h1>
+    <p class="lede">
+      MjolnirMenu — внутриигровой трейнер для Valheim. Нажмите <kbd>Insert</kbd> — и перед вами одиннадцать вкладок
+      переключателей: выживание, движение, бой, мир, транспорт, навыки, эффекты, спавн, телепорт, ESP. И всё это
+      выключается одной клавишей. Никаких консольных команд, никакой правки конфигов, ничего не остаётся после выхода.
+    </p>
+    <div class="cta">
+      <a class="btn btn-primary" id="dl" href="https://github.com/RGB-Outl4w/MjolnirMenu/releases/latest">
+        <span>Скачать</span><small id="dl-ver">v0.9.0 · MjolnirMenu.dll</small>
+      </a>
+      <a class="btn btn-ghost" href="https://github.com/RGB-Outl4w/MjolnirMenu" rel="noopener">Исходный код</a>
+    </div>
+    <ul class="stats">
+      <li><b id="stat-tabs">11</b><span>вкладок</span></li>
+      <li><b id="stat-toggles">60+</b><span>переключателей и ползунков</span></li>
+      <li><b>1</b><span>DLL, никаких зависимостей кроме BepInEx</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="notice" aria-label="О честной игре">
+  <p><strong>Честная игра.</strong> MjolnirMenu предназначен для одиночных миров и серверов, которые принадлежат вам или где моды разрешены. В нём нет защиты от обнаружения, обхода сервера и ничего, что скрывало бы его от других игроков. Не используйте его на публичных серверах.</p>
+</section>
+
+<section id="features" class="section">
+  <div class="section-head">
+    <h2>Все вкладки по порядку</h2>
+    <p>Нажмите на вкладку — те же одиннадцать, что и в игре.</p>
+  </div>
+
+  <div class="menu" role="tablist" aria-label="Вкладки меню">
+    <div class="menu-titlebar"><span>MJOLNIR MENU</span><span class="menu-ver" id="menu-ver">v0.9.0</span></div>
+    <div class="menu-tabs" id="tabs"></div>
+    <div class="menu-body" id="tab-body"></div>
+    <div class="menu-foot"><span>Bjorn Outlawson &nbsp;•&nbsp; локально/хост</span><span><button type="button" class="chip">Сбросить всё</button><button type="button" class="chip">Закрыть</button></span></div>
+  </div>
+</section>
+
+<section id="install" class="section alt">
+  <div class="section-head">
+    <h2>Установка в четыре шага</h2>
+    <p>Windows, Steam. Около двух минут.</p>
+  </div>
+  <ol class="steps">
+    <li>
+      <h3>Установите BepInEx</h3>
+      <p>Скачайте <a href="https://thunderstore.io/c/valheim/p/denikson/BepInExPack_Valheim/" rel="noopener">BepInExPack_Valheim</a> и распакуйте в папку Valheim (<code>winhttp.dll</code> должен оказаться рядом с <code>valheim.exe</code>).</p>
+    </li>
+    <li>
+      <h3>Запустите игру один раз</h3>
+      <p>Запустите Valheim, чтобы BepInEx создал папки <code>config</code> и <code>plugins</code>, затем выйдите.</p>
+    </li>
+    <li>
+      <h3>Положите DLL</h3>
+      <p>Поместите <code>MjolnirMenu.dll</code> из <a href="https://github.com/RGB-Outl4w/MjolnirMenu/releases/latest">последнего релиза</a> в <code>Valheim\BepInEx\plugins\MjolnirMenu\</code>.</p>
+    </li>
+    <li>
+      <h3>Играйте</h3>
+      <p>Запустите игру, зайдите в мир, нажмите <kbd>Insert</kbd>. В <code>BepInEx\LogOutput.log</code> должна быть строка <code>Loading [MjolnirMenu]</code>.</p>
+    </li>
+  </ol>
+  <details class="build">
+    <summary>Или собрать из исходников</summary>
+    <pre><code># нужны .NET SDK 8+ и установленный Valheim
+$env:VALHEIM_DIR = "C:\Program Files (x86)\Steam\steamapps\common\Valheim"
+dotnet build src\MjolnirMenu -c Release   # сам копирует DLL в BepInEx\plugins, если папка есть</code></pre>
+    <p>Сборки игры подключаются из <code>valheim_Data\Managed</code>; BepInEx и HarmonyX берутся из NuGet-ленты BepInEx. Файлы игры не распространяются.</p>
+  </details>
+</section>
+
+<section id="hotkeys" class="section">
+  <div class="section-head">
+    <h2>Горячие клавиши</h2>
+    <p>Любую можно переназначить в <em>Настройки → Горячие клавиши</em> или в <code>BepInEx/config/com.mjolnir.menu.cfg</code>.</p>
+  </div>
+  <div class="keys">
+    <div class="key"><kbd>Insert</kbd><span>Открыть / закрыть меню. Пока оно открыто, игра не получает ввод: клавиши и клики идут в меню, а не персонажу.</span></div>
+    <div class="key"><kbd>F6</kbd><span>Режим бога</span></div>
+    <div class="key"><kbd>F7</kbd><span>Полёт</span></div>
+    <div class="key"><kbd>End</kbd><span>Экстренный сброс — все читы выключаются разом</span></div>
+    <div class="key"><span class="combo"><kbd>Ctrl</kbd> + <kbd>Клик</kbd></span><span>По большой карте: телепорт туда (если включён телепорт по карте)</span></div>
+  </div>
+</section>
+
+<section id="config" class="section alt">
+  <div class="section-head">
+    <h2>Настройки и пресеты</h2>
+    <p>Всё хранится в <code>BepInEx/config/</code>. Больше никуда ничего не пишется.</p>
+  </div>
+  <div class="cols">
+    <div>
+      <h3><code>com.mjolnir.menu.cfg</code></h3>
+      <div class="table-wrap"><table class="cfg">
+        <tr><th>Ключ</th><th>По умолчанию</th><th>Что это</th></tr>
+        <tr><td>Hotkeys.*</td><td>Insert / F6 / F7 / End</td><td>Назначения клавиш — меняются и в меню; плюс пять незанятых быстрых переключателей</td></tr>
+        <tr><td>UI.Language</td><td><code>Auto</code></td><td>Язык меню: английский или русский</td></tr>
+        <tr><td>UI.Scale / Opacity</td><td>1.0 / 1.0</td><td>Размер и прозрачность окна</td></tr>
+        <tr><td>General.HideCheatTags</td><td><code>true</code></td><td>Не помечать добычу «получено с помощью читов»</td></tr>
+        <tr><td>General.AutoLoadPreset</td><td><em>пусто</em></td><td>Пресет, применяемый при входе в мир</td></tr>
+        <tr><td>Player.SpeedMultiplier / JumpMultiplier</td><td>2.0</td><td>Множители по умолчанию</td></tr>
+        <tr><td>ESP.Range / MaxEntities / *Color</td><td>150 м / 250</td><td>Настройка оверлея</td></tr>
+      </table></div>
+    </div>
+    <div>
+      <h3>Пресеты</h3>
+      <p>Сохраните всё состояние меню под именем на вкладке «Настройки». Пресеты — обычные файлы <code>Ключ=Значение</code> в <code>MjolnirMenu.presets/</code>: ими удобно делиться и легко править вручную. Отметьте один как <em>Автозагрузка</em> — и он применится сразу при появлении в мире.</p>
+      <pre><code># MjolnirMenu preset  v0.9.0
+GodMode=true
+Fly=false
+SpeedHack=true
+SpeedMultiplier=3
+InfiniteItems=true
+HideCheatTags=true</code></pre>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="section">
+  <div class="section-head">
+    <h2>Вопросы и ответы</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>Работает ли в мультиплеере?</summary>
+      <p>Клиентские эффекты (движение, ESP, само меню) работают везде. Множители урона применяются до отправки удара владельцу цели, поэтому тоже работают. От сервера и других игроков ничего не скрывается — см. предупреждение о честной игре.</p>
+    </details>
+    <details>
+      <summary>На добыче написано «получено с помощью читов».</summary>
+      <p>Это собственная метка Valheim: игра помечает вас читером, как только вы наносите урон в режиме бога / призрака / полёта, и после этого метит всю добычу. <em>Настройки → Метки читов</em> включено по умолчанию и сообщает игре её собственный ключ обхода; <em>Снять метки с предметов в инвентаре</em> исправит то, что уже при вас.</p>
+    </details>
+    <details>
+      <summary>Созданный предмет ведёт себя странно.</summary>
+      <p>Спавн скрывает префабы, которые не являются настоящими предметами инвентаря (оружие монстров, объекты эффектов). Если вы включили <em>Показать все</em> — именно они и ведут себя странно.</p>
+    </details>
+    <details>
+      <summary>Не сломает ли это сохранение?</summary>
+      <p>Каждый чит сверяется с игрой каждый кадр и возвращает обычные значения при выключении или выходе. Навыки и силы боссов записываются через собственные поля игры, поэтому сохраняются так, будто вы их заработали сами.</p>
+    </details>
+    <details>
+      <summary>Какая версия игры?</summary>
+      <p>Собрано и проверено на текущей сборке Steam (1.0.x, Deep North). Сигнатуры методов сверены с <code>assembly_valheim.dll</code> через Mono.Cecil до написания каждого патча. Если обновление игры переименует патчимый метод, в <code>LogOutput.log</code> появится ошибка Harmony — откройте issue с этим логом.</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div>
+    <b>MjolnirMenu</b> · MIT · автор <a href="https://github.com/RGB-Outl4w" rel="noopener">RGB-Outl4w</a>
+  </div>
+  <div class="foot-small">
+    Сделано с помощью <a href="https://claude.com/claude-code" rel="noopener">Claude Code</a>, <a href="https://github.com/JuliusBrussee/caveman" rel="noopener">caveman</a> и <a href="https://github.com/safishamsi/graphify" rel="noopener">graphify</a>.
+    Работает на <a href="https://github.com/BepInEx/BepInEx" rel="noopener">BepInEx</a>, <a href="https://github.com/BepInEx/HarmonyX" rel="noopener">HarmonyX</a>, <a href="https://github.com/krafs/Publicizer" rel="noopener">Krafs.Publicizer</a>.
+    Valheim © Iron Gate Studio — проект с ними не связан.
+  </div>
+</footer>
+
+<script src="strings.js?v=0.9.0"></script>
+<script src="../app.js?v=0.9.0"></script>
+</body>
+</html>

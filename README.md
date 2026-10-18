@@ -12,6 +12,8 @@
 
 Press <kbd>Insert</kbd> in-game. Eleven tabs. Everything reversible.
 
+**English** · [Русский](README.ru.md)
+
 **[Website](https://rgb-outl4w.github.io/MjolnirMenu/)** · [Features](#features) · [Installation](#installation) · [Usage](#usage) · [Configuration](#configuration) · [Building](#building-from-source) · [Architecture](#architecture) · [FAQ](#faq)
 
 </div>
@@ -146,6 +148,7 @@ dotnet build src\MjolnirMenu -c Release
 * BepInEx and HarmonyX come from the BepInEx NuGet feed (`nuget.config`), so the project compiles even before BepInEx is installed.
 * [Krafs.Publicizer](https://github.com/krafs/Publicizer) exposes the private `m_*` fields the patches rely on — no reflection strings.
 * A successful build copies the DLL into `BepInEx\plugins\MjolnirMenu` automatically when that folder exists; `scripts\deploy.ps1` does the same explicitly.
+* `python scripts/check-translations.py` checks the menu's Russian table: every string has a translation and the `{0}` holes match.
 
 ## Architecture
 
@@ -155,26 +158,33 @@ src/MjolnirMenu/
 ├── Core/
 │   ├── State.cs          Every toggle and multiplier — the single source of truth
 │   ├── MenuConfig.cs     BepInEx ConfigEntry bindings
-│   └── Hotkeys.cs        Key handling and on-screen notifications
+│   ├── Hotkeys.cs        Rebindable keys and on-screen notifications
+│   └── L.cs              Menu language (English / Russian table)
 ├── Features/             Reconcile game state against State every frame; restore originals on toggle-off
 │   ├── PlayerCheats.cs   Survival, movement, water, camera, durability
 │   ├── WorldCheats.cs    Build, craft, time, weather
 │   ├── SkillCheats.cs    Skill levels
 │   ├── Effects.cs        Forsaken powers and the status-effect manager
 │   ├── Spawner.cs        Item / creature catalog and spawning
-│   ├── Warp.cs           Teleport and saved positions
+│   ├── Warp.cs           Teleport, saved positions, boss altars
+│   ├── MapFog.cs         Reveal map / POIs and restore the fog from a snapshot
+│   ├── Vehicles.cs       Ships and carts
+│   ├── Morph.cs          Possessing a creature
+│   ├── Rename.cs         Safe character rename
 │   ├── Esp.cs            Overlay scanning and drawing
 │   └── Presets.cs        Save / load / auto-load of State
 ├── Patches/              Harmony patches, grouped by game type
-│   ├── PlayerPatches.cs         stamina · carry weight · speed · crafting · input gate · teleport speed
+│   ├── PlayerPatches.cs         stamina · carry weight · speed · crafting · input gate · teleport speed · multi-equip · morph control & camera
 │   ├── CharacterPatches.cs      damage in/out · water jump · swim state · attack & emote speed
 │   ├── DestructiblePatches.cs   per-category damage for trees, rocks, pieces, destructibles
 │   ├── ItemPatches.cs           infinite items (scoped) · duplicate-on-interact
-│   ├── MinimapPatches.cs        map-click teleport
+│   ├── VehiclePatches.cs        tailwind · sail thrust · cart hitch · hull immunity
+│   ├── MinimapPatches.cs        map-click teleport · fog snapshot
 │   ├── EnvManPatches.cs         forced weather
-│   └── GamePatches.cs           reset on logout
+│   └── GamePatches.cs           reset on logout · instant growth · high-level loot
 └── UI/
     ├── MenuWindow.cs     Tabbed IMGUI window
+    ├── Ui.cs             Widgets (translated, auto-width)
     └── Styles.cs         Skin
 ```
 
